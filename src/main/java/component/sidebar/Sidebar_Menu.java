@@ -89,7 +89,10 @@ public class Sidebar_Menu extends JPanel {
 				subStaff_2, 
 				subStaff_3, 
 				subStaff_4, 
-				subBill_1, 
+				subBill_1,
+				subStat_1,
+				subStat_2,
+				subStat_3,
 				subStorage_1,
 				subStorage_2, 
 				subStorage_3);
