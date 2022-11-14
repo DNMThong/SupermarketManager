@@ -13,6 +13,10 @@ public class LoaiSanPham {
         this.TenLoai = TenLoai;
     }
 
+    public LoaiSanPham(String TenLoai) {
+        this.TenLoai = TenLoai;
+    }
+
     public String getMaLoai() {
         return MaLoai;
     }

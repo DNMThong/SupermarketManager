@@ -10,7 +10,6 @@ package entity;
  */
 public class ChiTietPhieuNhap {
 
-    private String MaCTPN;
     private String MaPhieuNhap;
     private String MaSP;
     private String TenSP;
@@ -22,8 +21,7 @@ public class ChiTietPhieuNhap {
     public ChiTietPhieuNhap() {
     }
 
-    public ChiTietPhieuNhap(String MaCTPN, String MaPhieuNhap, String MaSP, String TenSP, int SoLuong, String GiaNhap, String GiaBan, String MaNCC) {
-        this.MaCTPN = MaCTPN;
+    public ChiTietPhieuNhap(String MaPhieuNhap, String MaSP, String TenSP, int SoLuong, String GiaNhap, String GiaBan, String MaNCC) {
         this.MaPhieuNhap = MaPhieuNhap;
         this.MaSP = MaSP;
         this.TenSP = TenSP;
@@ -31,14 +29,6 @@ public class ChiTietPhieuNhap {
         this.GiaNhap = GiaNhap;
         this.GiaBan = GiaBan;
         this.MaNCC = MaNCC;
-    }
-
-    public String getMaCTPN() {
-        return MaCTPN;
-    }
-
-    public void setMaCTPN(String MaCTPN) {
-        this.MaCTPN = MaCTPN;
     }
 
     public String getMaPhieuNhap() {

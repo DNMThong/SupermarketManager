@@ -3,16 +3,16 @@ package entity;
 public class PhieuNhap {
 
     private String MaPhieuNhap;
-    private String MaNV;
     private String NgayNhap;
+    private String TenNV;
 
     public PhieuNhap() {
     }
 
-    public PhieuNhap(String MaPhieuNhap, String MaNV, String NgayNhap) {
+    public PhieuNhap(String MaPhieuNhap, String NgayNhap, String TenNV) {
         this.MaPhieuNhap = MaPhieuNhap;
-        this.MaNV = MaNV;
         this.NgayNhap = NgayNhap;
+        this.TenNV = TenNV;
     }
 
     public String getMaPhieuNhap() {
@@ -23,20 +23,20 @@ public class PhieuNhap {
         this.MaPhieuNhap = MaPhieuNhap;
     }
 
-    public String getMaNV() {
-        return MaNV;
-    }
-
-    public void setMaNV(String MaNV) {
-        this.MaNV = MaNV;
-    }
-
     public String getNgayNhap() {
         return NgayNhap;
     }
 
     public void setNgayNhap(String NgayNhap) {
         this.NgayNhap = NgayNhap;
+    }
+
+    public String getTenNV() {
+        return TenNV;
+    }
+
+    public void setTenNV(String TenNV) {
+        this.TenNV = TenNV;
     }
 
 }

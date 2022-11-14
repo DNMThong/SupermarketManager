@@ -2,8 +2,7 @@ package entity;
 
 public class ChiTietPhieuXuat {
 
-    private String MaCTPX;
-    private String MaPX;
+    private String MaPhieuXuat;
     private String MaSP;
     private String TenSP;
     private int SoLuong;
@@ -12,29 +11,20 @@ public class ChiTietPhieuXuat {
     public ChiTietPhieuXuat() {
     }
 
-    public ChiTietPhieuXuat(String MaCTPX, String MaPX, String MaSP, String TenSP, int SoLuong, String DiaChiXuat) {
-        this.MaCTPX = MaCTPX;
-        this.MaPX = MaPX;
+    public ChiTietPhieuXuat(String MaPhieuXuat, String MaSP, String TenSP, int SoLuong, String DiaChiXuat) {
+        this.MaPhieuXuat = MaPhieuXuat;
         this.MaSP = MaSP;
         this.TenSP = TenSP;
         this.SoLuong = SoLuong;
         this.DiaChiXuat = DiaChiXuat;
     }
 
-    public String getMaCTPX() {
-        return MaCTPX;
+    public String getMaPhieuXuat() {
+        return MaPhieuXuat;
     }
 
-    public void setMaCTPX(String MaCTPX) {
-        this.MaCTPX = MaCTPX;
-    }
-
-    public String getMaPX() {
-        return MaPX;
-    }
-
-    public void setMaPX(String MaPX) {
-        this.MaPX = MaPX;
+    public void setMaPhieuXuat(String MaPhieuXuat) {
+        this.MaPhieuXuat = MaPhieuXuat;
     }
 
     public String getMaSP() {
