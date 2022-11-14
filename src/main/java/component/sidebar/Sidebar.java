@@ -19,7 +19,7 @@ public class Sidebar extends JPanel {
 	
 	private void initComponents(JComponent c) {
 		this.setPreferredSize(new Dimension(300, 1032));
-		ImageIcon icon = new ImageIcon(new ImageIcon(getClass().getResource("../../icon/sidebar/404SP.png")).getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH));
+		ImageIcon icon = new ImageIcon(new ImageIcon(getClass().getResource("../../icon/sidebar/404SP.png")).getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH));
 
 		JButton btnNewButton = new JButton("New button");
 
