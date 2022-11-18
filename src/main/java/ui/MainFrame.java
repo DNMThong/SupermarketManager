@@ -1,6 +1,5 @@
 package ui;
 
-import com.formdev.flatlaf.FlatIntelliJLaf;
 import component.sidebar.Sidebar;
 
 import javax.swing.*;
@@ -22,31 +21,31 @@ public class MainFrame extends JFrame {
 	
 	public MainFrame() {
 		initComponents();
-		FlatIntelliJLaf.setup();
-//		addSidebar();
 	}
 	
 	
 	private void initComponents() {
-//		MainContent panel = new MainContent();
-		Sidebar sidebarPane = new Sidebar(null);
+		JPanel panel = new JPanel();
+		Sidebar sidebarPane = new Sidebar(panel);
 		this.setContentPane(contentPane);
 		sidebarPane.setBackground(new Color(31, 174, 255));
-
+		
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //		this.setResizable(false);
-
+		
 		// content panel properties
 		contentPane.setLayout(new BorderLayout());
 		contentPane.add(sidebarPane, BorderLayout.WEST);
-//		contentPane.add(panel, BorderLayout.CENTER);
-
+		
+		contentPane.add(panel, BorderLayout.CENTER);
+		panel.setLayout(new BorderLayout(0, 0));
+		
 //		panel.setVisible(true);
 	}
-
+	
 	private void addSidebar() {
-		System.out.println("=== Resources: " + this.getClass().getResource("../icon/title/sun.png"));
 	}
 }

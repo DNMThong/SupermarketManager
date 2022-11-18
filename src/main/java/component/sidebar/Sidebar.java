@@ -1,5 +1,7 @@
 package component.sidebar;
 
+import component.Button;
+
 import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -18,18 +20,25 @@ public class Sidebar extends JPanel {
 	}
 	
 	private void initComponents(JComponent c) {
-		this.setPreferredSize(new Dimension(300, 1032));
+		this.setPreferredSize(new Dimension(300, 0));
 		ImageIcon icon = new ImageIcon(new ImageIcon(getClass().getResource("../../icon/sidebar/404SP.png")).getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH));
 
-		JButton btnNewButton = new JButton("New button");
+		Button btnToHome = new Button();
+		btnToHome.setForeground(Color.white);
+		btnToHome.setRadius(40);
+		btnToHome.setBackground(Color.red);
+		btnToHome.setFont(new Font("Tahoma", Font.BOLD, 36));
+		btnToHome.setText("POS");
+		btnToHome.setBorderPainted(false);
+		btnToHome.setFocusPainted(false);
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setPreferredSize(new Dimension(2, 600));
 		scrollPane.setBorder(null);
 
-		JLabel lblNewLabel_1 = new JLabel("---Quy Da---");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		JLabel lbMadeBy = new JLabel("---Quy Da---");
+		lbMadeBy.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
+		lbMadeBy.setHorizontalAlignment(SwingConstants.CENTER);
 		this.setBackground(Color.BLUE);
 
 		JPanel panel_1 = new JPanel();
@@ -41,11 +50,11 @@ public class Sidebar extends JPanel {
 				groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
 								.addGap(37)
-								.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+								.addComponent(btnToHome, GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
 								.addGap(37))
 						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
 								.addGap(61)
-								.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lbMadeBy, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE)
 								.addContainerGap(62, Short.MAX_VALUE))
 						.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
 						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
@@ -59,20 +68,20 @@ public class Sidebar extends JPanel {
 								.addContainerGap()
 								.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 167, GroupLayout.PREFERRED_SIZE)
 								.addGap(34)
-								.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnToHome, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
 								.addPreferredGap(ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
 								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 600, GroupLayout.PREFERRED_SIZE)
 								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lbMadeBy, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
 								.addContainerGap())
 		);
 		panel_1.setLayout(new BorderLayout(5, 0));
 
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(icon);
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setPreferredSize(new Dimension(80, 14));
-		panel_1.add(lblNewLabel, BorderLayout.CENTER);
+		JLabel lbLogo = new JLabel("");
+		lbLogo.setIcon(icon);
+		lbLogo.setHorizontalAlignment(SwingConstants.CENTER);
+		lbLogo.setPreferredSize(new Dimension(80, 14));
+		panel_1.add(lbLogo, BorderLayout.CENTER);
 
 		Sidebar_Menu panel = new Sidebar_Menu(c);
 		scrollPane.setViewportView(panel);
@@ -80,22 +89,4 @@ public class Sidebar extends JPanel {
 		setLayout(groupLayout);
 		this.setVisible(true);
 	}
-	
-	private Dimension dimension() {
-		return new Dimension(300, this.getParent() != null ? this.getParent().getHeight() : 0);
-	}
-	
-//	private void runClock() {
-//		new Thread(() -> {
-//            while(true) {
-//                SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss a");
-//                timer.setText(format.format(new Date()));
-//                try {
-//                    Thread.sleep(1000);
-//                }catch(Exception e1) {
-//                    e1.printStackTrace();
-//                }
-//            }
-//        }).start();
-//	}
 }
