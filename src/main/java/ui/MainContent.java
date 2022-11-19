@@ -1,8 +1,11 @@
 package ui;
 
+import utils.DateUtil;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.util.Date;
 
 public class MainContent extends JPanel {
 
@@ -19,6 +22,7 @@ public class MainContent extends JPanel {
 		
 		initComponents();
 		execute(title);
+		displayTime();
 	}
 	
 	public void initComponents() {
@@ -107,5 +111,33 @@ public class MainContent extends JPanel {
 		lbTimer.setText("8:36 AM");
 		lbTimer.setFont(new Font("Jost", Font.PLAIN, 12));
 		lbTimer.setPreferredSize(new Dimension(80, 14));
+	}
+
+	public void displayTime() {
+		new Thread(() -> {
+			while(true) {
+				Date date = new Date();
+				lbDate.setText(DateUtil.toString(date,"dd MMMM yyyy"));
+				lbTimer.setText(DateUtil.toString(date,"hh:mm a"));
+				lbTop.setText(greet(date.getHours()));
+				try {
+					Thread.sleep(1000);
+				}catch(Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		}).start();
+	}
+
+	public String greet(int hours) {
+		if(hours<6) {
+			return "Please go to sleep";
+		}else if(hours<12) {
+			return "Good morning";
+		}else if(hours<18) {
+			return "Good afternoon";
+		}else {
+			return "Good evening";
+		}
 	}
 }
