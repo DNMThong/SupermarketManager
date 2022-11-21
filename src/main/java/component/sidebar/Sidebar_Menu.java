@@ -1,6 +1,8 @@
 package component.sidebar;
 
+import component.notification.Notification;
 import ui.MainContent;
+import ui.MainFrame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -195,6 +197,7 @@ public class Sidebar_Menu extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
+
 				// TODO Auto-generated method stub
 				setSelectedMenu(menuHome);
 				if (contentPanel != null) {
@@ -211,6 +214,8 @@ public class Sidebar_Menu extends JPanel {
 					containerContent.getParent().getParent().revalidate();
 					containerContent.getParent().getParent().repaint();
 				}
+				Notification n = new Notification(MainFrame.getFrames()[0],Notification.Type.SUCCESS,Notification.Location.TOP_RIGHT,"Success");
+				n.showNotification();
 			}
 
 			@Override

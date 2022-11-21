@@ -1,0 +1,139 @@
+package ui;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import com.formdev.flatlaf.FlatIntelliJLaf;
+
+import component.Button;
+import component.textfield.PasswordField;
+import component.textfield.TextField;
+import utils.ImageUtil;
+
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JLabel;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.Font;
+import javax.swing.SwingConstants;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.Cursor;
+
+public class LoginJFrame extends JFrame {
+
+	private JPanel contentPane;
+	private TextField txTaiKhoan;
+	private PasswordField txMatKhau;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					LoginJFrame frame = new LoginJFrame();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public LoginJFrame() {
+		FlatIntelliJLaf.setup();
+		setBounds(100, 100, 1200, 800);
+//		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		this.setVisible(true);
+		this.setLocationRelativeTo(null);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBackground(Color.white);
+		setContentPane(contentPane);
+		
+		JLabel lblLogo = new JLabel();
+		lblLogo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblLogo.setSize(350, 350);
+		lblLogo.setIcon(ImageUtil.read(getClass().getResource("/image/logo/logo-white.png"),350,350));
+		
+		JLabel lblNewLabel = new JLabel("Đăng nhập");
+		lblNewLabel.setForeground(new Color(31,174,255));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 32));
+		
+		txTaiKhoan = new TextField();
+		txTaiKhoan.setLabelText("Tài khoản");
+		txTaiKhoan.setColumns(10);
+		txTaiKhoan.setSize(500, 100);
+		txTaiKhoan.setOpaque(false);
+		
+		txMatKhau = new PasswordField();
+		txMatKhau.setLabelText("Mật khẩu");
+		txMatKhau.setColumns(10);
+		txMatKhau.setSize(500, 100);
+		txMatKhau.setShowAndHide(true);
+		txMatKhau.setOpaque(false);
+		
+		Button btnDangNhap = new Button();
+		btnDangNhap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnDangNhap.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnDangNhap.setForeground(Color.white);
+		btnDangNhap.setText("Đăng nhập");
+		btnDangNhap.setRadius(30);
+		btnDangNhap.setColor(new Color(31,174,255));
+		btnDangNhap.setColorOver(new Color(90,193,251));
+		btnDangNhap.setColorClick(new Color(31,174,255));
+		btnDangNhap.setBorderColor(Color.white);
+		
+		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(524)
+					.addComponent(btnDangNhap, GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+					.addGap(511))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(344)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addComponent(txMatKhau, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
+						.addComponent(txTaiKhoan, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE))
+					.addGap(344))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 1158, Short.MAX_VALUE)
+					.addContainerGap())
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblLogo, GroupLayout.DEFAULT_SIZE, 1158, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(21)
+					.addComponent(lblLogo, GroupLayout.PREFERRED_SIZE, 253, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE)
+					.addGap(43)
+					.addComponent(txTaiKhoan, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+					.addGap(68)
+					.addComponent(txMatKhau, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+					.addGap(64)
+					.addComponent(btnDangNhap, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(107, Short.MAX_VALUE))
+		);
+		contentPane.setLayout(gl_contentPane);
+	}
+}

@@ -1,6 +1,8 @@
 package ui;
 
+import com.formdev.flatlaf.FlatIntelliJLaf;
 import component.sidebar.Sidebar;
+import component.textfield.PasswordField;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,6 +27,7 @@ public class MainFrame extends JFrame {
 	
 	
 	private void initComponents() {
+		FlatIntelliJLaf.setup();
 		JPanel panel = new JPanel();
 		Sidebar sidebarPane = new Sidebar(panel);
 		this.setContentPane(contentPane);
@@ -39,9 +42,11 @@ public class MainFrame extends JFrame {
 		// content panel properties
 		contentPane.setLayout(new BorderLayout());
 		contentPane.add(sidebarPane, BorderLayout.WEST);
-		
+
+
 		contentPane.add(panel, BorderLayout.CENTER);
 		panel.setLayout(new BorderLayout(0, 0));
+
 		
 //		panel.setVisible(true);
 	}
