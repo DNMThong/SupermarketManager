@@ -1,8 +1,8 @@
 package ui;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.EventQueue;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -19,17 +19,17 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import java.awt.Cursor;
 
 public class LoginJFrame extends JFrame {
 
 	private JPanel contentPane;
 	private TextField txTaiKhoan;
 	private PasswordField txMatKhau;
+
+	private Button btnDangNhap;
 
 	/**
 	 * Launch the application.
@@ -86,7 +86,7 @@ public class LoginJFrame extends JFrame {
 		txMatKhau.setShowAndHide(true);
 		txMatKhau.setOpaque(false);
 		
-		Button btnDangNhap = new Button();
+		btnDangNhap = new Button();
 		btnDangNhap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnDangNhap.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnDangNhap.setForeground(Color.white);
@@ -96,6 +96,8 @@ public class LoginJFrame extends JFrame {
 		btnDangNhap.setColorOver(new Color(90,193,251));
 		btnDangNhap.setColorClick(new Color(31,174,255));
 		btnDangNhap.setBorderColor(Color.white);
+		btnDangNhap.addActionListener(new handleActionDangNhap());
+
 		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
@@ -135,5 +137,13 @@ public class LoginJFrame extends JFrame {
 					.addContainerGap(107, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
+	}
+
+	class handleActionDangNhap implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+
+		}
 	}
 }
