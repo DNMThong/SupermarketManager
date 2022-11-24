@@ -18,6 +18,8 @@ public class MainContent extends JPanel {
 
 	private JLabel lbDate;
 
+	private JPanel containerContent;
+
 	public MainContent(String title) {
 		
 		initComponents();
@@ -80,6 +82,11 @@ public class MainContent extends JPanel {
 		panel.setLayout(sl_panel);
 		panel.add(lbTitle);
 		panel.add(panel_1);
+
+		containerContent = new JPanel();
+		containerContent.setBorder(new EmptyBorder(10, 0, 0, 0));
+		add(containerContent, BorderLayout.CENTER);
+		containerContent.setLayout(new BorderLayout(0, 0));
 	}
 
 	public void execute(String title) {
@@ -113,6 +120,17 @@ public class MainContent extends JPanel {
 		lbTimer.setPreferredSize(new Dimension(80, 14));
 	}
 
+	public void addContent(JComponent jc) {
+		if (containerContent.getComponentCount() > 0) {
+			containerContent.removeAll();
+			containerContent.getParent().validate();
+			containerContent.getParent().repaint();
+		}
+		containerContent.add(jc, BorderLayout.CENTER);
+		containerContent.getParent().validate();
+		containerContent.getParent().repaint();
+	}
+
 	public void displayTime() {
 		new Thread(() -> {
 			while(true) {
@@ -130,11 +148,11 @@ public class MainContent extends JPanel {
 	}
 
 	public String greet(int hours) {
-		if(hours<6) {
+		if(hours < 6) {
 			return "Please go to sleep";
-		}else if(hours<12) {
+		}else if(hours < 12) {
 			return "Good morning";
-		}else if(hours<18) {
+		}else if(hours < 18) {
 			return "Good afternoon";
 		}else {
 			return "Good evening";

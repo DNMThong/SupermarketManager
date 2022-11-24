@@ -1,6 +1,9 @@
 package entity;
 
-import java.util.Objects;
+import component.table.ModelAction;
+import component.table.product.EventAction;
+import component.table.product.ModelProductInfo;
+import utils.ImageUtil;
 
 public class SanPham {
 
@@ -81,4 +84,17 @@ public class SanPham {
         this.Hinh = Hinh;
     }
 
+    /**
+     *
+     * Header: "Thông tin sản phẩm", "Mã sản phẩm", "Loại", "Đơn vị tính", "Giá", "Action"
+     */
+    public Object[] toRowTable(EventAction event) {
+        return new Object[]{
+                new ModelProductInfo(TenSP, TenNCC, ImageUtil.read(this.getClass().getResource(Hinh))),
+                MaSP,
+                TenLoai,
+                DVT,
+                GiaSP,
+                new ModelAction(this, event)};
+    }
 }
