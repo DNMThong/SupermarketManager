@@ -26,7 +26,7 @@ public class NhanVienDAO extends SupermarketManagerDAO<NhanVien, String> {
                 entity.getSDT(),
                 entity.getDiaChi(),
                 entity.getEmail(),
-                entity.isGioiTinh(),
+                entity.getGioiTinh(),
                 entity.getMatKhau(),
                 entity.getVaiTro(),
                 entity.getHinh());
@@ -40,7 +40,7 @@ public class NhanVienDAO extends SupermarketManagerDAO<NhanVien, String> {
                 entity.getSDT(),
                 entity.getDiaChi(),
                 entity.getEmail(),
-                entity.isGioiTinh(),
+                entity.getGioiTinh(),
                 entity.getMatKhau(),
                 entity.getVaiTro(),
                 entity.getHinh(),
@@ -82,7 +82,7 @@ public class NhanVienDAO extends SupermarketManagerDAO<NhanVien, String> {
                     entity.setEmail(rs.getString(5));
                     entity.setGioiTinh(rs.getBoolean(6));
                     entity.setMatKhau(rs.getString(7));
-                    entity.setVaiTro(rs.getString(8));
+                    entity.setVaiTro(rs.getBoolean(8));
                     entity.setHinh(rs.getString(9));
                     list.add(entity);
                 }

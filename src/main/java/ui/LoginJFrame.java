@@ -13,6 +13,10 @@ import com.formdev.flatlaf.FlatIntelliJLaf;
 import component.Button;
 import component.textfield.PasswordField;
 import component.textfield.TextField;
+import dao.NhanVienDAO;
+import entity.NhanVien;
+import utils.Alert;
+import utils.Auth;
 import utils.ImageUtil;
 
 import javax.swing.GroupLayout;
@@ -139,11 +143,43 @@ public class LoginJFrame extends JFrame {
 		contentPane.setLayout(gl_contentPane);
 	}
 
+	public boolean validation() {
+
+		if(txTaiKhoan.getText().trim().isEmpty()) {
+			Alert.warning(this,"Vui lòng nhập tài khoản");
+			return false;
+		}
+
+		if(String.valueOf(txMatKhau.getPassword()).trim().isEmpty()) {
+			Alert.warning(this,"Vui lòng nhập mật khẩu");
+			return false;
+		}
+		return true;
+	}
+
 	class handleActionDangNhap implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			NhanVienDAO nvd = new NhanVienDAO();
+			NhanVien nv = nvd.selectById(txTaiKhoan.getText());
 
+			if(validation()) {
+				if(nv==null) {
+					Alert.error(LoginJFrame.getFrames()[0], "Sai tài khoản");
+				}else {
+					if(nv.getMatKhau().equals(String.valueOf(txMatKhau.getPassword()))) {
+						Auth.user = nv;
+						Alert.success(LoginJFrame.getFrames()[0], "Đăng nhập thành công");
+						dispose();
+						new MainFrame();
+						repaint();
+						revalidate();
+					}else {
+						Alert.error(LoginJFrame.getFrames()[0], "Sai mật khẩu");
+					}
+				}
+			}
 		}
 	}
 }

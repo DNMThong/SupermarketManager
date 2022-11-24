@@ -23,6 +23,9 @@ public class MainFrame extends JFrame {
 	
 	public MainFrame() {
 		initComponents();
+		for(Frame f: MainFrame.getFrames()) {
+			System.out.println(f.getClass());
+		}
 	}
 	
 	

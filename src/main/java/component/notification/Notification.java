@@ -49,6 +49,9 @@ public class Notification extends javax.swing.JComponent {
         } else if (type == Type.INFO) {
             lbIcon.setIcon(ImageUtil.read(getClass().getResource("/icon/notification/info.png")));
             lbMessage.setText("Info");
+        } else if (type == Type.ERROR) {
+            lbIcon.setIcon(ImageUtil.read(getClass().getResource("/icon/notification/error.png")));
+            lbMessage.setText("Error");
         } else {
             lbIcon.setIcon(ImageUtil.read(getClass().getResource("/icon/notification/warning.png")));
             lbMessage.setText("Warning");
@@ -189,6 +192,8 @@ public class Notification extends javax.swing.JComponent {
             g2.setColor(new Color(18, 163, 24));
         } else if (type == Type.INFO) {
             g2.setColor(new Color(28, 139, 206));
+        }else if (type == Type.ERROR) {
+            g2.setColor(new Color(234, 45, 63));
         } else {
             g2.setColor(new Color(241, 196, 15));
         }
@@ -301,7 +306,7 @@ public class Notification extends javax.swing.JComponent {
     }//GEN-LAST:event_cmdCloseActionPerformed
 
     public static enum Type {
-        SUCCESS, INFO, WARNING
+        SUCCESS, INFO, WARNING, ERROR
     }
 
     public static enum Location {

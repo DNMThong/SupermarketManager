@@ -7,9 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class JDBCUtil {
-	static String nameDatabase = "";
-	static String user = "";
-	static String password = "";
+	static String nameDatabase = "QLDA_SieuThi";
+	static String user = "sa";
+	static String password = "songlong";
 	static Connection con = null;
 	static {
 		try {

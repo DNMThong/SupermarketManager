@@ -9,13 +9,13 @@ public class NhanVien {
     private String Email;
     private boolean GioiTinh;
     private String MatKhau;
-    private String VaiTro;
+    private boolean VaiTro;
     private String Hinh;
 
     public NhanVien() {
     }
 
-    public NhanVien(String MaNV, String HoTen, String SDT, String DiaChi, String Email, boolean GioiTinh, String MatKhau, String VaiTro, String Hinh) {
+    public NhanVien(String MaNV, String HoTen, String SDT, String DiaChi, String Email, boolean GioiTinh, String MatKhau, boolean VaiTro, String Hinh) {
         this.MaNV = MaNV;
         this.HoTen = HoTen;
         this.SDT = SDT;
@@ -67,7 +67,7 @@ public class NhanVien {
         this.Email = Email;
     }
 
-    public boolean isGioiTinh() {
+    public boolean getGioiTinh() {
         return GioiTinh;
     }
 
@@ -83,11 +83,11 @@ public class NhanVien {
         this.MatKhau = MatKhau;
     }
 
-    public String getVaiTro() {
+    public boolean getVaiTro() {
         return VaiTro;
     }
 
-    public void setVaiTro(String VaiTro) {
+    public void setVaiTro(boolean VaiTro) {
         this.VaiTro = VaiTro;
     }
 
