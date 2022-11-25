@@ -80,6 +80,8 @@ public class MainContent extends JPanel {
 		panel.setLayout(sl_panel);
 		panel.add(lbTitle);
 		panel.add(panel_1);
+
+		add(new FormProduct(),BorderLayout.CENTER);
 	}
 
 	public void execute(String title) {
