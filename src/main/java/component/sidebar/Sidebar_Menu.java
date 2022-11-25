@@ -1,9 +1,6 @@
 package component.sidebar;
 
-import component.notification.Notification;
 import ui.MainContent;
-import ui.MainFrame;
-import utils.Alert;
 
 import javax.swing.*;
 import java.awt.*;
@@ -197,8 +194,7 @@ public class Sidebar_Menu extends JPanel {
 		class HandleMenuHome implements MouseListener {
 
 			@Override
-			public void mouseClicked(MouseEvent e) {
-
+			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 				setSelectedMenu(menuHome);
 				if (contentPanel != null) {
@@ -218,7 +214,7 @@ public class Sidebar_Menu extends JPanel {
 			}
 
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 
 			}
@@ -246,7 +242,7 @@ public class Sidebar_Menu extends JPanel {
 		class HandleMenuAccount implements MouseListener {
 
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 				setSelectedMenu(menuAccount);
 				if (contentPanel != null) {
@@ -266,7 +262,7 @@ public class Sidebar_Menu extends JPanel {
 			}
 
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 
 			}
@@ -294,13 +290,13 @@ public class Sidebar_Menu extends JPanel {
 		class HandleSubProduct_1 implements MouseListener {
 
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 				setSelectedSubMenu(subProduct_1);
 			}
 
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 
 			}
@@ -327,13 +323,13 @@ public class Sidebar_Menu extends JPanel {
 		class HandleSubProduct_2 implements MouseListener {
 
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 				setSelectedSubMenu(subProduct_2);
 			}
 
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 
 			}
@@ -360,13 +356,13 @@ public class Sidebar_Menu extends JPanel {
 		class HandleSubStaff_1 implements MouseListener {
 
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 				setSelectedSubMenu(subStaff_1);
 			}
 
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 
 			}
@@ -393,13 +389,13 @@ public class Sidebar_Menu extends JPanel {
 		class HandleSubStaff_2 implements MouseListener {
 
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 				setSelectedSubMenu(subStaff_2);
 			}
 
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 
 			}
@@ -426,13 +422,13 @@ public class Sidebar_Menu extends JPanel {
 		class HandleSubStaff_3 implements MouseListener {
 
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 				setSelectedSubMenu(subStaff_3);
 			}
 
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 
 			}
@@ -459,13 +455,13 @@ public class Sidebar_Menu extends JPanel {
 		class HandleSubStaff_4 implements MouseListener {
 
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 				setSelectedSubMenu(subStaff_4);
 			}
 
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 
 			}
@@ -492,13 +488,13 @@ public class Sidebar_Menu extends JPanel {
 		class HandleSubBill_1 implements MouseListener {
 
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 				setSelectedSubMenu(subBill_1);
 			}
 
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 
 			}
@@ -525,13 +521,13 @@ public class Sidebar_Menu extends JPanel {
 		class HandleSubStat_1 implements MouseListener {
 
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 				setSelectedSubMenu(subStat_1);
 			}
 
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 
 			}
@@ -558,13 +554,13 @@ public class Sidebar_Menu extends JPanel {
 		class HandleSubStat_2 implements MouseListener {
 
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 				setSelectedSubMenu(subStat_2);
 			}
 
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 
 			}
@@ -591,13 +587,13 @@ public class Sidebar_Menu extends JPanel {
 		class HandleSubStat_3 implements MouseListener {
 
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 				setSelectedSubMenu(subStat_3);
 			}
 
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 
 			}
@@ -624,13 +620,13 @@ public class Sidebar_Menu extends JPanel {
 		class HandleSubStorage_1 implements MouseListener {
 
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 				setSelectedSubMenu(subStorage_1);
 			}
 
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 
 			}
@@ -657,13 +653,13 @@ public class Sidebar_Menu extends JPanel {
 		class HandleSubStorage_2 implements MouseListener {
 
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 				setSelectedSubMenu(subStorage_2);
 			}
 
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 
 			}
@@ -690,13 +686,13 @@ public class Sidebar_Menu extends JPanel {
 		class HandleSubStorage_3 implements MouseListener {
 
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 				setSelectedSubMenu(subStorage_3);
 			}
 
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 
 			}
