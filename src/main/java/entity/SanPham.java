@@ -1,5 +1,10 @@
 package entity;
 
+import component.table.ModelAction;
+import component.table.product.EventAction;
+import component.table.product.ModelProductInfo;
+import utils.ImageUtil;
+
 public class SanPham {
 
     private String MaSP;
@@ -14,8 +19,6 @@ public class SanPham {
 
     public SanPham() {
     }
-
-
 
     public SanPham(String MaSP, String TenSP, String DVT, int GiaSP, int SoLuongTrongKho, int SoLuongTrenQuay, String TenLoai, String TenNCC, String Hinh) {
         this.MaSP = MaSP;
@@ -101,4 +104,14 @@ public class SanPham {
         this.Hinh = Hinh;
     }
 
+
+    public Object[] toRowTable(EventAction event) {
+        return new Object[]{
+                new ModelProductInfo(TenSP, TenNCC, ImageUtil.read(getClass().getResource(Hinh))),
+                MaSP,
+                TenLoai,
+                DVT,
+                GiaSP,
+                new ModelAction<SanPham, EventAction>(this, event)};
+    }
 }

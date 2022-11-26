@@ -1,8 +1,8 @@
-package component.table.product;
+package component.table.staff;
 
 import component.Button;
 import component.table.ModelAction;
-import entity.SanPham;
+import entity.NhanVien;
 import utils.ImageUtil;
 
 import javax.swing.*;
@@ -11,19 +11,19 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Action extends JPanel {
+public class StaffAction extends JPanel {
 	
 	Button btnEdit;
 	Button btnDelete;
 
-	public Action(ModelAction<SanPham> data) {
+	public StaffAction(ModelAction<NhanVien, EventAction> data) {
 		// TODO Auto-generated constructor stub
 		setOpaque(true);
 		setLayout(new GridLayout(1, 2, 10, 0));
 		setBorder(new EmptyBorder(15, 60, 15, 60));
 		
 		btnEdit = new Button();
-		setButtonProp(btnEdit, ImageUtil.read(this.getClass().getResource("/icon/edit.png"), 12, 12));
+		setButtonProp(btnEdit, ImageUtil.read(getClass().getResource("/icon/edit.png"), 12, 12));
 		btnEdit.addActionListener(new ActionListener() {
 
 			@Override
@@ -35,7 +35,7 @@ public class Action extends JPanel {
 		});
 		
 		btnDelete = new Button();
-		setButtonProp(btnDelete, ImageUtil.read(this.getClass().getResource("/icon/delete.png"), 12, 12));
+		setButtonProp(btnDelete, ImageUtil.read(getClass().getResource("/icon/delete.png"), 12, 12));
 		btnDelete.addActionListener(new ActionListener() {
 
 			@Override
@@ -63,11 +63,10 @@ public class Action extends JPanel {
 		btn.setFont(new Font("Tahoma", Font.BOLD, 12));
 		add(btn);
 	}
-
+	
 	public void setSelectedBackground(Color c) {
 		btnEdit.setBackground(c);
 		btnDelete.setBackground(c);
 		setBackground(c);
 	}
-
 }

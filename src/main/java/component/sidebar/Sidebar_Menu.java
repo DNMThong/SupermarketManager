@@ -1,7 +1,6 @@
 package component.sidebar;
 
-import ui.MainContent;
-import ui.POS;
+import ui.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -295,6 +294,18 @@ public class Sidebar_Menu extends JPanel {
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 				setSelectedSubMenu(subProduct_1);
+				if (containerContent != null) {
+					containerContent.removeAll();
+					containerContent.getParent().revalidate();
+					containerContent.getParent().repaint();
+				}
+
+				FormProduct content = new FormProduct();
+				MainContent m = new MainContent("Sản Phẩm");
+				m.addContent(content);
+				containerContent.add(m, BorderLayout.CENTER);
+				containerContent.getParent().getParent().revalidate();
+				containerContent.getParent().getParent().repaint();
 			}
 
 			@Override
@@ -328,6 +339,18 @@ public class Sidebar_Menu extends JPanel {
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 				setSelectedSubMenu(subProduct_2);
+				if (containerContent != null) {
+					containerContent.removeAll();
+					containerContent.getParent().revalidate();
+					containerContent.getParent().repaint();
+				}
+
+				ListProductContent content = new ListProductContent();
+				MainContent m = new MainContent("Sản Phẩm");
+				m.addContent(content);
+				containerContent.add(m, BorderLayout.CENTER);
+				containerContent.getParent().getParent().revalidate();
+				containerContent.getParent().getParent().repaint();
 			}
 
 			@Override
@@ -394,6 +417,18 @@ public class Sidebar_Menu extends JPanel {
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 				setSelectedSubMenu(subStaff_2);
+				if (containerContent != null) {
+					containerContent.removeAll();
+					containerContent.getParent().revalidate();
+					containerContent.getParent().repaint();
+				}
+
+				ListStaffContent content = new ListStaffContent();
+				MainContent m = new MainContent("Nhân viên");
+				m.addContent(content);
+				containerContent.add(m, BorderLayout.CENTER);
+				containerContent.getParent().getParent().revalidate();
+				containerContent.getParent().getParent().repaint();
 			}
 
 			@Override

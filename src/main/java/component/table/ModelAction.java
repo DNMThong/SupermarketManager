@@ -1,14 +1,13 @@
 package component.table;
 
-import component.table.product.EventAction;
 
-public class ModelAction<Entity> {
+public class ModelAction<Type, EventAction> {
 
-    public Entity getEntity() {
+    public Type getEntity() {
         return entity;
     }
 
-    public void setEntity(Entity entity) {
+    public void setEntity(Type entity) {
     	 this.entity = entity;
     }
 
@@ -20,7 +19,7 @@ public class ModelAction<Entity> {
         this.event = event;
     }
 
-    public ModelAction(Entity entity, EventAction event) {
+    public ModelAction(Type entity, EventAction event) {
         this.entity = entity;
         this.event = event;
     }
@@ -28,6 +27,6 @@ public class ModelAction<Entity> {
     public ModelAction() {
     }
 
-    private Entity entity;
+    private Type entity;
     private EventAction event;
 }
