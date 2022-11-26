@@ -1,18 +1,20 @@
 package entity;
 
+import java.util.Date;
+
 public class PhieuNhap {
 
     private String MaPhieuNhap;
-    private String NgayNhap;
-    private String TenNV;
+    private Date NgayNhap;
+    private String MaNhanVien;
 
     public PhieuNhap() {
     }
 
-    public PhieuNhap(String MaPhieuNhap, String NgayNhap, String TenNV) {
+    public PhieuNhap(String MaPhieuNhap, Date NgayNhap, String MaNhanVien) {
         this.MaPhieuNhap = MaPhieuNhap;
         this.NgayNhap = NgayNhap;
-        this.TenNV = TenNV;
+        this.MaNhanVien = MaNhanVien;
     }
 
     public String getMaPhieuNhap() {
@@ -23,20 +25,24 @@ public class PhieuNhap {
         this.MaPhieuNhap = MaPhieuNhap;
     }
 
-    public String getNgayNhap() {
+    public Date getNgayNhap() {
         return NgayNhap;
     }
 
-    public void setNgayNhap(String NgayNhap) {
+    public void setNgayNhap(Date NgayNhap) {
         this.NgayNhap = NgayNhap;
     }
 
-    public String getTenNV() {
-        return TenNV;
+    public String getMaNhanVien() {
+        return MaNhanVien;
     }
 
-    public void setTenNV(String TenNV) {
-        this.TenNV = TenNV;
+    public void setMaNhanVien(String MaNhanVien) {
+        this.MaNhanVien = MaNhanVien;
     }
+
+    
+
+   
 
 }

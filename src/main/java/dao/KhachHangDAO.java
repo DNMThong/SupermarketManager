@@ -11,24 +11,28 @@ public class KhachHangDAO extends SupermarketManagerDAO<KhachHang, String> {
 
     @Override
     public void insert(KhachHang entity) {
-        String sql = "INSERT INTO KhachHang (MaKH, HoTen, SDT, Email, DoThanMat) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO KhachHang (MaKH, HoTen, SDT,GioiTinh, Email,DiaChi, DoThanMat) VALUES (?, ?, ?, ?, ?, ?, ?)";
         JDBCUtil.update(sql,
-                entity.getMaKH(),
+                entity.getMaKhachHang(),
                 entity.getHoTen(),
                 entity.getSDT(),
+                entity.isGioiTinh(),
                 entity.getEmail(),
+                entity.getDiaChi(),
                 entity.getDoThanMat());
     }
 
     @Override
     public void update(KhachHang entity) {
-        String sql = "UPDATE KhachHang SET HoTen = ?, SDT = ?, Email = ?, DoThanMat = ? WHERE MaKH = ?";
+        String sql = "UPDATE KhachHang SET HoTen = ?, SDT = ?,GioiTinh = ?, Email = ?, DiaChi = ?, DoThanMat = ? WHERE MaKH = ?";
         JDBCUtil.update(sql,
                 entity.getHoTen(),
                 entity.getSDT(),
+                entity.isGioiTinh(),
                 entity.getEmail(),
+                entity.getDiaChi(),
                 entity.getDoThanMat(),
-                entity.getMaKH());
+                entity.getMaKhachHang());
     }
 
     @Override
@@ -59,11 +63,13 @@ public class KhachHangDAO extends SupermarketManagerDAO<KhachHang, String> {
                 rs = JDBCUtil.query(sql, args);
                 while (rs.next()) {
                     KhachHang entity = new KhachHang();
-                    entity.setMaKH(rs.getString(1));
+                    entity.setMaKhachHang(rs.getString(1));
                     entity.setHoTen(rs.getString(2));
                     entity.setSDT(rs.getString(3));
-                    entity.setEmail(rs.getString(4));
-                    entity.setDoThanMat(rs.getString(5));
+                    entity.setGioiTinh(rs.getBoolean(4));
+                    entity.setEmail(rs.getString(5));
+                    entity.setDiaChi(rs.getString(6));
+                    entity.setDoThanMat(rs.getInt(7));
                     list.add(entity);
                 }
             } catch (SQLException e) {

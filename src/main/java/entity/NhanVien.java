@@ -2,12 +2,12 @@ package entity;
 
 public class NhanVien {
 
-    private String MaNV;
+    private String MaNhanVien;
     private String HoTen;
-    private String SDT;
-    private String DiaChi;
-    private String Email;
     private boolean GioiTinh;
+    private String SDT;
+    private String Email;
+    private String DiaChi;
     private String MatKhau;
     private boolean VaiTro;
     private String Hinh;
@@ -15,24 +15,26 @@ public class NhanVien {
     public NhanVien() {
     }
 
-    public NhanVien(String MaNV, String HoTen, String SDT, String DiaChi, String Email, boolean GioiTinh, String MatKhau, boolean VaiTro, String Hinh) {
-        this.MaNV = MaNV;
+    public NhanVien(String MaNhanVien, String HoTen, boolean GioiTinh, String SDT, String Email, String DiaChi, String MatKhau, boolean VaiTro, String Hinh) {
+        this.MaNhanVien = MaNhanVien;
         this.HoTen = HoTen;
-        this.SDT = SDT;
-        this.DiaChi = DiaChi;
-        this.Email = Email;
         this.GioiTinh = GioiTinh;
+        this.SDT = SDT;
+        this.Email = Email;
+        this.DiaChi = DiaChi;
         this.MatKhau = MatKhau;
         this.VaiTro = VaiTro;
         this.Hinh = Hinh;
     }
 
-    public String getMaNV() {
-        return MaNV;
+
+
+    public String getMaNhanVien() {
+        return MaNhanVien;
     }
 
-    public void setMaNV(String MaNV) {
-        this.MaNV = MaNV;
+    public void setMaNhanVien(String MaNV) {
+        this.MaNhanVien = MaNhanVien;
     }
 
     public String getHoTen() {
@@ -67,7 +69,7 @@ public class NhanVien {
         this.Email = Email;
     }
 
-    public boolean getGioiTinh() {
+    public boolean isGioiTinh() {
         return GioiTinh;
     }
 
@@ -83,7 +85,7 @@ public class NhanVien {
         this.MatKhau = MatKhau;
     }
 
-    public boolean getVaiTro() {
+    public boolean isVaiTro() {
         return VaiTro;
     }
 

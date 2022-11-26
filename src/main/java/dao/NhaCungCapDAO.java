@@ -67,7 +67,7 @@ public class NhaCungCapDAO extends SupermarketManagerDAO<NhaCungCap, String> {
                     entity.setSDT(rs.getString(3));
                     entity.setEmail(rs.getString(4));
                     entity.setDiaChi(rs.getString(5));
-                    entity.setNgayHopTac(rs.getString(6));
+                    entity.setNgayHopTac(rs.getDate(6));
                     list.add(entity);
                 }
             } catch (SQLException e) {

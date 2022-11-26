@@ -1,20 +1,22 @@
 package entity;
 
+import java.util.Date;
+
 public class HoaDon {
 
     private String MaHoaDon;
-    private String NgayXuat;
-    private String TenNV;
-    private String TenKH;
+    private String MaNhanVien;
+    private String MaKhachHang;
+    private Date NgayXuat;
 
     public HoaDon() {
     }
 
-    public HoaDon(String MaHoaDon, String NgayXuat, String TenNV, String TenKH) {
+    public HoaDon(String MaHoaDon, String MaNhanVien, String MaKhachHang, Date NgayXuat) {
         this.MaHoaDon = MaHoaDon;
+        this.MaNhanVien = MaNhanVien;
+        this.MaKhachHang = MaKhachHang;
         this.NgayXuat = NgayXuat;
-        this.TenNV = TenNV;
-        this.TenKH = TenKH;
     }
 
     public String getMaHoaDon() {
@@ -25,28 +27,27 @@ public class HoaDon {
         this.MaHoaDon = MaHoaDon;
     }
 
-    public String getNgayXuat() {
+    public String getMaNhanVien() {
+        return MaNhanVien;
+    }
+
+    public void setMaNhanVien(String MaNhanVien) {
+        this.MaNhanVien = MaNhanVien;
+    }
+
+    public String getMaKhachHang() {
+        return MaKhachHang;
+    }
+
+    public void setMaKhachHang(String MaKhachHang) {
+        this.MaKhachHang = MaKhachHang;
+    }
+
+    public Date getNgayXuat() {
         return NgayXuat;
     }
 
-    public void setNgayXuat(String NgayXuat) {
+    public void setNgayXuat(Date NgayXuat) {
         this.NgayXuat = NgayXuat;
     }
-
-    public String getTenNV() {
-        return TenNV;
-    }
-
-    public void setTenNV(String TenNV) {
-        this.TenNV = TenNV;
-    }
-
-    public String getTenKH() {
-        return TenKH;
-    }
-
-    public void setTenKH(String TenKH) {
-        this.TenKH = TenKH;
-    }
-
 }

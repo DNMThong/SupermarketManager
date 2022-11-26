@@ -2,29 +2,33 @@ package entity;
 
 public class KhachHang {
 
-    private String MaKH;
+    private String MaKhachHang;
     private String HoTen;
     private String SDT;
+    private boolean GioiTinh;
     private String Email;
-    private String DoThanMat;
+    private String DiaChi;
+    private int DoThanMat;
 
     public KhachHang() {
     }
 
-    public KhachHang(String MaKH, String HoTen, String SDT, String Email, String DoThanMat) {
-        this.MaKH = MaKH;
+    public KhachHang(String MaKhachHang, String HoTen, String SDT, boolean GioiTinh, String Email, String DiaChi, int DoThanMat) {
+        this.MaKhachHang = MaKhachHang;
         this.HoTen = HoTen;
         this.SDT = SDT;
+        this.GioiTinh = GioiTinh;
         this.Email = Email;
+        this.DiaChi = DiaChi;
         this.DoThanMat = DoThanMat;
     }
 
-    public String getMaKH() {
-        return MaKH;
+    public String getMaKhachHang() {
+        return MaKhachHang;
     }
 
-    public void setMaKH(String MaKH) {
-        this.MaKH = MaKH;
+    public void setMaKhachHang(String MaKhachHang) {
+        this.MaKhachHang = MaKhachHang;
     }
 
     public String getHoTen() {
@@ -43,6 +47,14 @@ public class KhachHang {
         this.SDT = SDT;
     }
 
+    public boolean isGioiTinh() {
+        return GioiTinh;
+    }
+
+    public void setGioiTinh(boolean GioiTinh) {
+        this.GioiTinh = GioiTinh;
+    }
+
     public String getEmail() {
         return Email;
     }
@@ -51,12 +63,22 @@ public class KhachHang {
         this.Email = Email;
     }
 
-    public String getDoThanMat() {
+    public String getDiaChi() {
+        return DiaChi;
+    }
+
+    public void setDiaChi(String DiaChi) {
+        this.DiaChi = DiaChi;
+    }
+
+    public int getDoThanMat() {
         return DoThanMat;
     }
 
-    public void setDoThanMat(String DoThanMat) {
+    public void setDoThanMat(int DoThanMat) {
         this.DoThanMat = DoThanMat;
     }
+
+    
 
 }
