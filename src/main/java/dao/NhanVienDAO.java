@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dao;
 
 import entity.NhanVien;
@@ -11,24 +7,20 @@ import java.util.ArrayList;
 import java.util.List;
 import utils.JDBCUtil;
 
-/**
- *
- * @author ShariacHung
- */
 public class NhanVienDAO extends SupermarketManagerDAO<NhanVien, String> {
 
     @Override
     public void insert(NhanVien entity) {
-        String sql = "INSERT INTO NhanVien (MaNV, HoTen, SDT, DiaChi, Email, GioiTinh, MatKhau, VaiTro, Hinh) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO NhanVien (MaNV, HoTen, GioiTinh, SDT, Email, DiaChi, MatKhau, VaiTro, Hinh) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         JDBCUtil.update(sql,
-                entity.getMaNV(),
+                entity.getMaNhanVien(),
                 entity.getHoTen(),
+                entity.isGioiTinh(),
                 entity.getSDT(),
-                entity.getDiaChi(),
                 entity.getEmail(),
-                entity.getGioiTinh(),
+                entity.getDiaChi(),
                 entity.getMatKhau(),
-                entity.getVaiTro(),
+                entity.isVaiTro(),
                 entity.getHinh());
     }
 
@@ -40,11 +32,11 @@ public class NhanVienDAO extends SupermarketManagerDAO<NhanVien, String> {
                 entity.getSDT(),
                 entity.getDiaChi(),
                 entity.getEmail(),
-                entity.getGioiTinh(),
+                entity.isGioiTinh(),
                 entity.getMatKhau(),
-                entity.getVaiTro(),
+                entity.isVaiTro(),
                 entity.getHinh(),
-                entity.getMaNV());
+                entity.getMaNhanVien());
     }
 
     @Override
@@ -75,12 +67,12 @@ public class NhanVienDAO extends SupermarketManagerDAO<NhanVien, String> {
                 rs = JDBCUtil.query(sql, args);
                 while (rs.next()) {
                     NhanVien entity = new NhanVien();
-                    entity.setMaNV(rs.getString(1));
+                    entity.setMaNhanVien(rs.getString(1));
                     entity.setHoTen(rs.getString(2));
-                    entity.setSDT(rs.getString(3));
-                    entity.setDiaChi(rs.getString(4));
+                    entity.setGioiTinh(rs.getBoolean(3));
+                    entity.setSDT(rs.getString(4));
                     entity.setEmail(rs.getString(5));
-                    entity.setGioiTinh(rs.getBoolean(6));
+                    entity.setDiaChi(rs.getString(6));
                     entity.setMatKhau(rs.getString(7));
                     entity.setVaiTro(rs.getBoolean(8));
                     entity.setHinh(rs.getString(9));

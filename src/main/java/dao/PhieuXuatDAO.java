@@ -11,21 +11,19 @@ public class PhieuXuatDAO extends SupermarketManagerDAO<PhieuXuat, String> {
 
     @Override
     public void insert(PhieuXuat entity) {
-        String sql = "INSERT INTO PhieuXuat (MaPhieuXuat, NgayXuat, TenNV, TenNCC) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO PhieuXuat (MaPhieuXuat, NgayXuat, MaNV) VALUES (?, ?, ?, ?)";
         JDBCUtil.update(sql,
                 entity.getMaPhieuXuat(),
                 entity.getNgayXuat(),
-                entity.getTenNV(),
-                entity.getTenNCC());
+                entity.getMaNhanVien());
     }
 
     @Override
     public void update(PhieuXuat entity) {
-        String sql = "UPDATE PhieuXuat SET NgayXuat = ?, TenNV = ?, TenNCC WHERE MaPhieuXuat = ?";
+        String sql = "UPDATE PhieuXuat SET NgayXuat = ?, MaNV = ? WHERE MaPhieuXuat = ?";
         JDBCUtil.update(sql,
                 entity.getNgayXuat(),
-                entity.getTenNV(),
-                entity.getTenNCC(),
+                entity.getMaNhanVien(),
                 entity.getMaPhieuXuat());
     }
 
@@ -58,9 +56,8 @@ public class PhieuXuatDAO extends SupermarketManagerDAO<PhieuXuat, String> {
                 while (rs.next()) {
                     PhieuXuat entity = new PhieuXuat();
                     entity.setMaPhieuXuat(rs.getString(1));
-                    entity.setNgayXuat(rs.getString(2));
-                    entity.setTenNV(rs.getString(3));
-                    entity.setTenNCC(rs.getString(4));
+                    entity.setNgayXuat(rs.getDate(2));
+                    entity.setMaNhanVien(rs.getString(3));
                     list.add(entity);
                 }
             } catch (SQLException e) {

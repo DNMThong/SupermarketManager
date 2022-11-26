@@ -1,5 +1,7 @@
 package entity;
 
+import java.util.Date;
+
 public class NhaCungCap {
 
     private String MaNCC;
@@ -7,12 +9,12 @@ public class NhaCungCap {
     private String SDT;
     private String Email;
     private String DiaChi;
-    private String NgayHopTac;
+    private Date NgayHopTac;
 
     public NhaCungCap() {
     }
 
-    public NhaCungCap(String MaNCC, String TenNCC, String SDT, String Email, String DiaChi, String NgayHopTac) {
+    public NhaCungCap(String MaNCC, String TenNCC, String SDT, String Email, String DiaChi, Date NgayHopTac) {
         this.MaNCC = MaNCC;
         this.TenNCC = TenNCC;
         this.SDT = SDT;
@@ -61,11 +63,11 @@ public class NhaCungCap {
         this.DiaChi = DiaChi;
     }
 
-    public String getNgayHopTac() {
+    public Date getNgayHopTac() {
         return NgayHopTac;
     }
 
-    public void setNgayHopTac(String NgayHopTac) {
+    public void setNgayHopTac(Date NgayHopTac) {
         this.NgayHopTac = NgayHopTac;
     }
 

@@ -11,24 +11,17 @@ package entity;
 public class ChiTietPhieuNhap {
 
     private String MaPhieuNhap;
-    private String MaSP;
-    private String TenSP;
+    private String MaSanPham;
+    private int GiaNhap;
     private int SoLuong;
-    private String GiaNhap;
-    private String GiaBan;
-    private String MaNCC;
-
     public ChiTietPhieuNhap() {
     }
 
-    public ChiTietPhieuNhap(String MaPhieuNhap, String MaSP, String TenSP, int SoLuong, String GiaNhap, String GiaBan, String MaNCC) {
+    public ChiTietPhieuNhap(String MaPhieuNhap, String MaSanPham, int GiaNhap, int SoLuong) {
         this.MaPhieuNhap = MaPhieuNhap;
-        this.MaSP = MaSP;
-        this.TenSP = TenSP;
-        this.SoLuong = SoLuong;
+        this.MaSanPham = MaSanPham;
         this.GiaNhap = GiaNhap;
-        this.GiaBan = GiaBan;
-        this.MaNCC = MaNCC;
+        this.SoLuong = SoLuong;
     }
 
     public String getMaPhieuNhap() {
@@ -39,20 +32,20 @@ public class ChiTietPhieuNhap {
         this.MaPhieuNhap = MaPhieuNhap;
     }
 
-    public String getMaSP() {
-        return MaSP;
+    public String getMaSanPham() {
+        return MaSanPham;
     }
 
-    public void setMaSP(String MaSP) {
-        this.MaSP = MaSP;
+    public void setMaSanPham(String MaSanPham) {
+        this.MaSanPham = MaSanPham;
     }
 
-    public String getTenSP() {
-        return TenSP;
+    public int getGiaNhap() {
+        return GiaNhap;
     }
 
-    public void setTenSP(String TenSP) {
-        this.TenSP = TenSP;
+    public void setGiaNhap(int GiaNhap) {
+        this.GiaNhap = GiaNhap;
     }
 
     public int getSoLuong() {
@@ -63,28 +56,5 @@ public class ChiTietPhieuNhap {
         this.SoLuong = SoLuong;
     }
 
-    public String getGiaNhap() {
-        return GiaNhap;
-    }
-
-    public void setGiaNhap(String GiaNhap) {
-        this.GiaNhap = GiaNhap;
-    }
-
-    public String getGiaBan() {
-        return GiaBan;
-    }
-
-    public void setGiaBan(String GiaBan) {
-        this.GiaBan = GiaBan;
-    }
-
-    public String getMaNCC() {
-        return MaNCC;
-    }
-
-    public void setMaNCC(String MaNCC) {
-        this.MaNCC = MaNCC;
-    }
-
+    
 }

@@ -12,19 +12,19 @@ public class PhieuNhapDAO extends SupermarketManagerDAO<PhieuNhap, String> {
 
     @Override
     public void insert(PhieuNhap entity) {
-        String sql = "INSERT INTO PhieuNhap (MaPhieuNhap, NgayNhap, TenNV) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO PhieuNhap (MaPhieuNhap, NgayNhap, MaNV) VALUES (?, ?, ?)";
         JDBCUtil.update(sql,
                 entity.getMaPhieuNhap(),
                 entity.getNgayNhap(),
-                entity.getTenNV());
+                entity.getMaNhanVien());
     }
 
     @Override
     public void update(PhieuNhap entity) {
-        String sql = "UPDATE PhieuNhap SET NgayNhap = ?, TenNV = ? WHERE MaPhieuNhap = ?";
+        String sql = "UPDATE PhieuNhap SET NgayNhap = ?, MaNV = ? WHERE MaPhieuNhap = ?";
         JDBCUtil.update(sql,
                 entity.getNgayNhap(),
-                entity.getTenNV(),
+                entity.getMaNhanVien(),
                 entity.getMaPhieuNhap());
     }
 
@@ -57,8 +57,8 @@ public class PhieuNhapDAO extends SupermarketManagerDAO<PhieuNhap, String> {
                 while (rs.next()) {
                     PhieuNhap entity = new PhieuNhap();
                     entity.setMaPhieuNhap(rs.getString(1));
-                    entity.setNgayNhap(rs.getString(2));
-                    entity.setTenNV(rs.getString(3));
+                    entity.setNgayNhap(rs.getDate(2));
+                    entity.setMaNhanVien(rs.getString(3));
                     list.add(entity);
                 }
             } catch (SQLException e) {

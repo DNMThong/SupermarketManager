@@ -40,7 +40,7 @@ public class LoaiSanPhamDAO extends SupermarketManagerDAO<LoaiSanPham, String> {
     @Override
     public List<LoaiSanPham> selectAll() {
         // dùng để đổ tên loại sản phẩm lên combobox. Trước khi đổ thì hãy thêm 1 item vào combobox có name là "Tất cả".
-        String sql = "SELECT TenLoai FROM LoaiSanPham GROUP BY TenLoai";
+        String sql = "SELECT TenLoai FROM LoaiSanPham";
         return selectBySql(sql);
     }
 
@@ -53,7 +53,8 @@ public class LoaiSanPhamDAO extends SupermarketManagerDAO<LoaiSanPham, String> {
                 rs = JDBCUtil.query(sql, args);
                 while (rs.next()) {
                     LoaiSanPham entity = new LoaiSanPham();
-                    entity.setTenLoai(rs.getString(1));
+                    entity.setMaLoai(rs.getString(1));
+                    entity.setTenLoai(rs.getString(2));
                     list.add(entity);
                 }
             } catch (SQLException e) {

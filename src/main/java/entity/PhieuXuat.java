@@ -1,20 +1,20 @@
 package entity;
 
+import java.util.Date;
+
 public class PhieuXuat {
 
     private String MaPhieuXuat;
-    private String NgayXuat;
-    private String TenNV;
-    private String TenNCC;
+    private Date NgayXuat;
+    private String MaNhanVien;
 
     public PhieuXuat() {
     }
 
-    public PhieuXuat(String MaPhieuXuat, String NgayXuat, String TenNV, String TenNCC) {
+    public PhieuXuat(String MaPhieuXuat, Date NgayXuat, String MaNhanVien) {
         this.MaPhieuXuat = MaPhieuXuat;
         this.NgayXuat = NgayXuat;
-        this.TenNV = TenNV;
-        this.TenNCC = TenNCC;
+        this.MaNhanVien = MaNhanVien;
     }
 
     public String getMaPhieuXuat() {
@@ -25,28 +25,19 @@ public class PhieuXuat {
         this.MaPhieuXuat = MaPhieuXuat;
     }
 
-    public String getNgayXuat() {
+    public Date getNgayXuat() {
         return NgayXuat;
     }
 
-    public void setNgayXuat(String NgayXuat) {
+    public void setNgayXuat(Date NgayXuat) {
         this.NgayXuat = NgayXuat;
     }
 
-    public String getTenNV() {
-        return TenNV;
+    public String getMaNhanVien() {
+        return MaNhanVien;
     }
 
-    public void setTenNV(String TenNV) {
-        this.TenNV = TenNV;
+    public void setMaNhanVien(String MaNhanVien) {
+        this.MaNhanVien = MaNhanVien;
     }
-
-    public String getTenNCC() {
-        return TenNCC;
-    }
-
-    public void setTenNCC(String TenNCC) {
-        this.TenNCC = TenNCC;
-    }
-
 }

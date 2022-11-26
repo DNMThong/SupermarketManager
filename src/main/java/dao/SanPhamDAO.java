@@ -11,12 +11,14 @@ public class SanPhamDAO extends SupermarketManagerDAO<SanPham, String> {
 
     @Override
     public void insert(SanPham entity) {
-        String sql = "INSERT INTO SanPham (MaSP, TenSP, DVT, GiaSP, TenLoai, TenNCC, Hinh) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO SanPham (MaSP, TenSP, DVT, GiaSP, SoLuongTrongKho, SoLuongTrenQuay, TenLoai, TenNCC, Hinh) VALUES (?, ?, ?, ?, ?, ?, ?)";
         JDBCUtil.update(sql,
                 entity.getMaSP(),
                 entity.getTenSP(),
                 entity.getDVT(),
                 entity.getGiaSP(),
+                entity.getSoLuongTrongKho(),
+                entity.getSoLuongTrenQuay(),
                 entity.getTenLoai(),
                 entity.getTenNCC(),
                 entity.getHinh());
@@ -24,11 +26,13 @@ public class SanPhamDAO extends SupermarketManagerDAO<SanPham, String> {
 
     @Override
     public void update(SanPham entity) {
-        String sql = "UPDATE SanPham SET TenSP = ?, DVT = ?, GiaSP = ?, TenLoai = ?, TenNCC = ?, Hinh = ? WHERE MaSP = ?";
+        String sql = "UPDATE SanPham SET TenSP = ?, DVT = ?, GiaSP = ?, SoLuongTrongKho = ?, SoLuongTrenQuay = ? TenLoai = ?, TenNCC = ?, Hinh = ? WHERE MaSP = ?";
         JDBCUtil.update(sql,
                 entity.getTenSP(),
                 entity.getDVT(),
                 entity.getGiaSP(),
+                entity.getSoLuongTrongKho(),
+                entity.getSoLuongTrenQuay(),
                 entity.getTenLoai(),
                 entity.getTenNCC(),
                 entity.getHinh(),
@@ -71,6 +75,12 @@ public class SanPhamDAO extends SupermarketManagerDAO<SanPham, String> {
                     entity.setTenLoai(rs.getString(5));
                     entity.setTenNCC(rs.getString(6));
                     entity.setHinh(rs.getString(7));
+                    entity.setSoLuongTrongKho(rs.getInt(5));
+                    entity.setSoLuongTrenQuay(rs.getInt(6));
+                    entity.setTenLoai(rs.getString(7));
+                    entity.setTenNCC(rs.getString(8));
+                    entity.setHinh(rs.getString(9));
+
                     list.add(entity);
                 }
             } catch (SQLException e) {

@@ -11,39 +11,33 @@ public class ChiTietPhieuNhapDAO extends SupermarketManagerDAO<ChiTietPhieuNhap,
 
     @Override
     public void insert(ChiTietPhieuNhap entity) {
-        String sql = "INSERT INTO ChiTietPhieuNhap (MaPhieuNhap, MaSP, TenSP, SoLuong, GiaNhap, GiaBan, MaNCC) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO CTPN (MaPhieuNhap, MaSP, GiaNhap, SoLuong) VALUES (?, ?, ?, ?)";
         JDBCUtil.update(sql,
                 entity.getMaPhieuNhap(),
-                entity.getMaSP(),
-                entity.getTenSP(),
-                entity.getSoLuong(),
+                entity.getMaSanPham(),
                 entity.getGiaNhap(),
-                entity.getGiaBan(),
-                entity.getMaNCC());
+                entity.getSoLuong());
     }
 
     @Override
     public void update(ChiTietPhieuNhap entity) {
-        String sql = "UPDATE ChiTietPhieuNhap SET MaSP = ?, TenSP= ?, SoLuong= ?, GiaNhap= ?, GiaBan= ?, MaNCC= ? WHERE MaPhieuNhap= ?";
+        String sql = "UPDATE CTPN SET MaSP = ?, GiaNhap= ?, SoLuong= ? WHERE MaPhieuNhap= ?";
         JDBCUtil.update(sql,
-                entity.getMaSP(),
-                entity.getTenSP(),
-                entity.getSoLuong(),
+                entity.getMaSanPham(),
                 entity.getGiaNhap(),
-                entity.getGiaBan(),
-                entity.getMaNCC(),
+                entity.getSoLuong(),
                 entity.getMaPhieuNhap());
     }
 
     @Override
     public void delete(String MaPhieuNhap) {
-        String sql = "DELETE FROM ChiTietPhieuNhap WHERE MaPhieuNhap = ?";
+        String sql = "DELETE FROM CTPN WHERE MaPhieuNhap = ?";
         JDBCUtil.update(sql, MaPhieuNhap);
     }
 
     @Override
     public ChiTietPhieuNhap selectById(String MaPhieuNhap) {
-        String sql = "SELECT * FROM ChiTietPhieuNhap WHERE MaPhieuNhap = ?";
+        String sql = "SELECT * FROM CTPN WHERE MaPhieuNhap = ?";
         List<ChiTietPhieuNhap> list = this.selectBySql(sql, MaPhieuNhap);
         return !list.isEmpty() ? list.get(0) : null;
     }
@@ -64,12 +58,9 @@ public class ChiTietPhieuNhapDAO extends SupermarketManagerDAO<ChiTietPhieuNhap,
                 while (rs.next()) {
                     ChiTietPhieuNhap entity = new ChiTietPhieuNhap();
                     entity.setMaPhieuNhap(rs.getString(1));
-                    entity.setMaSP(rs.getString(2));
-                    entity.setTenSP(rs.getString(3));
-                    entity.setSoLuong(rs.getInt(4));
-                    entity.setGiaBan(rs.getString(5));
-                    entity.setGiaNhap(rs.getString(6));
-                    entity.setMaNCC(rs.getString(7));
+                    entity.setMaSanPham(rs.getString(2));
+                    entity.setGiaNhap(rs.getInt(3));
+                    entity.setSoLuong(rs.getInt(4));                   
                     list.add(entity);
                 }
             } catch (SQLException e) {

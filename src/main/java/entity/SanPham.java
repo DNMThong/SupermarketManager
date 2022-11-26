@@ -1,16 +1,13 @@
 package entity;
 
-import component.table.ModelAction;
-import component.table.product.EventAction;
-import component.table.product.ModelProductInfo;
-import utils.ImageUtil;
-
 public class SanPham {
 
     private String MaSP;
     private String TenSP;
     private String DVT;
     private int GiaSP;
+    private int SoLuongTrongKho;
+    private int SoLuongTrenQuay;
     private String TenLoai;
     private String TenNCC;
     private String Hinh;
@@ -18,11 +15,15 @@ public class SanPham {
     public SanPham() {
     }
 
-    public SanPham(String MaSP, String TenSP, String DVT, int GiaSP, String TenLoai, String TenNCC, String Hinh) {
+
+
+    public SanPham(String MaSP, String TenSP, String DVT, int GiaSP, int SoLuongTrongKho, int SoLuongTrenQuay, String TenLoai, String TenNCC, String Hinh) {
         this.MaSP = MaSP;
         this.TenSP = TenSP;
         this.DVT = DVT;
         this.GiaSP = GiaSP;
+        this.SoLuongTrongKho = SoLuongTrongKho;
+        this.SoLuongTrenQuay = SoLuongTrenQuay;
         this.TenLoai = TenLoai;
         this.TenNCC = TenNCC;
         this.Hinh = Hinh;
@@ -60,6 +61,22 @@ public class SanPham {
         this.GiaSP = GiaSP;
     }
 
+    public int getSoLuongTrongKho() {
+        return SoLuongTrongKho;
+    }
+
+    public void setSoLuongTrongKho(int SoLuongTrongKho) {
+        this.SoLuongTrongKho = SoLuongTrongKho;
+    }
+
+    public int getSoLuongTrenQuay() {
+        return SoLuongTrenQuay;
+    }
+
+    public void setSoLuongTrenQuay(int SoLuongTrenQuay) {
+        this.SoLuongTrenQuay = SoLuongTrenQuay;
+    }
+
     public String getTenLoai() {
         return TenLoai;
     }
@@ -84,17 +101,4 @@ public class SanPham {
         this.Hinh = Hinh;
     }
 
-    /**
-     *
-     * Header: "Thông tin sản phẩm", "Mã sản phẩm", "Loại", "Đơn vị tính", "Giá", "Action"
-     */
-    public Object[] toRowTable(EventAction event) {
-        return new Object[]{
-                new ModelProductInfo(TenSP, TenNCC, ImageUtil.read(this.getClass().getResource(Hinh))),
-                MaSP,
-                TenLoai,
-                DVT,
-                GiaSP,
-                new ModelAction(this, event)};
-    }
 }

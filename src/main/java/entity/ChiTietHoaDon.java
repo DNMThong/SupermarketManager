@@ -1,25 +1,21 @@
 package entity;
 
+import java.util.Date;
+
 public class ChiTietHoaDon {
 
     private String MaHoaDon;
-    private String NgayXuat;
-    private String TenNV;
-    private String TenKH;
-    private String TenSP;
-    private String GiaBan;
+    private String MaSanPham;
+    private String MaPhieuXuat;
     private int SoLuong;
 
     public ChiTietHoaDon() {
     }
 
-    public ChiTietHoaDon(String MaHoaDon, String NgayXuat, String TenNV, String TenKH, String TenSP, String GiaBan, int SoLuong) {
+    public ChiTietHoaDon(String MaHoaDon, String MaSanPham, String MaPhieuXuat, int SoLuong) {
         this.MaHoaDon = MaHoaDon;
-        this.NgayXuat = NgayXuat;
-        this.TenNV = TenNV;
-        this.TenKH = TenKH;
-        this.TenSP = TenSP;
-        this.GiaBan = GiaBan;
+        this.MaSanPham = MaSanPham;
+        this.MaPhieuXuat = MaPhieuXuat;
         this.SoLuong = SoLuong;
     }
 
@@ -31,44 +27,20 @@ public class ChiTietHoaDon {
         this.MaHoaDon = MaHoaDon;
     }
 
-    public String getNgayXuat() {
-        return NgayXuat;
+    public String getMaSanPham() {
+        return MaSanPham;
     }
 
-    public void setNgayXuat(String NgayXuat) {
-        this.NgayXuat = NgayXuat;
+    public void setMaSanPham(String MaSanPham) {
+        this.MaSanPham = MaSanPham;
     }
 
-    public String getTenNV() {
-        return TenNV;
+    public String getMaPhieuXuat() {
+        return MaPhieuXuat;
     }
 
-    public void setTenNV(String TenNV) {
-        this.TenNV = TenNV;
-    }
-
-    public String getTenKH() {
-        return TenKH;
-    }
-
-    public void setTenKH(String TenKH) {
-        this.TenKH = TenKH;
-    }
-
-    public String getTenSP() {
-        return TenSP;
-    }
-
-    public void setTenSP(String TenSP) {
-        this.TenSP = TenSP;
-    }
-
-    public String getGiaBan() {
-        return GiaBan;
-    }
-
-    public void setGiaBan(String GiaBan) {
-        this.GiaBan = GiaBan;
+    public void setMaPhieuXuat(String MaPhieuXuat) {
+        this.MaPhieuXuat = MaPhieuXuat;
     }
 
     public int getSoLuong() {

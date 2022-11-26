@@ -11,34 +11,34 @@ public class HoaDonDAO extends SupermarketManagerDAO<HoaDon, String> {
 
     @Override
     public void insert(HoaDon entity) {
-        String sql = "INSERT INTO HoaDon (MaHoaDon, NgayXuat, TenNV, TenKH) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO HoaDon (MaHD, MaNV, MaKH, NgayXuat) VALUES (?, ?, ?, ?)";
         JDBCUtil.update(sql,
                 entity.getMaHoaDon(),
-                entity.getNgayXuat(),
-                entity.getTenNV(),
-                entity.getTenKH());
+                entity.getMaNhanVien(),
+                entity.getMaKhachHang(),
+                entity.getNgayXuat());
     }
 
     @Override
     public void update(HoaDon entity) {
-        String sql = "UPDATE HoaDon SET NgayXuat  = ?, TenNV = ?, TenKH = ? WHERE MaHoaDon = ?";
+        String sql = "UPDATE HoaDon SET NaNV=?,MaKH=?,NgayXuat=? WHERE MaHD = ?";
         JDBCUtil.update(sql,
+                entity.getMaKhachHang(),
+                entity.getMaNhanVien(),
                 entity.getNgayXuat(),
-                entity.getTenNV(),
-                entity.getTenKH(),
                 entity.getMaHoaDon());
     }
 
     //tạo procerduce khi xóa hóa đơn hoặc hóa đơn chi tiết thì sẽ xóa luôn cả 2 
     @Override
     public void delete(String maHoaDon) {
-        String sql = "DELETE FROM HoaDon WHERE maHoaDon = ?";
+        String sql = "DELETE FROM HoaDon WHERE MaHD = ?";
         JDBCUtil.update(sql, maHoaDon);
     }
 
     @Override
     public HoaDon selectById(String MaHoaDon) {
-        String sql = "SELECT * FROM HoaDon WHERE MaHoaDon = ?";
+        String sql = "SELECT * FROM HoaDon WHERE MaHD = ?";
         List<HoaDon> list = this.selectBySql(sql, MaHoaDon);
         return !list.isEmpty() ? list.get(0) : null;
     }
@@ -59,9 +59,9 @@ public class HoaDonDAO extends SupermarketManagerDAO<HoaDon, String> {
                 while (rs.next()) {
                     HoaDon entity = new HoaDon();
                     entity.setMaHoaDon(rs.getString(1));
-                    entity.setNgayXuat(rs.getString(2));
-                    entity.setTenNV(rs.getString(3));
-                    entity.setTenKH(rs.getString(4));
+                    entity.setMaNhanVien(rs.getString(2));
+                    entity.setMaKhachHang(rs.getString(3));
+                    entity.setNgayXuat(rs.getDate(4));
                     list.add(entity);
                 }
             } catch (SQLException e) {
