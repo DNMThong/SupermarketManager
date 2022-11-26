@@ -67,7 +67,7 @@ public class SanPhamDAO extends SupermarketManagerDAO<SanPham, String> {
                     entity.setMaSP(rs.getString(1));
                     entity.setTenSP(rs.getString(2));
                     entity.setDVT(rs.getString(3));
-                    entity.setGiaSP(rs.getString(4));
+                    entity.setGiaSP(rs.getInt(4));
                     entity.setTenLoai(rs.getString(5));
                     entity.setTenNCC(rs.getString(6));
                     entity.setHinh(rs.getString(7));

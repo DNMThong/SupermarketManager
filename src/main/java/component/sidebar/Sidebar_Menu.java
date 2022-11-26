@@ -1,6 +1,7 @@
 package component.sidebar;
 
 import ui.MainContent;
+import ui.POS;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,7 +35,7 @@ public class Sidebar_Menu extends JPanel {
 		private MenuItem menuAccount;
 
 		private JPanel containerContent = null;
-		private JPanel contentPanel;
+		private MainContent contentPanel;
 
 
 		public Sidebar_Menu(JComponent c) {
@@ -203,6 +204,7 @@ public class Sidebar_Menu extends JPanel {
 					contentPanel.getParent().repaint();
 				}
 				contentPanel = new MainContent("Trang chu");
+				contentPanel.addContent(new POS());
 				if (containerContent != null) {
 					containerContent.removeAll();
 					containerContent.getParent().getParent().revalidate();

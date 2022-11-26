@@ -10,7 +10,7 @@ public class SanPham {
     private String MaSP;
     private String TenSP;
     private String DVT;
-    private String GiaSP;
+    private int GiaSP;
     private String TenLoai;
     private String TenNCC;
     private String Hinh;
@@ -18,7 +18,7 @@ public class SanPham {
     public SanPham() {
     }
 
-    public SanPham(String MaSP, String TenSP, String DVT, String GiaSP, String TenLoai, String TenNCC, String Hinh) {
+    public SanPham(String MaSP, String TenSP, String DVT, int GiaSP, String TenLoai, String TenNCC, String Hinh) {
         this.MaSP = MaSP;
         this.TenSP = TenSP;
         this.DVT = DVT;
@@ -52,11 +52,11 @@ public class SanPham {
         this.DVT = DVT;
     }
 
-    public String getGiaSP() {
+    public int getGiaSP() {
         return GiaSP;
     }
 
-    public void setGiaSP(String GiaSP) {
+    public void setGiaSP(int GiaSP) {
         this.GiaSP = GiaSP;
     }
 
