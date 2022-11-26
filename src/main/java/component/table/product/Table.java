@@ -115,8 +115,7 @@ public class Table extends JTable {
 //        this.TenNCC = TenNCC;
 //        this.Hinh = Hinh;
         
-        tb.addRow(new SanPham("1101", "Sting", "Chai", 10000, "Nước ngọt", "Nghia", "../icon/sidebar/Account.png").toRowTable(eventAction));
-        tb.addRow(new SanPham("1102","Khong 0", "Chai", 12000, "Nước ngọt", "Nghia", "../icon/sidebar/Account.png").toRowTable(eventAction));
+
 
         System.out.println(Table.class.getResource("../../../icon/sidebar/Account.png"));
 		

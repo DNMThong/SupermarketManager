@@ -15,12 +15,12 @@ public class NhanVienDAO extends SupermarketManagerDAO<NhanVien, String> {
         JDBCUtil.update(sql,
                 entity.getMaNhanVien(),
                 entity.getHoTen(),
-                entity.isGioiTinh(),
+                entity.getGioiTinh(),
                 entity.getSDT(),
                 entity.getEmail(),
                 entity.getDiaChi(),
                 entity.getMatKhau(),
-                entity.isVaiTro(),
+                entity.getVaiTro(),
                 entity.getHinh());
     }
 
@@ -32,9 +32,9 @@ public class NhanVienDAO extends SupermarketManagerDAO<NhanVien, String> {
                 entity.getSDT(),
                 entity.getDiaChi(),
                 entity.getEmail(),
-                entity.isGioiTinh(),
+                entity.getGioiTinh(),
                 entity.getMatKhau(),
-                entity.isVaiTro(),
+                entity.getVaiTro(),
                 entity.getHinh(),
                 entity.getMaNhanVien());
     }

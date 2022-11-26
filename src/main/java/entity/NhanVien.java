@@ -69,7 +69,7 @@ public class NhanVien {
         this.Email = Email;
     }
 
-    public boolean isGioiTinh() {
+    public boolean getGioiTinh() {
         return GioiTinh;
     }
 
@@ -85,7 +85,7 @@ public class NhanVien {
         this.MatKhau = MatKhau;
     }
 
-    public boolean isVaiTro() {
+    public boolean getVaiTro() {
         return VaiTro;
     }
 
