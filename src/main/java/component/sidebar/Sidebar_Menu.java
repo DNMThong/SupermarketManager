@@ -693,6 +693,18 @@ public class Sidebar_Menu extends JPanel {
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 				setSelectedSubMenu(subStorage_2);
+				if (containerContent != null) {
+					containerContent.removeAll();
+					containerContent.getParent().revalidate();
+					containerContent.getParent().repaint();
+				}
+
+				DSPNContent content = new DSPNContent();
+				MainContent m = new MainContent("Sản Phẩm");
+				m.addContent(content);
+				containerContent.add(m, BorderLayout.CENTER);
+				containerContent.getParent().getParent().revalidate();
+				containerContent.getParent().getParent().repaint();
 			}
 
 			@Override
