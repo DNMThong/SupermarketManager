@@ -1,25 +1,21 @@
 package ui;
 
-import javax.swing.JPanel;
-import javax.swing.GroupLayout;
+import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
 
 import component.Button;
+import component.DashedBorder;
 import component.textfield.TextField;
 
-import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.geom.RoundRectangle2D;
 
-import javax.swing.SwingConstants;
-
 import java.awt.BasicStroke;
 import java.awt.Color;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JComboBox;
 import java.awt.Cursor;
 import java.awt.BorderLayout;
 
@@ -89,25 +85,8 @@ public class FormProduct extends JPanel {
 		cboNhaCungCap = new JComboBox();
 		cboNhaCungCap.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		JPanel panelImage = new JPanel() {
-			@Override
-			protected void paintComponent(Graphics grphcs) {
-				float dash1[] = { 10.0f };
-				BasicStroke dashed = new BasicStroke(1.0f,
-						BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, dash1, 0.0f);
-				Graphics2D g2 = (Graphics2D) grphcs;
-				g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-						RenderingHints.VALUE_ANTIALIAS_ON);
-
-				g2.setPaint(Color.gray);
-				int x = 1;
-				int y = 1;
-
-				g2.setStroke(dashed);
-				g2.draw(new RoundRectangle2D.Double(x, y, getWidth() - x - 10, getHeight() - y - 10,
-						10, 10));
-			}
-		};
+		JPanel panelImage = new JPanel();
+		panelImage.setBorder(new DashedBorder());
 		panelImage.setBackground(Color.WHITE);
 		panelImage.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		panelImage.setFont(new Font("Tahoma", Font.PLAIN, 20));

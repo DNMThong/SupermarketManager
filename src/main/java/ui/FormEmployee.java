@@ -1,29 +1,16 @@
 package ui;
 
-import javax.swing.JPanel;
-import javax.swing.ButtonGroup;
-import javax.swing.GroupLayout;
+import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.SwingConstants;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.geom.RoundRectangle2D;
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.BasicStroke;
-import java.awt.BorderLayout;
+import java.awt.*;
+
 
 import component.Button;
+import component.DashedBorder;
 import component.textfield.TextField;
 
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JButton;
+
 
 public class FormEmployee extends JPanel {
 
@@ -60,24 +47,8 @@ public class FormEmployee extends JPanel {
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 32));
 		lblNewLabel.setForeground(new Color(31,174,255));
 
-		JPanel panelImage = new JPanel() {
-			protected void paintComponent(Graphics grphcs) {
-				float dash1[] = { 10.0f };
-				BasicStroke dashed = new BasicStroke(1.0f,
-						BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, dash1, 0.0f);
-				Graphics2D g2 = (Graphics2D) grphcs;
-				g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-						RenderingHints.VALUE_ANTIALIAS_ON);
-
-				g2.setPaint(Color.gray);
-				int x = 1;
-				int y = 1;
-
-				g2.setStroke(dashed);
-				g2.draw(new RoundRectangle2D.Double(x, y, getWidth() - x - 10, getHeight() - y - 10,
-						10, 10));
-			}
-		};
+		JPanel panelImage = new JPanel();
+		panelImage.setBorder(new DashedBorder());
 		panelImage.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		panelImage.setBackground(Color.WHITE);
 		panelImage.setLayout(new BorderLayout(0, 0));
@@ -272,4 +243,5 @@ public class FormEmployee extends JPanel {
 		panelImage.add(image, BorderLayout.CENTER);
 		setLayout(groupLayout);
 	}
+
 }
