@@ -173,6 +173,7 @@ public class LoginJFrame extends JFrame {
 						Alert.success(LoginJFrame.getFrames()[0], "Đăng nhập thành công");
 						dispose();
 						new MainFrame();
+						System.out.println(nv.getMatKhau());
 						repaint();
 						revalidate();
 					}else {

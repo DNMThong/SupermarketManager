@@ -10,20 +10,19 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.SwingConstants;
 
+import utils.CurrencyUtil;
 import utils.ImageUtil;
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
+
+import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class CardProduct extends JPanel {
 	private String name;
 	private int price;
 	private String supplier;
 	private ImageIcon imageProduct;
+
+	private ActionListener action;
 
 	/**
 	 * Create the panel.
@@ -40,6 +39,14 @@ public class CardProduct extends JPanel {
 		initUI();
 	}
 
+	public CardProduct(String name, int price, String supplier,ImageIcon imageProduct,ActionListener action) {
+		this.name = name;
+		this.price = price;
+		this.supplier = supplier;
+		this.imageProduct = imageProduct;
+		this.action = action;
+		initUI();
+	}
 
 
 	public void initUI() {
@@ -48,6 +55,7 @@ public class CardProduct extends JPanel {
 		setBackground(Color.WHITE);
 		
 		JLabel lblImage = new JLabel();
+
 		lblImage.setHorizontalAlignment(SwingConstants.CENTER);
 		lblImage.setIcon(imageProduct);
 		
@@ -61,14 +69,19 @@ public class CardProduct extends JPanel {
 		btnAdd.setColorOver(new Color(90,193,251));
 		btnAdd.setColorClick(new Color(31,174,255));
 		btnAdd.setBorderColor(Color.white);
+		btnAdd.addActionListener(action==null?null:action);
 		
 		JLabel lblName = new JLabel(name);
 		lblName.setHorizontalAlignment(SwingConstants.CENTER);
+		lblName.setFont(new Font("Tahoma",Font.BOLD,16));
 		
-		JLabel lblPrice = new JLabel(price+"");
+		JLabel lblPrice = new JLabel(CurrencyUtil.format(price));
 		lblPrice.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblPrice.setFont(new Font("Tahoma",Font.BOLD,12));
 		
 		JLabel lblSupplier = new JLabel(supplier);
+		lblSupplier.setFont(new Font("Tahoma",Font.BOLD,12));
+
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -100,6 +113,7 @@ public class CardProduct extends JPanel {
 					.addGap(10))
 		);
 		setLayout(groupLayout);
+
 	}
 	
 	public static void main(String[] args) {

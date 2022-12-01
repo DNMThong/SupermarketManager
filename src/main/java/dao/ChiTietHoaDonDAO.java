@@ -11,9 +11,9 @@ public class ChiTietHoaDonDAO extends SupermarketManagerDAO<ChiTietHoaDon, Strin
 
     @Override
     public void insert(ChiTietHoaDon entity) {
-        String sql = "INSERT INTO CTHD (MaHoaDon,MaSP, MaPhieuXuat, SoLuong) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO CTHD (MaHD,MaSP, MaPhieuXuat, SoLuong) VALUES (?, ?, ?, ?)";
         JDBCUtil.update(sql,
-                entity.getMaHoaDon(),
+                entity.getMaHD(),
                 entity.getMaSanPham(),
                 entity.getMaPhieuXuat(),
                 entity.getSoLuong());
@@ -21,19 +21,19 @@ public class ChiTietHoaDonDAO extends SupermarketManagerDAO<ChiTietHoaDon, Strin
 
     @Override
     public void update(ChiTietHoaDon entity) {
-        String sql = "UPDATE CTHD SET  MaSP=?,MaPhieuXuat=?,SoLuong = ? WHERE MaHoaDon  = ?";
+        String sql = "UPDATE CTHD SET  MaSP=?,MaPhieuXuat=?,SoLuong = ? WHERE MaHD  = ?";
         JDBCUtil.update(sql,
                 entity.getMaSanPham(),
                 entity.getMaPhieuXuat(),
                 entity.getSoLuong(),
-                entity.getMaHoaDon());
+                entity.getMaHD());
     }   
 
     //tạo procerduce khi xóa hóa đơn hoặc hóa đơn chi tiết thì sẽ xóa luôn cả 2 
     @Override
-    public void delete(String maHoaDon) {
+    public void delete(String MaHD) {
         String sql = "DELETE FROM CTHD WHERE MaHD = ?";
-        JDBCUtil.update(sql, maHoaDon);
+        JDBCUtil.update(sql, MaHD);
     }
 
     @Override
@@ -58,7 +58,7 @@ public class ChiTietHoaDonDAO extends SupermarketManagerDAO<ChiTietHoaDon, Strin
                 rs = JDBCUtil.query(sql, args);
                 while (rs.next()) {
                     ChiTietHoaDon entity = new ChiTietHoaDon();
-                    entity.setMaHoaDon(rs.getString(1));
+                    entity.setMaHD(rs.getString(1));
                     entity.setMaSanPham(rs.getString(2));
                     entity.setMaPhieuXuat(rs.getString(3));
                     entity.setSoLuong(rs.getInt(4));

@@ -34,7 +34,7 @@ public class NhanVien {
     }
 
     public void setMaNhanVien(String MaNV) {
-        this.MaNhanVien = MaNhanVien;
+        this.MaNhanVien = MaNV;
     }
 
     public String getHoTen() {

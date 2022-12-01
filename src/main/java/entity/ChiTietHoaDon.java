@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class ChiTietHoaDon {
 
-    private String MaHoaDon;
+    private String MaHD;
     private String MaSanPham;
     private String MaPhieuXuat;
     private int SoLuong;
@@ -12,19 +12,19 @@ public class ChiTietHoaDon {
     public ChiTietHoaDon() {
     }
 
-    public ChiTietHoaDon(String MaHoaDon, String MaSanPham, String MaPhieuXuat, int SoLuong) {
-        this.MaHoaDon = MaHoaDon;
+    public ChiTietHoaDon(String MaHD, String MaSanPham, String MaPhieuXuat, int SoLuong) {
+        this.MaHD = MaHD;
         this.MaSanPham = MaSanPham;
         this.MaPhieuXuat = MaPhieuXuat;
         this.SoLuong = SoLuong;
     }
 
-    public String getMaHoaDon() {
-        return MaHoaDon;
+    public String getMaHD() {
+        return MaHD;
     }
 
-    public void setMaHoaDon(String MaHoaDon) {
-        this.MaHoaDon = MaHoaDon;
+    public void setMaHD(String MaHD) {
+        this.MaHD = MaHD;
     }
 
     public String getMaSanPham() {

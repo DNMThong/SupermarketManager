@@ -1,5 +1,6 @@
 package component.sidebar;
 
+import ui.FormEmployee;
 import ui.MainContent;
 import ui.POS;
 

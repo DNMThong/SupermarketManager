@@ -49,4 +49,11 @@ public class ImageUtil {
 				.getImage()
 				.getScaledInstance(w, h, Image.SCALE_SMOOTH));
 	}
+
+	public static ImageIcon read(ImageIcon icon,int w,int h) {
+		return new ImageIcon(
+						icon
+						.getImage()
+						.getScaledInstance(w, h, Image.SCALE_SMOOTH));
+	}
 }

@@ -15,8 +15,6 @@ public class SanPham {
     public SanPham() {
     }
 
-
-
     public SanPham(String MaSP, String TenSP, String DVT, int GiaSP, int SoLuongTrongKho, int SoLuongTrenQuay, String TenLoai, String TenNCC, String Hinh) {
         this.MaSP = MaSP;
         this.TenSP = TenSP;

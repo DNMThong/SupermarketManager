@@ -15,7 +15,7 @@ public class HoaDonDAO extends SupermarketManagerDAO<HoaDon, String> {
         JDBCUtil.update(sql,
                 entity.getMaHoaDon(),
                 entity.getMaNhanVien(),
-                entity.getMaKhachHang(),
+                entity.getMaKhachHang().isEmpty()?null:entity.getMaKhachHang(),
                 entity.getNgayXuat());
     }
 
