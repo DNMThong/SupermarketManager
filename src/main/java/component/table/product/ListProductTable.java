@@ -110,8 +110,8 @@ public class ListProductTable extends JTable {
 //        this.TenNCC = TenNCC;
 //        this.Hinh = Hinh;
 
-        addRow(new SanPham("1101", "Sting", "Chai", 10000, 100, 1000,"Nước ngọt", "Nghia", "../icon/sidebar/Account.png").toRowTable(eventAction));
-        addRow(new SanPham("1102","Khong 0", "Chai", 12000, 100, 1000, "Nước ngọt", "Nghia", "../icon/sidebar/Account.png").toRowTable(eventAction));
+//        addRow(new SanPham("1101", "Sting", "Chai", 10000, 100, 1000,"Nước ngọt", "Nghia", "../icon/sidebar/Account.png").toRowTable(eventAction));
+//        addRow(new SanPham("1102","Khong 0", "Chai", 12000, 100, 1000, "Nước ngọt", "Nghia", "../icon/sidebar/Account.png").toRowTable(eventAction));
     }
 	
 	public static void main(String[] args) throws MalformedURLException {
