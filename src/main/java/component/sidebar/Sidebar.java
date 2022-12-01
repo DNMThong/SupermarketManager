@@ -69,11 +69,11 @@ public class Sidebar extends JPanel {
 								.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 167, GroupLayout.PREFERRED_SIZE)
 								.addGap(34)
 								.addComponent(btnToHome, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 600, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 611, Short.MAX_VALUE)
 								.addPreferredGap(ComponentPlacement.RELATED)
 								.addComponent(lbMadeBy, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-								.addContainerGap())
+								.addGap(0))
 		);
 		panel_1.setLayout(new BorderLayout(5, 0));
 

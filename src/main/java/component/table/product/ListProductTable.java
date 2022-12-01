@@ -1,7 +1,6 @@
 package component.table.product;
 
 import component.table.ModelAction;
-import component.table.TableCellAction;
 import component.table.TableHeader;
 import entity.SanPham;
 
@@ -14,9 +13,9 @@ import java.awt.*;
 import java.net.MalformedURLException;
 
 
-public class Table extends JTable {
+public class ListProductTable extends JTable {
 
-	public Table() {
+    public ListProductTable() {
         setOpaque(false);
         getTableHeader().setBackground(new Color(255, 255, 255));
         setBackground(Color.white);
@@ -46,8 +45,8 @@ public class Table extends JTable {
                     }
                     return cell;
                 } else if (o instanceof ModelAction) {
-                    ModelAction<SanPham> data = (ModelAction<SanPham>) o;
-                    Action cell = new Action(data);
+                    ModelAction<SanPham, EventAction> data = (ModelAction<SanPham, EventAction>) o;
+                    ProductAction cell = new  ProductAction(data);
                     if (selected) {
                         cell.setSelectedBackground(new Color(239, 244, 255));
                     } else {
@@ -70,7 +69,50 @@ public class Table extends JTable {
                 }
             }
         });
-	}
+
+        execute();
+    }
+
+    public void execute() {
+        Object[] header = {
+                "Thông tin sản phẩm", "Mã sản phẩm", "Loại", "Đơn vị tính", "Giá", "Action"
+        };
+
+        Object[][] data = {
+
+        };
+
+        /**
+         * delete: Viết xử lí cho nút xóa
+         * update: Viết xử lí cho nút sửa
+         *
+         */
+        EventAction eventAction = new EventAction() {
+            @Override
+            public void delete(SanPham student) {
+                System.out.println("Delete Student : " + student.getTenSP());
+            }
+
+            @Override
+            public void update(SanPham student) {
+                System.out.println("Update Student : " + student.getTenSP());
+            }
+        };
+        setModel(new DefaultTableModel(data, header));
+
+//        this.MaSP = MaSP;
+//        this.TenSP = TenSP;
+//        this.DVT = DVT;
+//        this.GiaSP = GiaSP;
+//        this.SoLuongTrongKho = SoLuongTrongKho;
+//        this.SoLuongTrenQuay = SoLuongTrenQuay;
+//        this.TenLoai = TenLoai;
+//        this.TenNCC = TenNCC;
+//        this.Hinh = Hinh;
+
+        addRow(new SanPham("1101", "Sting", "Chai", 10000, 100, 1000,"Nước ngọt", "Nghia", "../icon/sidebar/Account.png").toRowTable(eventAction));
+        addRow(new SanPham("1102","Khong 0", "Chai", 12000, 100, 1000, "Nước ngọt", "Nghia", "../icon/sidebar/Account.png").toRowTable(eventAction));
+    }
 	
 	public static void main(String[] args) throws MalformedURLException {
 		JPanel c = new JPanel();
@@ -84,28 +126,8 @@ public class Table extends JTable {
 		sp.getViewport().setBackground(Color.white);
 		c.add(sp, BorderLayout.CENTER);
 		
-		Table tb = new Table() ;
+		ListProductTable tb = new ListProductTable() ;
 		sp.setViewportView(tb);
-		Object[] header = {
-				"Thông tin sản phẩm", "Mã sản phẩm", "Loại", "Đơn vị tính", "Giá", "Action"
-		};
-		
-		Object[][] data = {
-				
-		};
-		
-		EventAction eventAction = new EventAction() {
-            @Override
-            public void delete(SanPham student) {
-                System.out.println("Delete Student : " + student.getTenSP());
-            }
-
-            @Override
-            public void update(SanPham student) {
-            	System.out.println("Update Student : " + student.getTenSP());
-            }
-        };
-        tb.setModel(new DefaultTableModel(data, header));
         
 //        this.MaSP = MaSP;
 //        this.TenSP = TenSP;
@@ -117,7 +139,7 @@ public class Table extends JTable {
         
 
 
-        System.out.println(Table.class.getResource("../../../icon/sidebar/Account.png"));
+        System.out.println(ListProductTable.class.getResource("../../../icon/sidebar/Account.png"));
 		
 		frame.setVisible(true);
 		

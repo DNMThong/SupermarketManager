@@ -1,13 +1,14 @@
-package component.table;
+package component.table.product;
 
-import component.table.product.Action;
+import component.table.ModelAction;
+import entity.SanPham;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class TableCellAction extends DefaultCellEditor {
 
-	private ModelAction data;
+	private ModelAction<SanPham, EventAction> data;
 	
 	public TableCellAction() {
         super(new JCheckBox());
@@ -15,8 +16,8 @@ public class TableCellAction extends DefaultCellEditor {
 
     @Override
     public Component getTableCellEditorComponent(JTable jtable, Object o, boolean bln, int i, int i1) {
-        data = (ModelAction) o;
-        Action cell = new Action(data);
+        data = (ModelAction<SanPham, EventAction>) o;
+        ProductAction cell = new  ProductAction(data);
         return cell;
     }
 

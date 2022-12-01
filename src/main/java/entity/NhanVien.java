@@ -1,5 +1,10 @@
 package entity;
 
+import component.table.ModelAction;
+import component.table.staff.EventAction;
+import component.table.staff.ModelStaffInfo;
+import utils.ImageUtil;
+
 public class NhanVien {
 
     private String MaNhanVien;
@@ -101,4 +106,17 @@ public class NhanVien {
         this.Hinh = Hinh;
     }
 
+    /**
+     *
+     * Header: "Thông tin nhân viên", "Mã nhân viên", "Email", "Số điện thoại", "Mật khẩu", "Action"
+     */
+    public Object[] toRowTable(EventAction event) {
+        return new Object[]{
+                new ModelStaffInfo(HoTen, VaiTro, ImageUtil.read(getClass().getResource(Hinh))),
+                MaNhanVien,
+                Email,
+                SDT,
+                MatKhau,
+                new ModelAction<NhanVien, EventAction>(this, event)};
+    }
 }
