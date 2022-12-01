@@ -1,34 +1,46 @@
 package entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SanPham {
 
     private String MaSP;
     private String TenSP;
+    private String MaLoai;
+    private String MaNhaCungCap;  
     private String DVT;
-    private int GiaSP;
-    private int SoLuongTrongKho;
-    private int SoLuongTrenQuay;
-    private String TenLoai;
-    private String TenNCC;
     private String Hinh;
-
+    private String GhiChu;
     public SanPham() {
     }
 
-
-
-    public SanPham(String MaSP, String TenSP, String DVT, int GiaSP, int SoLuongTrongKho, int SoLuongTrenQuay, String TenLoai, String TenNCC, String Hinh) {
+    public SanPham(String MaSP, String TenSP, String MaLoai, String MaNhaCungCap, String DVT, String Hinh, String GhiChu) {
         this.MaSP = MaSP;
         this.TenSP = TenSP;
+        this.MaLoai = MaLoai;
+        this.MaNhaCungCap = MaNhaCungCap;
         this.DVT = DVT;
-        this.GiaSP = GiaSP;
-        this.SoLuongTrongKho = SoLuongTrongKho;
-        this.SoLuongTrenQuay = SoLuongTrenQuay;
-        this.TenLoai = TenLoai;
-        this.TenNCC = TenNCC;
         this.Hinh = Hinh;
+        this.GhiChu = GhiChu;
     }
 
+    public String getGhiChu() {
+        return GhiChu;
+    }
+
+    public void setGhiChu(String GhiChu) {
+        this.GhiChu = GhiChu;
+    }
+
+    public String getMaNhaCungCap() {
+        return MaNhaCungCap;
+    }
+
+    public void setMaNhaCungCap(String MaNhaCungCap) {
+        this.MaNhaCungCap = MaNhaCungCap;
+    }
+    
     public String getMaSP() {
         return MaSP;
     }
@@ -52,45 +64,13 @@ public class SanPham {
     public void setDVT(String DVT) {
         this.DVT = DVT;
     }
-
-    public int getGiaSP() {
-        return GiaSP;
+    
+    public String getMaLoai() {
+        return MaLoai;
     }
 
-    public void setGiaSP(int GiaSP) {
-        this.GiaSP = GiaSP;
-    }
-
-    public int getSoLuongTrongKho() {
-        return SoLuongTrongKho;
-    }
-
-    public void setSoLuongTrongKho(int SoLuongTrongKho) {
-        this.SoLuongTrongKho = SoLuongTrongKho;
-    }
-
-    public int getSoLuongTrenQuay() {
-        return SoLuongTrenQuay;
-    }
-
-    public void setSoLuongTrenQuay(int SoLuongTrenQuay) {
-        this.SoLuongTrenQuay = SoLuongTrenQuay;
-    }
-
-    public String getTenLoai() {
-        return TenLoai;
-    }
-
-    public void setTenLoai(String TenLoai) {
-        this.TenLoai = TenLoai;
-    }
-
-    public String getTenNCC() {
-        return TenNCC;
-    }
-
-    public void setTenNCC(String TenNCC) {
-        this.TenNCC = TenNCC;
+    public void setMaLoai(String MaLoai) {
+        this.MaLoai = MaLoai;
     }
 
     public String getHinh() {
@@ -100,5 +80,10 @@ public class SanPham {
     public void setHinh(String Hinh) {
         this.Hinh = Hinh;
     }
-
+    
+    @Override
+    public String toString() {
+        return this.DVT;
+    }
+   // 
 }
