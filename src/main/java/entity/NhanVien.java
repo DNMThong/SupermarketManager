@@ -33,7 +33,7 @@ public class NhanVien {
         return MaNhanVien;
     }
 
-    public void setMaNhanVien(String MaNV) {
+    public void setMaNhanVien(String MaNhanVien) {
         this.MaNhanVien = MaNhanVien;
     }
 

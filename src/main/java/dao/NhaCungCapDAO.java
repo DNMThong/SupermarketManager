@@ -52,7 +52,7 @@ public class NhaCungCapDAO extends SupermarketManagerDAO<NhaCungCap, String> {
         String sql = "SELECT * FROM NhaCungCap";
         return selectBySql(sql);
     }
-
+    
     @Override
     protected List<NhaCungCap> selectBySql(String sql, Object... args) {
         List<NhaCungCap> list = new ArrayList<>();
@@ -80,5 +80,5 @@ public class NhaCungCapDAO extends SupermarketManagerDAO<NhaCungCap, String> {
         }
         return list;
     }
-
+    
 }

@@ -40,7 +40,7 @@ public class LoaiSanPhamDAO extends SupermarketManagerDAO<LoaiSanPham, String> {
     @Override
     public List<LoaiSanPham> selectAll() {
         // dùng để đổ tên loại sản phẩm lên combobox. Trước khi đổ thì hãy thêm 1 item vào combobox có name là "Tất cả".
-        String sql = "SELECT TenLoai FROM LoaiSanPham";
+        String sql = "SELECT * FROM LoaiSanPham";
         return selectBySql(sql);
     }
 

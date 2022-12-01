@@ -11,37 +11,34 @@ public class SanPhamDAO extends SupermarketManagerDAO<SanPham, String> {
 
     @Override
     public void insert(SanPham entity) {
-        String sql = "INSERT INTO SanPham (MaSP, TenSP, DVT, GiaSP, SoLuongTrongKho, SoLuongTrenQuay, TenLoai, TenNCC, Hinh) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO SanPham (MaSP, TenSP, DVT, MaLoai, MaNCC, Hinh, GhiChu) VALUES (?, ?, ?, ?, ?, ?,?)";
         JDBCUtil.update(sql,
                 entity.getMaSP(),
                 entity.getTenSP(),
                 entity.getDVT(),
-                entity.getGiaSP(),
-                entity.getSoLuongTrongKho(),
-                entity.getSoLuongTrenQuay(),
-                entity.getTenLoai(),
-                entity.getTenNCC(),
-                entity.getHinh());
+                entity.getMaLoai(),
+                entity.getMaNhaCungCap(),
+                entity.getHinh(),
+                entity.getGhiChu());
     }
 
     @Override
     public void update(SanPham entity) {
-        String sql = "UPDATE SanPham SET TenSP = ?, DVT = ?, GiaSP = ?, SoLuongTrongKho = ?, SoLuongTrenQuay = ? TenLoai = ?, TenNCC = ?, Hinh = ? WHERE MaSP = ?";
+        String sql = "UPDATE SanPham SET TenSP = ?, DVT = ?,MaLoai = ?, MaNCC = ?, Hinh = ? ,GhiChu = ? WHERE MaSP = ?";
         JDBCUtil.update(sql,
                 entity.getTenSP(),
                 entity.getDVT(),
-                entity.getGiaSP(),
-                entity.getSoLuongTrongKho(),
-                entity.getSoLuongTrenQuay(),
-                entity.getTenLoai(),
-                entity.getTenNCC(),
+                entity.getMaLoai(),
+                entity.getMaNhaCungCap(),
                 entity.getHinh(),
+                entity.getGhiChu(),
                 entity.getMaSP());
+                
     }
 
     @Override
     public void delete(String maSP) {
-        String sql = "DELETE FROM NhanVien WHERE MaNV = ?";
+        String sql = "DELETE FROM SanPham WHERE MaNV = ?";
         JDBCUtil.update(sql, maSP);
     }
 
@@ -71,16 +68,10 @@ public class SanPhamDAO extends SupermarketManagerDAO<SanPham, String> {
                     entity.setMaSP(rs.getString(1));
                     entity.setTenSP(rs.getString(2));
                     entity.setDVT(rs.getString(3));
-                    entity.setGiaSP(rs.getInt(4));
-                    entity.setTenLoai(rs.getString(5));
-                    entity.setTenNCC(rs.getString(6));
-                    entity.setHinh(rs.getString(7));
-                    entity.setSoLuongTrongKho(rs.getInt(5));
-                    entity.setSoLuongTrenQuay(rs.getInt(6));
-                    entity.setTenLoai(rs.getString(7));
-                    entity.setTenNCC(rs.getString(8));
-                    entity.setHinh(rs.getString(9));
-
+                    entity.setMaLoai(rs.getString(4));
+                    entity.setMaNhaCungCap(rs.getString(5));
+                    entity.setHinh(rs.getString(6));
+                    entity.setGhiChu(rs.getString(7));
                     list.add(entity);
                 }
             } catch (SQLException e) {
@@ -94,4 +85,48 @@ public class SanPhamDAO extends SupermarketManagerDAO<SanPham, String> {
         return list;
     }
 
+    public List<String> getDVT() {
+        List<String> list = new ArrayList();
+        String sql = "select DISTINCT DVT from SanPham";
+        try {
+            ResultSet rs = JDBCUtil.query(sql);
+            try {
+                while (rs.next()) {
+                    list.add(rs.getString(1));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }finally{
+                rs.getStatement().getConnection().close();
+            }
+        } catch(SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+        return list;
+    }
+
+    public List<Object[]> viewSanPhamBan() {
+        String sql = "Select * view_BanSanPham";
+        String colums[] = {"Mã Sản Phẩm", "Mã Phiếu Xuất","Tên Sản Phẩm", "Hình", "Tên NCC", "Đơn Vị Tính", "Tên Loại", "Giá Xuất"};
+        return this.getListOfArray(sql, colums);
+
+    }
+
+    private List<Object[]> getListOfArray(String sql, String[] cols, Object... args) {
+        try {
+            List<Object[]> list = new ArrayList<>();
+            ResultSet rs = JDBCUtil.query(sql, args);
+            while (rs.next()) {
+                Object[] vals = new Object[cols.length];
+                for (int i = 0; i < cols.length; i++) {
+                    vals[i] = rs.getObject(cols[i]);
+                }
+                list.add(vals);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
