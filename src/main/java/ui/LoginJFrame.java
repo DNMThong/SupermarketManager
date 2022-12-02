@@ -18,6 +18,7 @@ import entity.NhanVien;
 import utils.Alert;
 import utils.Auth;
 import utils.ImageUtil;
+import utils.Util;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -172,7 +173,7 @@ public class LoginJFrame extends JFrame {
 						Auth.user = nv;
 						Alert.success(LoginJFrame.getFrames()[0], "Đăng nhập thành công");
 						dispose();
-						new MainFrame();
+						Util.mainFrame = new MainFrame();
 						System.out.println(nv.getMatKhau());
 						repaint();
 						revalidate();

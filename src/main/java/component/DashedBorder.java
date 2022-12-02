@@ -18,7 +18,7 @@ public class DashedBorder extends AbstractBorder {
 
 
         g2.setStroke(dashed);
-        g2.draw(new RoundRectangle2D.Double(x, y, width - x - 10, height - y - 10,
+        g2.draw(new RoundRectangle2D.Double(x+1, y+1, width - x - 10, height - y - 10,
                 10, 10));
     }
 }

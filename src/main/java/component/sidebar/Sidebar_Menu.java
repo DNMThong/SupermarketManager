@@ -199,18 +199,18 @@ public class Sidebar_Menu extends JPanel {
 				setSelectedMenu(menuHome);
 				if (contentPanel != null) {
 					contentPanel.removeAll();
-					contentPanel.getParent().revalidate();
-					contentPanel.getParent().repaint();
+					contentPanel.revalidate();
+					contentPanel.repaint();
 				}
 				contentPanel = new MainContent("Trang chu");
 				contentPanel.addContent(new POS());
 				if (containerContent != null) {
 					containerContent.removeAll();
-					containerContent.getParent().getParent().revalidate();
-					containerContent.getParent().getParent().repaint();
+					containerContent.revalidate();
+					containerContent.repaint();
 					containerContent.add(contentPanel, BorderLayout.CENTER);
-					containerContent.getParent().getParent().revalidate();
-					containerContent.getParent().getParent().repaint();
+					containerContent.revalidate();
+					containerContent.repaint();
 				}
 			}
 
@@ -248,17 +248,17 @@ public class Sidebar_Menu extends JPanel {
 				setSelectedMenu(menuAccount);
 				if (contentPanel != null) {
 					contentPanel.removeAll();
-					contentPanel.getParent().revalidate();
-					contentPanel.getParent().repaint();
+					contentPanel.revalidate();
+					contentPanel.repaint();
 				}
 				contentPanel = new MainContent("Tai khoan");
 				if (containerContent != null) {
 					containerContent.removeAll();
-					containerContent.getParent().getParent().revalidate();
-					containerContent.getParent().getParent().repaint();
+					containerContent.revalidate();
+					containerContent.repaint();
 					containerContent.add(contentPanel, BorderLayout.CENTER);
-					containerContent.getParent().getParent().revalidate();
-					containerContent.getParent().getParent().repaint();
+					containerContent.revalidate();
+					containerContent.repaint();
 				}
 			}
 
@@ -296,16 +296,16 @@ public class Sidebar_Menu extends JPanel {
 				setSelectedSubMenu(subProduct_1);
 				if (containerContent != null) {
 					containerContent.removeAll();
-					containerContent.getParent().revalidate();
-					containerContent.getParent().repaint();
+					containerContent.revalidate();
+					containerContent.repaint();
 				}
 
 				FormProduct content = new FormProduct();
 				MainContent m = new MainContent("Sản Phẩm");
 				m.addContent(content);
 				containerContent.add(m, BorderLayout.CENTER);
-				containerContent.getParent().getParent().revalidate();
-				containerContent.getParent().getParent().repaint();
+				containerContent.revalidate();
+				containerContent.repaint();
 			}
 
 			@Override
@@ -341,16 +341,16 @@ public class Sidebar_Menu extends JPanel {
 				setSelectedSubMenu(subProduct_2);
 				if (containerContent != null) {
 					containerContent.removeAll();
-					containerContent.getParent().revalidate();
-					containerContent.getParent().repaint();
+					containerContent.revalidate();
+					containerContent.repaint();
 				}
 
 				ListProductContent content = new ListProductContent();
 				MainContent m = new MainContent("Sản Phẩm");
 				m.addContent(content);
 				containerContent.add(m, BorderLayout.CENTER);
-				containerContent.getParent().getParent().revalidate();
-				containerContent.getParent().getParent().repaint();
+				containerContent.revalidate();
+				containerContent.repaint();
 			}
 
 			@Override
@@ -384,6 +384,17 @@ public class Sidebar_Menu extends JPanel {
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 				setSelectedSubMenu(subStaff_1);
+				if (containerContent != null) {
+					containerContent.removeAll();
+					containerContent.revalidate();
+					containerContent.repaint();
+				}
+
+				MainContent m = new MainContent("Sản Phẩm");
+				m.addContent(new FormEmployee());
+				containerContent.add(m, BorderLayout.CENTER);
+				containerContent.revalidate();
+				containerContent.repaint();
 			}
 
 			@Override
@@ -419,16 +430,16 @@ public class Sidebar_Menu extends JPanel {
 				setSelectedSubMenu(subStaff_2);
 				if (containerContent != null) {
 					containerContent.removeAll();
-					containerContent.getParent().revalidate();
-					containerContent.getParent().repaint();
+					containerContent.revalidate();
+					containerContent.repaint();
 				}
 
 				ListStaffContent content = new ListStaffContent();
 				MainContent m = new MainContent("Nhân viên");
 				m.addContent(content);
 				containerContent.add(m, BorderLayout.CENTER);
-				containerContent.getParent().getParent().revalidate();
-				containerContent.getParent().getParent().repaint();
+				containerContent.revalidate();
+				containerContent.repaint();
 			}
 
 			@Override
@@ -695,16 +706,16 @@ public class Sidebar_Menu extends JPanel {
 				setSelectedSubMenu(subStorage_2);
 				if (containerContent != null) {
 					containerContent.removeAll();
-					containerContent.getParent().revalidate();
-					containerContent.getParent().repaint();
+					containerContent.revalidate();
+					containerContent.repaint();
 				}
 
 				DSPNContent content = new DSPNContent();
 				MainContent m = new MainContent("Sản Phẩm");
 				m.addContent(content);
 				containerContent.add(m, BorderLayout.CENTER);
-				containerContent.getParent().getParent().revalidate();
-				containerContent.getParent().getParent().repaint();
+				containerContent.revalidate();
+				containerContent.repaint();
 			}
 
 			@Override

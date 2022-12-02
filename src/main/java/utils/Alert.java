@@ -1,8 +1,10 @@
 package utils;
 
 import component.notification.Notification;
+import confirm.ConfirmJDialog;
 import ui.MainFrame;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class Alert {
@@ -92,5 +94,11 @@ public class Alert {
                         msg
                 );
         n.showNotification();
+    }
+
+    public static boolean confirm(String title, String msg, JFrame jFrame) {
+        ConfirmJDialog cd = new ConfirmJDialog(jFrame);
+        cd.showMessage(title, msg);
+        return cd.getMessageType() == ConfirmJDialog.MessageType.OK;
     }
 }

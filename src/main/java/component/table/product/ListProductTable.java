@@ -2,7 +2,11 @@ package component.table.product;
 
 import component.table.ModelAction;
 import component.table.TableHeader;
+import dao.SanPhamDAO;
 import entity.SanPham;
+import ui.MainFrame;
+import utils.Alert;
+import utils.Util;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -11,9 +15,15 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 import java.awt.*;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ListProductTable extends JTable {
+
+    private SanPhamDAO spd = new SanPhamDAO();
+    private EventAction eventAction;
+
 
     public ListProductTable() {
         setOpaque(false);
@@ -94,24 +104,18 @@ public class ListProductTable extends JTable {
             }
 
             @Override
-            public void update(SanPham student) {
-                System.out.println("Update Student : " + student.getTenSP());
+            public void update(SanPham product) {
+                System.out.println("Update Student : " + product.getTenSP());
             }
         };
         setModel(new DefaultTableModel(data, header));
+    }
 
-//        this.MaSP = MaSP;
-//        this.TenSP = TenSP;
-//        this.DVT = DVT;
-//        this.GiaSP = GiaSP;
-//        this.SoLuongTrongKho = SoLuongTrongKho;
-//        this.SoLuongTrenQuay = SoLuongTrenQuay;
-//        this.TenLoai = TenLoai;
-//        this.TenNCC = TenNCC;
-//        this.Hinh = Hinh;
-
-        addRow(new SanPham("1101", "Sting", "Chai", 10000, 100, 1000,"Nước ngọt", "Nghia", "../icon/sidebar/Account.png").toRowTable(eventAction));
-        addRow(new SanPham("1102","Khong 0", "Chai", 12000, 100, 1000, "Nước ngọt", "Nghia", "../icon/sidebar/Account.png").toRowTable(eventAction));
+    public void loadProduct() {
+        List<SanPham> products = spd.selectAll();
+        products.forEach(product -> {
+            product.toRowTable(eventAction);
+        });
     }
 	
 	public static void main(String[] args) throws MalformedURLException {
@@ -126,7 +130,7 @@ public class ListProductTable extends JTable {
 		sp.getViewport().setBackground(Color.white);
 		c.add(sp, BorderLayout.CENTER);
 		
-		ListProductTable tb = new ListProductTable() ;
+		ListProductTable tb = new ListProductTable();
 		sp.setViewportView(tb);
         
 //        this.MaSP = MaSP;
@@ -159,6 +163,11 @@ public class ListProductTable extends JTable {
 			return super.getCellEditor(row, col);
 		}
 	}
-	
+
+    @Override
+    public boolean isCellEditable(int row, int column) {
+        return column == 5;
+    }
+
 
 }

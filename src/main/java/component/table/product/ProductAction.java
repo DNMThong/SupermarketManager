@@ -12,7 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ProductAction extends JPanel {
-	
+
 	Button btnEdit;
 	Button btnDelete;
 
@@ -24,6 +24,7 @@ public class ProductAction extends JPanel {
 		
 		btnEdit = new Button();
 		setButtonProp(btnEdit, ImageUtil.read(getClass().getResource("/icon/edit.png"), 12, 12));
+
 		btnEdit.addActionListener(new ActionListener() {
 
 			@Override

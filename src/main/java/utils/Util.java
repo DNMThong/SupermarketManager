@@ -1,5 +1,7 @@
 package utils;
 
+import javax.swing.*;
+
 public class Util {
     public static void setTimeout(Runnable runnable, int delay){
         new Thread(() -> {
@@ -12,4 +14,6 @@ public class Util {
             }
         }).start();
     }
+
+    public static JFrame mainFrame = null;
 }

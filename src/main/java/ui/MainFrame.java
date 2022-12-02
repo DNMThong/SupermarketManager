@@ -3,6 +3,7 @@ package ui;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import component.sidebar.Sidebar;
 import component.textfield.PasswordField;
+import utils.Util;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,12 +19,13 @@ public class MainFrame extends JFrame {
 //                  GraphicsEnvironment.getLocalGraphicsEnvironment();
 //                  GraphicsDevice device = graphics.getDefaultScreenDevice();
 //        device.setFullScreenWindow(j);
-		new MainFrame();
+		Util.mainFrame = new MainFrame();
 	}
 	
 	public MainFrame() {
 		initComponents();
 	}
+
 	
 	
 	private void initComponents() {

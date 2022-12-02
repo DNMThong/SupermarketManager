@@ -6,6 +6,12 @@ import javax.swing.GroupLayout.Alignment;
 import component.Button;
 import component.DashedBorder;
 import component.textfield.TextField;
+import dao.LoaiSanPhamDAO;
+import dao.NhaCungCapDAO;
+import dao.SanPhamDAO;
+import entity.LoaiSanPham;
+import entity.NhaCungCap;
+import entity.SanPham;
 
 import java.awt.Font;
 import java.awt.Graphics;
@@ -18,6 +24,14 @@ import java.awt.Color;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Cursor;
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.io.File;
+import java.util.List;
+import utils.ImageUtil;
 
 public class FormProduct extends JPanel {
 	private TextField txtMaSP;
@@ -25,12 +39,13 @@ public class FormProduct extends JPanel {
 	private JComboBox cboDonViTinh;
 	private JComboBox cboLoaiSP;
 	private TextField txtTenSP;
-	private TextField txtGia;
+	private TextField txtGhiChu;
 	private JLabel lblNewLabel_2;
 	private Button btnOk;
 	private Button btnClear;
 	private JLabel image;
 	private String maSP=null;
+        private File fileImage=null;
 
 	/**
 	 * Create the panel.
@@ -64,10 +79,13 @@ public class FormProduct extends JPanel {
 		txtTenSP.setLabelText("Tên sản phẩm");
 		txtTenSP.setFont(new Font("Tahoma", Font.PLAIN, 11));
 
-		txtGia = new TextField();
-		txtGia.setOpaque(false);
-		txtGia.setLabelText("Giá");
-		txtGia.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		txtGhiChu = new TextField();
+		txtGhiChu.setOpaque(false);
+		txtGhiChu.setLabelText("Ghi chú");
+		txtGhiChu.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		txtGhiChu = new TextField();
+		txtGhiChu.setOpaque(false);
+
 
 		cboLoaiSP = new JComboBox();
 		cboLoaiSP.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -138,7 +156,7 @@ public class FormProduct extends JPanel {
 														.addComponent(panelImage, GroupLayout.DEFAULT_SIZE, 953, Short.MAX_VALUE)
 														.addGroup(groupLayout.createSequentialGroup()
 																.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-																		.addComponent(txtGia, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
+																		.addComponent(txtGhiChu, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
 																		.addComponent(txtMaSP, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
 																		.addComponent(txtTenSP, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
 																		.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE))
@@ -174,7 +192,7 @@ public class FormProduct extends JPanel {
 												.addComponent(cboDonViTinh, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)))
 								.addGap(58)
 								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(txtGia, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
+										.addComponent(txtGhiChu, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
 										.addGroup(groupLayout.createSequentialGroup()
 												.addComponent(lblNewLabel_1_1_1)
 												.addGap(4)
@@ -200,4 +218,132 @@ public class FormProduct extends JPanel {
 		panelImage.add(image, BorderLayout.CENTER);
 		setLayout(groupLayout);
 	}
+        private void fillCBXLoaiSanPham() {
+        LoaiSanPhamDAO lSP = new LoaiSanPhamDAO();
+        DefaultComboBoxModel modelLoaiSanPham = (DefaultComboBoxModel) cboLoaiSP.getModel();
+        modelLoaiSanPham.removeAllElements();
+        List<LoaiSanPham> list = lSP.selectAll();
+        list.forEach(i -> {
+            modelLoaiSanPham.addElement(i);
+        });
+    }
+
+    private void fillCBXDonViTinh() {
+        SanPhamDAO dVT = new SanPhamDAO();
+        DefaultComboBoxModel modelDVT = (DefaultComboBoxModel) cboDonViTinh.getModel();
+        modelDVT.removeAllElements();
+        List<String> listDVT = dVT.getDVT();
+        listDVT.forEach(i -> {
+            modelDVT.addElement(i);
+        });
+    }
+
+    private void fillCBXNhaCungCap() {
+        NhaCungCapDAO nCC = new NhaCungCapDAO();
+        DefaultComboBoxModel modelNCC = (DefaultComboBoxModel) cboNhaCungCap.getModel();
+        modelNCC.removeAllElements();
+        List<NhaCungCap> list = nCC.selectAll();
+        list.forEach(i -> {
+            modelNCC.addElement(i);
+
+        });
+    }
+
+    private void fillComboBox() {
+        fillCBXNhaCungCap();
+        fillCBXLoaiSanPham();
+        fillCBXDonViTinh();
+    }
+
+    public void displayChooseFile() {
+        if (fileImage == null) {
+            image.setText("Tải ảnh lên");
+        } else {
+            image.setText("");
+        }
+    }
+
+    public void addImage() {
+        JFileChooser jfc = new JFileChooser();
+        int returnValue = jfc.showOpenDialog(this);
+
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            fileImage = jfc.getSelectedFile();
+            String regex = "(.*)*.+\\.(png|jpg|gif|bmp|jpeg|PNG|JPG|GIF|BMP|JPEG)$";
+            if (fileImage.getAbsolutePath().matches(regex)) {
+                image.setIcon(ImageUtil.read(fileImage.getAbsolutePath(), image.getWidth(), image.getHeight()));
+            } else {
+                fileImage = null;
+            }
+
+            displayChooseFile();
+
+        }
+    }
+
+    public boolean validateForm() {
+        
+        return true;
+    }
+
+    private void getForm() {
+        SanPham sp = new SanPham();
+        String DVT = (String) cboDonViTinh.getSelectedItem();
+        System.out.println(DVT);
+        NhaCungCap cBXNCC = (NhaCungCap) cboNhaCungCap.getSelectedItem();
+        LoaiSanPham cBXLSP = (LoaiSanPham) cboLoaiSP.getSelectedItem();
+        sp.setMaSP((String) txtMaSP.getText());
+        sp.setTenSP(txtTenSP.getText());
+        sp.setDVT(DVT);
+        sp.setMaLoai(cBXLSP.getMaLoai());
+        sp.setHinh(fileImage.getName());
+        sp.setMaNhaCungCap((String) cBXNCC.getMaNCC());
+        sp.setGhiChu(txtGhiChu.getText());
+        SanPhamDAO ins = new SanPhamDAO();
+        ins.insert(sp);
+
+    }
+
+    private void clearForm() {
+        txtMaSP.setText("");
+        txtTenSP.setText("");
+        txtGhiChu.setText("");
+        fillComboBox();
+        fileImage = null;
+        image.setIcon(null);
+        displayChooseFile();
+    }
+
+    private void addSK() {
+        image.addMouseListener(new getHinh());
+        btnClear.addActionListener(new handleClearButton());
+        btnOk.addActionListener(new handleOkButton());
+    }
+
+    class handleClearButton implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            clearForm();
+
+        }
+
+    }
+
+    class handleOkButton implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            getForm();
+        }
+
+    }
+
+    class getHinh extends MouseAdapter implements MouseListener {
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+            addImage();
+        }
+    }
 }

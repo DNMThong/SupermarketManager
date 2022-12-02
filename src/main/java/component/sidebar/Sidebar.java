@@ -1,14 +1,20 @@
 package component.sidebar;
 
 import component.Button;
+import ui.MainContent;
+import ui.POS;
 
 import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Sidebar extends JPanel {
+	private JPanel containerContent = null;
+	private MainContent contentPanel;
 	
 	public Sidebar() {
 		initComponents(null);
@@ -16,6 +22,7 @@ public class Sidebar extends JPanel {
 	
 	public Sidebar(JComponent c) {
 		initComponents(c);
+		this.containerContent = (JPanel) c;
 //		runClock();
 	}
 	
@@ -23,14 +30,16 @@ public class Sidebar extends JPanel {
 		this.setPreferredSize(new Dimension(300, 0));
 		ImageIcon icon = new ImageIcon(new ImageIcon(getClass().getResource("../../icon/sidebar/404SP.png")).getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH));
 
-		Button btnToHome = new Button();
-		btnToHome.setForeground(Color.white);
-		btnToHome.setRadius(40);
-		btnToHome.setBackground(Color.red);
-		btnToHome.setFont(new Font("Tahoma", Font.BOLD, 36));
-		btnToHome.setText("POS");
-		btnToHome.setBorderPainted(false);
-		btnToHome.setFocusPainted(false);
+		Button btnPOS = new Button();
+		btnPOS.setForeground(Color.white);
+		btnPOS.setRadius(40);
+		btnPOS.setBackground(Color.red);
+		btnPOS.setFont(new Font("Tahoma", Font.BOLD, 36));
+		btnPOS.setText("POS");
+		btnPOS.setBorderPainted(false);
+		btnPOS.setFocusPainted(false);
+		btnPOS.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnPOS.addActionListener(new handleClickBtnPOS());
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setPreferredSize(new Dimension(2, 600));
@@ -50,7 +59,7 @@ public class Sidebar extends JPanel {
 				groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
 								.addGap(37)
-								.addComponent(btnToHome, GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+								.addComponent(btnPOS, GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
 								.addGap(37))
 						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
 								.addGap(61)
@@ -68,7 +77,7 @@ public class Sidebar extends JPanel {
 								.addContainerGap()
 								.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 167, GroupLayout.PREFERRED_SIZE)
 								.addGap(34)
-								.addComponent(btnToHome, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnPOS, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
 								.addPreferredGap(ComponentPlacement.RELATED)
 								.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 611, Short.MAX_VALUE)
 								.addPreferredGap(ComponentPlacement.RELATED)
@@ -88,5 +97,28 @@ public class Sidebar extends JPanel {
 
 		setLayout(groupLayout);
 		this.setVisible(true);
+	}
+
+	class handleClickBtnPOS implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			System.out.println(123);
+			if (contentPanel != null) {
+				contentPanel.removeAll();
+				contentPanel.revalidate();
+				contentPanel.repaint();
+			}
+			contentPanel = new MainContent("Bán hàng");
+			contentPanel.addContent(new POS());
+			if (containerContent != null) {
+				containerContent.removeAll();
+				containerContent.revalidate();
+				containerContent.repaint();
+				containerContent.add(contentPanel, BorderLayout.CENTER);
+				containerContent.revalidate();
+				containerContent.repaint();
+			}
+		}
 	}
 }
