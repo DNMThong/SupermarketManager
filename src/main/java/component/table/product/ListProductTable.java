@@ -111,11 +111,26 @@ public class ListProductTable extends JTable {
         setModel(new DefaultTableModel(data, header));
     }
 
+<<<<<<< HEAD
     public void loadProduct() {
         List<SanPham> products = spd.selectAll();
         products.forEach(product -> {
             product.toRowTable(eventAction);
         });
+=======
+//        this.MaSP = MaSP;
+//        this.TenSP = TenSP;
+//        this.DVT = DVT;
+//        this.GiaSP = GiaSP;
+//        this.SoLuongTrongKho = SoLuongTrongKho;
+//        this.SoLuongTrenQuay = SoLuongTrenQuay;
+//        this.TenLoai = TenLoai;
+//        this.TenNCC = TenNCC;
+//        this.Hinh = Hinh;
+
+//        addRow(new SanPham("1101", "Sting", "Chai", 10000, 100, 1000,"Nước ngọt", "Nghia", "../icon/sidebar/Account.png").toRowTable(eventAction));
+//        addRow(new SanPham("1102","Khong 0", "Chai", 12000, 100, 1000, "Nước ngọt", "Nghia", "../icon/sidebar/Account.png").toRowTable(eventAction));
+>>>>>>> QuanKeDaThu
     }
 	
 	public static void main(String[] args) throws MalformedURLException {

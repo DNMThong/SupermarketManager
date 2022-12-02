@@ -80,10 +80,8 @@ public class FormProduct extends JPanel {
 		txtTenSP.setFont(new Font("Tahoma", Font.PLAIN, 11));
 
 		txtGhiChu = new TextField();
-		txtGhiChu.setOpaque(false);
 		txtGhiChu.setLabelText("Ghi chú");
 		txtGhiChu.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		txtGhiChu = new TextField();
 		txtGhiChu.setOpaque(false);
 
 
