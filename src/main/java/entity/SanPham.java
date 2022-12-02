@@ -3,6 +3,8 @@ package entity;
 import component.table.ModelAction;
 import component.table.product.EventAction;
 import component.table.product.ModelProductInfo;
+import dao.LoaiSanPhamDAO;
+import dao.NhaCungCapDAO;
 import utils.ImageUtil;
 
 public class SanPham {
@@ -90,12 +92,14 @@ public class SanPham {
     }
 
     public Object[] toRowTable(EventAction event) {
+        NhaCungCapDAO nccd = new NhaCungCapDAO();
+        LoaiSanPhamDAO lspd = new LoaiSanPhamDAO();
         return new Object[]{
-            new ModelProductInfo(TenSP, MaNhaCungCap, ImageUtil.read(getClass().getResource(Hinh))),
-            MaSP,
-            MaLoai,
-            DVT,
-            GhiChu,
+            new ModelProductInfo(TenSP, nccd.selectById(getMaNhaCungCap()).getTenNCC(), ImageUtil.read(getClass().getResource("/image/"+Hinh),80,60)),
+                MaSP,
+                lspd.selectById(getMaLoai()).getTenLoai(),
+                DVT,
+                GhiChu,
             new ModelAction<SanPham, EventAction>(this, event)};
     }
 }

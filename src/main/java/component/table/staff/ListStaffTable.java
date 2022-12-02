@@ -2,7 +2,11 @@ package component.table.staff;
 
 import component.table.ModelAction;
 import component.table.TableHeader;
+import dao.NhanVienDAO;
 import entity.NhanVien;
+import entity.SanPham;
+import utils.Alert;
+import utils.Util;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -10,11 +14,14 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 import java.awt.*;
+import java.util.List;
 
 
 public class ListStaffTable extends JTable {
+    private NhanVienDAO nvd = new NhanVienDAO();
+    private EventAction eventAction;
 
-	public ListStaffTable() {
+    public ListStaffTable() {
 		setOpaque(false);
         getTableHeader().setBackground(new Color(255, 255, 255));
         setBackground(Color.white);
@@ -70,6 +77,7 @@ public class ListStaffTable extends JTable {
         });
         
         execute();
+        loadProduct();
 	}
 //	
 	public static void main(String[] args) {
@@ -92,7 +100,7 @@ public class ListStaffTable extends JTable {
 	
 	public void execute() {
 		Object[] header = {
-				"Thông tin sản phẩm", "Mã sản phẩm", "Loại", "Đơn vị tính", "Giá", "Action"
+				"Thông tin nhân viên", "Mã nhân viên", "SĐT", "Email", "Mật khẩu","Giới tính", "Action"
 		};
 		
 		Object[][] data = {
@@ -104,17 +112,25 @@ public class ListStaffTable extends JTable {
 		 * update: Viết xử lí cho nút sửa 
 		 * 
 		 */
-		EventAction eventAction = new EventAction() {
+		eventAction = new EventAction() {
 
 			@Override
 			public void delete(NhanVien nv) {
-				// TODO Auto-generated method stub
-				System.out.println("Delete: " + nv.getHoTen());
+                if(Alert.confirm("Xóa nhân viên","Bạn có chắc muốn xóa nhân viên này", Util.mainFrame)) {
+                    try {
+                        nvd.delete(nv.getMaNhanVien());
+                        loadProduct();
+                        Alert.success("Xóa thành công");
+                    }catch (Exception e) {
+                        Alert.error("Xóa thất bại");
+                    }
+
+                }
 			}
 
 			@Override
 			public void update(NhanVien nv) {
-				// TODO Auto-generated method stub
+
 				System.out.println("Update: " + nv.getHoTen());
 			}
             
@@ -140,9 +156,6 @@ public class ListStaffTable extends JTable {
 //        this.MatKhau = MatKhau;
 //        this.VaiTro = VaiTro;
 //        this.Hinh = Hinh;
-        
-        addRow(new NhanVien("1101", "Tran Hoai Nguyen A", true, "0123456789", "Athn112233@gmail.com", "385/4 Quang trung, P.10, Go Vap, HCM", "123", true, "../icon/sidebar/Account.png").toRowTable(eventAction));
-        addRow(new NhanVien("1102", "Nguyen Van B", false, "0123456789", "BNV112233@gmail.com", "778k/2a Nguyen Kiem, P.10, Phu Nhuan, HCM", "123", false, "../icon/sidebar/Account.png").toRowTable(eventAction));
 	}
 	
 	public void addRow(Object[] row) {
@@ -157,6 +170,14 @@ public class ListStaffTable extends JTable {
 //		// Object.toRowTable -> Object[]
 //		// tb.addRow(Object[])
 //	}
+     public void loadProduct() {
+        DefaultTableModel mod = (DefaultTableModel) getModel();
+        mod.setRowCount(0);
+        List<NhanVien> staffs = nvd.selectAll();
+         staffs.forEach(product -> {
+            addRow(product.toRowTable(eventAction));
+    });
+}
 	
 	@Override
 	public TableCellEditor getCellEditor (int row, int col) {

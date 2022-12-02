@@ -4,6 +4,9 @@ import component.table.ModelAction;
 import component.table.TableHeader;
 import dao.SanPhamDAO;
 import entity.SanPham;
+import ui.FormProduct;
+import ui.ListStaffContent;
+import ui.MainContent;
 import ui.MainFrame;
 import utils.Alert;
 import utils.Util;
@@ -81,6 +84,7 @@ public class ListProductTable extends JTable {
         });
 
         execute();
+        loadProduct();
     }
 
     public void execute() {
@@ -97,40 +101,47 @@ public class ListProductTable extends JTable {
          * update: Viết xử lí cho nút sửa
          *
          */
-        EventAction eventAction = new EventAction() {
+        eventAction = new EventAction() {
             @Override
-            public void delete(SanPham student) {
-                System.out.println("Delete Student : " + student.getTenSP());
+            public void delete(SanPham product) {
+                if(Alert.confirm("Xóa sản phẩm","Bạn có chắc muốn xóa sản phẩm này?",Util.mainFrame)) {
+                    try {
+                        spd.delete(product.getMaSP());
+                        loadProduct();
+                        Alert.success("Xóa thành công");
+                    }catch (Exception e) {
+                        Alert.error("Xóa thất bại");
+                    }
+
+                }
             }
 
             @Override
             public void update(SanPham product) {
-                System.out.println("Update Student : " + product.getTenSP());
+                if (Util.containerContent != null) {
+                    Util.containerContent.removeAll();
+                    Util.containerContent.revalidate();
+                    Util.containerContent.repaint();
+                }
+
+                FormProduct content = new FormProduct(product);
+                MainContent m = new MainContent("Sản phẩm");
+                m.addContent(content);
+                Util.containerContent.add(m, BorderLayout.CENTER);
+                Util.containerContent.revalidate();
+                Util.containerContent.repaint();
             }
         };
         setModel(new DefaultTableModel(data, header));
     }
 
-<<<<<<< HEAD
     public void loadProduct() {
+        DefaultTableModel mod = (DefaultTableModel) getModel();
+        mod.setRowCount(0);
         List<SanPham> products = spd.selectAll();
         products.forEach(product -> {
-            product.toRowTable(eventAction);
+            addRow(product.toRowTable(eventAction));
         });
-=======
-//        this.MaSP = MaSP;
-//        this.TenSP = TenSP;
-//        this.DVT = DVT;
-//        this.GiaSP = GiaSP;
-//        this.SoLuongTrongKho = SoLuongTrongKho;
-//        this.SoLuongTrenQuay = SoLuongTrenQuay;
-//        this.TenLoai = TenLoai;
-//        this.TenNCC = TenNCC;
-//        this.Hinh = Hinh;
-
-//        addRow(new SanPham("1101", "Sting", "Chai", 10000, 100, 1000,"Nước ngọt", "Nghia", "../icon/sidebar/Account.png").toRowTable(eventAction));
-//        addRow(new SanPham("1102","Khong 0", "Chai", 12000, 100, 1000, "Nước ngọt", "Nghia", "../icon/sidebar/Account.png").toRowTable(eventAction));
->>>>>>> QuanKeDaThu
     }
 	
 	public static void main(String[] args) throws MalformedURLException {

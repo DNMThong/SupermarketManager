@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import entity.SanPham;
 import utils.JDBCUtil;
 
 public class LoaiSanPhamDAO extends SupermarketManagerDAO<LoaiSanPham, String> {
@@ -33,14 +35,14 @@ public class LoaiSanPhamDAO extends SupermarketManagerDAO<LoaiSanPham, String> {
 
     @Override
     public LoaiSanPham selectById(String MaLoai) {
-        // không cần dùng hàm này
-        return null;
+        String sql = "SELECT * FROM LoaiSanPham WHERE MaLoai = ?";
+        List<LoaiSanPham> list = this.selectBySql(sql, MaLoai);
+        return !list.isEmpty() ? list.get(0) : null;
     }
 
     @Override
     public List<LoaiSanPham> selectAll() {
-        // dùng để đổ tên loại sản phẩm lên combobox. Trước khi đổ thì hãy thêm 1 item vào combobox có name là "Tất cả".
-        String sql = "SELECT TenLoai FROM LoaiSanPham";
+        String sql = "SELECT * FROM LoaiSanPham";
         return selectBySql(sql);
     }
 

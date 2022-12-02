@@ -2,6 +2,8 @@ package component.sidebar;
 
 
 import ui.*;
+import utils.Util;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -33,14 +35,14 @@ public class Sidebar_Menu extends JPanel {
 		private MenuItem menuStorage;
 		private MenuItem menuAccount;
 
-		private JPanel containerContent = null;
 		private MainContent contentPanel;
 
 
 		public Sidebar_Menu(JComponent c) {
 			initComponents();
 			execute();
-			this.containerContent = (JPanel) c;
+			Util.containerContent = (JPanel) c;
+
 		}
 
 		private void initComponents() {
@@ -204,13 +206,13 @@ public class Sidebar_Menu extends JPanel {
 				}
 				contentPanel = new MainContent("Trang chu");
 				contentPanel.addContent(new POS());
-				if (containerContent != null) {
-					containerContent.removeAll();
-					containerContent.revalidate();
-					containerContent.repaint();
-					containerContent.add(contentPanel, BorderLayout.CENTER);
-					containerContent.revalidate();
-					containerContent.repaint();
+				if (Util.containerContent != null) {
+					Util.containerContent.removeAll();
+					Util.containerContent.revalidate();
+					Util.containerContent.repaint();
+					Util.containerContent.add(contentPanel, BorderLayout.CENTER);
+					Util.containerContent.revalidate();
+					Util.containerContent.repaint();
 				}
 			}
 
@@ -252,13 +254,13 @@ public class Sidebar_Menu extends JPanel {
 					contentPanel.repaint();
 				}
 				contentPanel = new MainContent("Tai khoan");
-				if (containerContent != null) {
-					containerContent.removeAll();
-					containerContent.revalidate();
-					containerContent.repaint();
-					containerContent.add(contentPanel, BorderLayout.CENTER);
-					containerContent.revalidate();
-					containerContent.repaint();
+				if (Util.containerContent != null) {
+					Util.containerContent.removeAll();
+					Util.containerContent.revalidate();
+					Util.containerContent.repaint();
+					Util.containerContent.add(contentPanel, BorderLayout.CENTER);
+					Util.containerContent.revalidate();
+					Util.containerContent.repaint();
 				}
 			}
 
@@ -294,18 +296,18 @@ public class Sidebar_Menu extends JPanel {
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 				setSelectedSubMenu(subProduct_1);
-				if (containerContent != null) {
-					containerContent.removeAll();
-					containerContent.revalidate();
-					containerContent.repaint();
+				if (Util.containerContent != null) {
+					Util.containerContent.removeAll();
+					Util.containerContent.revalidate();
+					Util.containerContent.repaint();
 				}
 
 				FormProduct content = new FormProduct();
 				MainContent m = new MainContent("Sản Phẩm");
 				m.addContent(content);
-				containerContent.add(m, BorderLayout.CENTER);
-				containerContent.revalidate();
-				containerContent.repaint();
+				Util.containerContent.add(m, BorderLayout.CENTER);
+				Util.containerContent.revalidate();
+				Util.containerContent.repaint();
 			}
 
 			@Override
@@ -339,18 +341,18 @@ public class Sidebar_Menu extends JPanel {
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 				setSelectedSubMenu(subProduct_2);
-				if (containerContent != null) {
-					containerContent.removeAll();
-					containerContent.revalidate();
-					containerContent.repaint();
+				if (Util.containerContent != null) {
+					Util.containerContent.removeAll();
+					Util.containerContent.revalidate();
+					Util.containerContent.repaint();
 				}
 
 				ListProductContent content = new ListProductContent();
 				MainContent m = new MainContent("Sản Phẩm");
 				m.addContent(content);
-				containerContent.add(m, BorderLayout.CENTER);
-				containerContent.revalidate();
-				containerContent.repaint();
+				Util.containerContent.add(m, BorderLayout.CENTER);
+				Util.containerContent.revalidate();
+				Util.containerContent.repaint();
 			}
 
 			@Override
@@ -384,17 +386,17 @@ public class Sidebar_Menu extends JPanel {
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 				setSelectedSubMenu(subStaff_1);
-				if (containerContent != null) {
-					containerContent.removeAll();
-					containerContent.revalidate();
-					containerContent.repaint();
+				if (Util.containerContent != null) {
+					Util.containerContent.removeAll();
+					Util.containerContent.revalidate();
+					Util.containerContent.repaint();
 				}
 
 				MainContent m = new MainContent("Sản Phẩm");
 				m.addContent(new FormEmployee());
-				containerContent.add(m, BorderLayout.CENTER);
-				containerContent.revalidate();
-				containerContent.repaint();
+				Util.containerContent.add(m, BorderLayout.CENTER);
+				Util.containerContent.revalidate();
+				Util.containerContent.repaint();
 			}
 
 			@Override
@@ -428,18 +430,18 @@ public class Sidebar_Menu extends JPanel {
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 				setSelectedSubMenu(subStaff_2);
-				if (containerContent != null) {
-					containerContent.removeAll();
-					containerContent.revalidate();
-					containerContent.repaint();
+				if (Util.containerContent != null) {
+					Util.containerContent.removeAll();
+					Util.containerContent.revalidate();
+					Util.containerContent.repaint();
 				}
 
 				ListStaffContent content = new ListStaffContent();
 				MainContent m = new MainContent("Nhân viên");
 				m.addContent(content);
-				containerContent.add(m, BorderLayout.CENTER);
-				containerContent.revalidate();
-				containerContent.repaint();
+				Util.containerContent.add(m, BorderLayout.CENTER);
+				Util.containerContent.revalidate();
+				Util.containerContent.repaint();
 			}
 
 			@Override
@@ -704,18 +706,18 @@ public class Sidebar_Menu extends JPanel {
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 				setSelectedSubMenu(subStorage_2);
-				if (containerContent != null) {
-					containerContent.removeAll();
-					containerContent.revalidate();
-					containerContent.repaint();
+				if (Util.containerContent != null) {
+					Util.containerContent.removeAll();
+					Util.containerContent.revalidate();
+					Util.containerContent.repaint();
 				}
 
 				DSPNContent content = new DSPNContent();
 				MainContent m = new MainContent("Sản Phẩm");
 				m.addContent(content);
-				containerContent.add(m, BorderLayout.CENTER);
-				containerContent.revalidate();
-				containerContent.repaint();
+				Util.containerContent.add(m, BorderLayout.CENTER);
+				Util.containerContent.revalidate();
+				Util.containerContent.repaint();
 			}
 
 			@Override

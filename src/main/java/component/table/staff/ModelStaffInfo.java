@@ -6,17 +6,17 @@ public class ModelStaffInfo {
 	
 	private ImageIcon icon;
 	private String name;
-	private boolean role;
+	private boolean gender;
 	
 	public ModelStaffInfo() {
 		super();
 	}
 
-	public ModelStaffInfo(String name, boolean role, ImageIcon icon) {
+	public ModelStaffInfo(String name, boolean gender, ImageIcon icon) {
 		// TODO Auto-generated constructor stub
 		this.icon = icon;
 		this.name = name;
-		this.role = role;
+		this.gender = gender;
 	}
 
 	public ImageIcon getIcon() {
@@ -35,12 +35,12 @@ public class ModelStaffInfo {
 		this.name = name;
 	}
 
-	public boolean getRole() {
-		return role;
+	public boolean getGender() {
+		return gender;
 	}
 
-	public void setRole(boolean role) {
-		this.role = role;
+	public void setGender(boolean role) {
+		this.gender = role;
 	}
 	
 }

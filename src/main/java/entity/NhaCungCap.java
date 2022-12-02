@@ -71,4 +71,10 @@ public class NhaCungCap {
         this.NgayHopTac = NgayHopTac;
     }
 
+    @Override
+    public String toString() {
+        return getTenNCC();
+    }
+
+
 }

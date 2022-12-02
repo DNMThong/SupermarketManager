@@ -1,5 +1,7 @@
 package utils;
 
+import ui.MainContent;
+
 import javax.swing.*;
 
 public class Util {
@@ -16,4 +18,6 @@ public class Util {
     }
 
     public static JFrame mainFrame = null;
+
+    public static JPanel containerContent = null;
 }

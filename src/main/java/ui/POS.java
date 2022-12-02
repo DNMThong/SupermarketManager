@@ -36,6 +36,7 @@ import java.util.*;
 
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -43,6 +44,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.TableCellRenderer;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -469,6 +471,8 @@ public class POS extends JPanel {
 
 		table = new JTable();
 		table.setFont(new Font("Tahoma", Font.PLAIN, 14));
+
+
 		scrollPane_1.setViewportView(table);
 		table.setModel(modelHoaDon);
 		modelHoaDon.addTableModelListener(new handleChangeAmount());
@@ -844,6 +848,8 @@ public class POS extends JPanel {
 			},500);
 		}
 	}
+
+
 
 	class handleScanBarcode implements MouseListener {
 

@@ -38,8 +38,8 @@ public class SanPhamDAO extends SupermarketManagerDAO<SanPham, String> {
 
     @Override
     public void delete(String maSP) {
-        String sql = "DELETE FROM SanPham WHERE MaNV = ?";
-        JDBCUtil.update(sql, maSP);
+        String sql = "DELETE FROM SanPham WHERE MaSP = ?";
+        int i = JDBCUtil.update(sql, maSP);
     }
 
     @Override

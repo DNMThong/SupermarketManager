@@ -112,11 +112,12 @@ public class NhanVien {
      */
     public Object[] toRowTable(EventAction event) {
         return new Object[]{
-                new ModelStaffInfo(HoTen, VaiTro, ImageUtil.read(getClass().getResource(Hinh))),
+                new ModelStaffInfo(HoTen, GioiTinh, ImageUtil.read(getClass().getResource("/image/"+getHinh()),60,80)),
                 MaNhanVien,
                 Email,
                 SDT,
                 MatKhau,
+                VaiTro?"Trưởng phòng":"Nhân viên",
                 new ModelAction<NhanVien, EventAction>(this, event)};
     }
 }

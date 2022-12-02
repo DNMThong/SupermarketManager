@@ -44,26 +44,39 @@ public class FormProduct extends JPanel {
 	private Button btnOk;
 	private Button btnClear;
 	private JLabel image;
-	private String maSP=null;
-        private File fileImage=null;
+	private SanPham product = null;
+	private File fileImage=null;
+	private JLabel lblNewLabel;
+	private DefaultComboBoxModel modelNCC;
+	private DefaultComboBoxModel modelDVT;
+	private DefaultComboBoxModel modelLoaiSanPham;
+	private JPanel panelImage;
+
 
 	/**
 	 * Create the panel.
 	 */
 	public FormProduct() {
 		initUI();
+		fillComboBox();
+		addSK();
 	}
 
-	public FormProduct(String maSP) {
-		this.maSP = maSP;
+	public FormProduct(SanPham product) {
+		this.product = product;
 		initUI();
+		lblNewLabel.setText("Cập nhật sản phẩm");
+		fillComboBox();
+		fillForm();
+		addSK();
+//		txtMaSP.setEnabled(true);
 	}
 
 	public void initUI() {
 		setBackground(Color.WHITE);
 		setForeground(Color.BLACK);
 
-		JLabel lblNewLabel = new JLabel("Thêm sản phẩm");
+		lblNewLabel = new JLabel("Thêm sản phẩm");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 32));
 		lblNewLabel.setForeground(new Color(31,174,255));
@@ -101,7 +114,7 @@ public class FormProduct extends JPanel {
 		cboNhaCungCap = new JComboBox();
 		cboNhaCungCap.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		JPanel panelImage = new JPanel();
+		panelImage = new JPanel();
 		panelImage.setBorder(new DashedBorder());
 		panelImage.setBackground(Color.WHITE);
 		panelImage.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -133,6 +146,7 @@ public class FormProduct extends JPanel {
 		btnClear.setColorOver(new Color(90,193,251));
 		btnClear.setColorClick(new Color(31,174,255));
 		btnClear.setBorderColor(Color.white);
+
 
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
@@ -212,13 +226,14 @@ public class FormProduct extends JPanel {
 		image.setBackground(Color.WHITE);
 		image.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		image.setHorizontalAlignment(SwingConstants.CENTER);
+		image.setVerticalAlignment(SwingConstants.CENTER);
 		image.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		panelImage.add(image, BorderLayout.CENTER);
 		setLayout(groupLayout);
 	}
         private void fillCBXLoaiSanPham() {
         LoaiSanPhamDAO lSP = new LoaiSanPhamDAO();
-        DefaultComboBoxModel modelLoaiSanPham = (DefaultComboBoxModel) cboLoaiSP.getModel();
+        modelLoaiSanPham = (DefaultComboBoxModel) cboLoaiSP.getModel();
         modelLoaiSanPham.removeAllElements();
         List<LoaiSanPham> list = lSP.selectAll();
         list.forEach(i -> {
@@ -228,7 +243,7 @@ public class FormProduct extends JPanel {
 
     private void fillCBXDonViTinh() {
         SanPhamDAO dVT = new SanPhamDAO();
-        DefaultComboBoxModel modelDVT = (DefaultComboBoxModel) cboDonViTinh.getModel();
+        modelDVT = (DefaultComboBoxModel) cboDonViTinh.getModel();
         modelDVT.removeAllElements();
         List<String> listDVT = dVT.getDVT();
         listDVT.forEach(i -> {
@@ -238,12 +253,11 @@ public class FormProduct extends JPanel {
 
     private void fillCBXNhaCungCap() {
         NhaCungCapDAO nCC = new NhaCungCapDAO();
-        DefaultComboBoxModel modelNCC = (DefaultComboBoxModel) cboNhaCungCap.getModel();
+       	modelNCC = (DefaultComboBoxModel) cboNhaCungCap.getModel();
         modelNCC.removeAllElements();
-        List<NhaCungCap> list = nCC.selectAll();
-        list.forEach(i -> {
+        List<NhaCungCap> listNCC = nCC.selectAll();
+		listNCC.forEach(i -> {
             modelNCC.addElement(i);
-
         });
     }
 
@@ -273,9 +287,7 @@ public class FormProduct extends JPanel {
             } else {
                 fileImage = null;
             }
-
             displayChooseFile();
-
         }
     }
 
@@ -318,6 +330,25 @@ public class FormProduct extends JPanel {
         btnOk.addActionListener(new handleOkButton());
     }
 
+	public void fillForm() {
+		if(product!=null) {
+			NhaCungCapDAO nccd = new NhaCungCapDAO();
+			LoaiSanPhamDAO lspd = new LoaiSanPhamDAO();
+			txtMaSP.setText(product.getMaSP());
+			txtTenSP.setText(product.getTenSP());
+			txtGhiChu.setText(product.getGhiChu());
+//			modelDVT.setSelectedItem(product.getDVT());
+			modelNCC.setSelectedItem(nccd.selectById(product.getMaNhaCungCap()));
+			modelLoaiSanPham.setSelectedItem(lspd.selectById(product.getMaLoai()));
+
+			fileImage = new File(getClass().getResource("/image/" + product.getHinh()).getFile());
+			image.setIcon(ImageUtil.read(fileImage.getAbsolutePath()));
+			displayChooseFile();
+		}
+
+
+	}
+
     class handleClearButton implements ActionListener {
 
         @Override
@@ -325,14 +356,18 @@ public class FormProduct extends JPanel {
             clearForm();
 
         }
-
     }
 
     class handleOkButton implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            getForm();
+            if(product == null) {
+				getForm();
+			}else {
+				// viết update ở đây
+			}
+
         }
 
     }

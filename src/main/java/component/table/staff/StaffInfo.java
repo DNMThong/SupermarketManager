@@ -31,7 +31,7 @@ public class StaffInfo extends JPanel {
 		rightPanel.setBackground(Color.white);
 		rightPanel.setLayout(new GridLayout(2,1));
 		lbName = new JLabel(info.getName());
-		lbRole = new JLabel(info.getRole() == true  ? "Trưởng phòng" : "Nhân viên");
+		lbRole = new JLabel(info.getGender() == true  ? "Nam" : "Nữ");
 		rightPanel.add(lbName);
 		rightPanel.add(lbRole);
 		add(rightPanel);

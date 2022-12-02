@@ -41,7 +41,6 @@ public class NhaCungCapDAO extends SupermarketManagerDAO<NhaCungCap, String> {
 
     @Override
     public NhaCungCap selectById(String maNCC) {
-        // tạo thêm JDialog dùng để xem thông tin nhà cung cấp
         String sql = "SELECT * FROM NhaCungCap WHERE MaNCC = ?";
         List<NhaCungCap> list = this.selectBySql(sql, maNCC);
         return !list.isEmpty() ? list.get(0) : null;
