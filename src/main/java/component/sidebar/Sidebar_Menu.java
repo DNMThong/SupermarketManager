@@ -392,7 +392,7 @@ public class Sidebar_Menu extends JPanel {
 					Util.containerContent.repaint();
 				}
 
-				MainContent m = new MainContent("Sản Phẩm");
+				MainContent m = new MainContent("Nhân viên");
 				m.addContent(new FormEmployee());
 				Util.containerContent.add(m, BorderLayout.CENTER);
 				Util.containerContent.revalidate();
