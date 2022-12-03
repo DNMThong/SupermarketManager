@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public class JDBCUtil {
 	static String nameDatabase = "QLDA_SieuThi";
 	static String user = "sa";
-	static String password = "songlong";
+	static String password = "1234";
 	static Connection con = null;
 	static {
 		try {

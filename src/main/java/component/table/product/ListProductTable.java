@@ -21,12 +21,10 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class ListProductTable extends JTable {
 
     private SanPhamDAO spd = new SanPhamDAO();
     private EventAction eventAction;
-
 
     public ListProductTable() {
         setOpaque(false);
@@ -59,7 +57,7 @@ public class ListProductTable extends JTable {
                     return cell;
                 } else if (o instanceof ModelAction) {
                     ModelAction<SanPham, EventAction> data = (ModelAction<SanPham, EventAction>) o;
-                    ProductAction cell = new  ProductAction(data);
+                    ProductAction cell = new ProductAction(data);
                     if (selected) {
                         cell.setSelectedBackground(new Color(239, 244, 255));
                     } else {
@@ -89,27 +87,24 @@ public class ListProductTable extends JTable {
 
     public void execute() {
         Object[] header = {
-                "Thông tin sản phẩm", "Mã sản phẩm", "Loại", "Đơn vị tính", "Giá", "Action"
+            "Thông tin sản phẩm", "Mã sản phẩm", "Loại", "Đơn vị tính", "Ghi chú", "Action"
         };
 
-        Object[][] data = {
-
-        };
+        Object[][] data = {};
 
         /**
-         * delete: Viết xử lí cho nút xóa
-         * update: Viết xử lí cho nút sửa
+         * delete: Viết xử lí cho nút xóa update: Viết xử lí cho nút sửa
          *
          */
         eventAction = new EventAction() {
             @Override
             public void delete(SanPham product) {
-                if(Alert.confirm("Xóa sản phẩm","Bạn có chắc muốn xóa sản phẩm này?",Util.mainFrame)) {
+                if (Alert.confirm("Xóa sản phẩm", "Bạn có chắc muốn xóa sản phẩm này?", Util.mainFrame)) {
                     try {
                         spd.delete(product.getMaSP());
                         loadProduct();
                         Alert.success("Xóa thành công");
-                    }catch (Exception e) {
+                    } catch (Exception e) {
                         Alert.error("Xóa thất bại");
                     }
 
@@ -143,22 +138,22 @@ public class ListProductTable extends JTable {
             addRow(product.toRowTable(eventAction));
         });
     }
-	
-	public static void main(String[] args) throws MalformedURLException {
-		JPanel c = new JPanel();
-		c.setLayout(new BorderLayout(0,0));
-		JFrame frame = new JFrame();
-		frame.setSize(800, 800);
-		frame.setContentPane(c);
-		
-		JScrollPane sp = new JScrollPane();
-		sp.setBorder(new EmptyBorder(5, 5, 5, 5));
-		sp.getViewport().setBackground(Color.white);
-		c.add(sp, BorderLayout.CENTER);
-		
-		ListProductTable tb = new ListProductTable();
-		sp.setViewportView(tb);
-        
+
+    public static void main(String[] args) throws MalformedURLException {
+        JPanel c = new JPanel();
+        c.setLayout(new BorderLayout(0, 0));
+        JFrame frame = new JFrame();
+        frame.setSize(800, 800);
+        frame.setContentPane(c);
+
+        JScrollPane sp = new JScrollPane();
+        sp.setBorder(new EmptyBorder(5, 5, 5, 5));
+        sp.getViewport().setBackground(Color.white);
+        c.add(sp, BorderLayout.CENTER);
+
+        ListProductTable tb = new ListProductTable();
+        sp.setViewportView(tb);
+
 //        this.MaSP = MaSP;
 //        this.TenSP = TenSP;
 //        this.DVT = DVT;
@@ -166,34 +161,30 @@ public class ListProductTable extends JTable {
 //        this.TenLoai = TenLoai;
 //        this.TenNCC = TenNCC;
 //        this.Hinh = Hinh;
-        
-
-
         System.out.println(ListProductTable.class.getResource("../../../icon/sidebar/Account.png"));
-		
-		frame.setVisible(true);
-		
-	}
-	
-	public void addRow(Object[] row) {
+
+        frame.setVisible(true);
+
+    }
+
+    public void addRow(Object[] row) {
         DefaultTableModel mod = (DefaultTableModel) getModel();
         mod.addRow(row);
     }
-	
-	@Override
-	public TableCellEditor getCellEditor (int row, int col) {
-		System.out.println(col);
-		if (col == 5) {
-			return new TableCellAction();
-		} else {
-			return super.getCellEditor(row, col);
-		}
-	}
+
+    @Override
+    public TableCellEditor getCellEditor(int row, int col) {
+        System.out.println(col);
+        if (col == 5) {
+            return new TableCellAction();
+        } else {
+            return super.getCellEditor(row, col);
+        }
+    }
 
     @Override
     public boolean isCellEditable(int row, int column) {
         return column == 5;
     }
-
 
 }

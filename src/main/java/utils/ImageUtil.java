@@ -12,19 +12,19 @@ import javax.swing.ImageIcon;
 
 public class ImageUtil {
 	
-//	public static void save(File src) {
-//		File dst = new File("logos",src.getName());
-//		if(!dst.getParentFile().exists()) {
-//			dst.getParentFile().mkdir();
-//		}
-//		try {
-//			Path from = Paths.get(src.getAbsolutePath());
-//			Path to = Paths.get(dst.getAbsolutePath());
-//			Files.copy(from, to, StandardCopyOption.REPLACE_EXISTING);
-//		}catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
+public static void save(File src) {
+        File dst = new File(ImageUtil.class.getResource("/image").getPath(),src.getName());
+        if(!dst.getParentFile().exists()) {
+            dst.getParentFile().mkdir();
+        }
+        try {
+            Path from = Paths.get(src.getAbsolutePath());
+            Path to = Paths.get(dst.getAbsolutePath());
+            Files.copy(from, to, StandardCopyOption.REPLACE_EXISTING);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 	
 	public static ImageIcon read(String url) {
 		File path = new File(url);
