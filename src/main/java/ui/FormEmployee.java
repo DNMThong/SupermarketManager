@@ -6,6 +6,7 @@ import java.awt.*;
 
 import component.Button;
 import component.DashedBorder;
+import component.textfield.PasswordField;
 import component.textfield.TextField;
 import dao.NhanVienDAO;
 import entity.NhanVien;
@@ -27,7 +28,7 @@ public class FormEmployee extends JPanel {
     private Button btnOk;
     private Button btnClear;
     private TextField txtEmail;
-    private TextField txtMatKhau;
+    private PasswordField txtMatKhau;
     private TextField txtSdt;
     private TextField txtHoTen;
     private TextField txtMaNV;
@@ -36,7 +37,7 @@ public class FormEmployee extends JPanel {
     private JRadioButton rdoNam;
     private JRadioButton rdoNu;
     private String maNV = null;
-    private JTextArea txtDiaChi;
+    private JTextArea taDiaChi;
     private File fileImage;
     private JLabel image;
     private JLabel lblNewLabel;
@@ -89,10 +90,11 @@ public class FormEmployee extends JPanel {
         txtSdt.setLabelText("Số điện thoại");
         txtSdt.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-        txtMatKhau = new TextField();
+        txtMatKhau = new PasswordField();
         txtMatKhau.setOpaque(false);
         txtMatKhau.setLabelText("Mật khẩu");
         txtMatKhau.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        txtMatKhau.setShowAndHide(true);
 
         txtEmail = new TextField();
         txtEmail.setOpaque(false);
@@ -252,8 +254,8 @@ public class FormEmployee extends JPanel {
                                 .addGap(55))
         );
 
-        txtDiaChi = new JTextArea();
-        scrollPane.setViewportView(txtDiaChi);
+        taDiaChi = new JTextArea();
+        scrollPane.setViewportView(taDiaChi);
         image = new JLabel("Tải ảnh lên");
         image.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         image.setForeground(Color.GRAY);
@@ -278,7 +280,7 @@ public class FormEmployee extends JPanel {
                 && Validation.required(txtHoTen.getText(), "Không để trống tên nhân viên")
                 && Validation.validatePhone(txtSdt.getText(), "Nhập số điện thoại theo định dạng VD:0993480916 (10 số)")
                 && Validation.validateEmail(txtEmail.getText(), "Nhập Email theo định dạng VD: sieuthi@gmail.com")
-                && Validation.required(txtDiaChi.getText(), "Không để trống địa chỉ")
+                && Validation.required(taDiaChi.getText(), "Không để trống địa chỉ")
                 && Validation.required(txtMatKhau.getText(), "Không để trống mật khẩu")
                 && Validation.requiredImage(fileImage, "Vui lòng chọn hình ảnh");
         return check;
@@ -289,8 +291,8 @@ public class FormEmployee extends JPanel {
                 && Validation.required(txtHoTen.getText(), "Không để trống tên nhân viên")
                 && Validation.validatePhone(txtSdt.getText(), "Nhập số điện thoại theo định dạng VD:0993480916 (10 số)")
                 && Validation.validateEmail(txtEmail.getText(), "Nhập Email theo định dạng VD: sieuthi@gmail.com")
-                && Validation.required(txtDiaChi.getText(), "Không để trống địa chỉ")
-                && Validation.required(txtMatKhau.getText(), "Không để trống mật khẩu")
+                && Validation.required(taDiaChi.getText(), "Không để trống địa chỉ")
+                && Validation.required(String.valueOf(txtMatKhau.getPassword()), "Không để trống mật khẩu")
                 && Validation.requiredImage(fileImage, "Vui lòng chọn hình ảnh");
         return check;
     }
@@ -303,7 +305,7 @@ public class FormEmployee extends JPanel {
     private void  clearForm(){
         txtMaNV.setText("");
         txtHoTen.setText("");
-        txtDiaChi.setText("");
+        taDiaChi.setText("");
         txtMatKhau.setText("");
         txtSdt.setText("");
         txtEmail.setText("");
@@ -318,10 +320,10 @@ public class FormEmployee extends JPanel {
         NhanVien nv = new NhanVien();
         nv.setMaNhanVien(txtMaNV.getText());
         nv.setHoTen(txtHoTen.getText());
-        nv.setDiaChi(txtDiaChi.getText());
+        nv.setDiaChi(taDiaChi.getText());
         nv.setEmail(txtEmail.getText());
         nv.setSDT(txtSdt.getText());
-        nv.setMatKhau(txtMatKhau.getText());
+        nv.setMatKhau(String.valueOf(txtMatKhau.getPassword()));
         nv.setHinh(fileImage.getName());
         if (rdoNam.isSelected()) {
             nv.setGioiTinh(true);
@@ -348,7 +350,7 @@ public class FormEmployee extends JPanel {
             }
             txtSdt.setText(Employee.getSDT());
             txtEmail.setText(Employee.getEmail());
-            txtDiaChi.setText(Employee.getDiaChi());           
+            taDiaChi.setText(Employee.getDiaChi());
             txtMatKhau.setText(Employee.getMatKhau());
             if(Employee.getVaiTro()==true){
                rdoQuanLy.setSelected(true);

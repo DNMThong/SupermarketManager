@@ -3,6 +3,7 @@ package ui;
 import component.table.staff.ListStaffTable;
 import component.Button;
 import utils.ImageUtil;
+import utils.Util;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -72,6 +73,22 @@ public class ListStaffContent extends JPanel {
 		btnToInsert.setBorderPainted(false);
 		btnToInsert.setBorderColor(btnToInsert.getBackground());
 		btnToInsert.setRadius(20);
+		btnToInsert.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnToInsert.addActionListener(i -> {
+			if (Util.containerContent != null) {
+				Util.containerContent.removeAll();
+				Util.containerContent.revalidate();
+				Util.containerContent.repaint();
+			}
+
+			FormEmployee content = new FormEmployee();
+			MainContent m = new MainContent("Nhân viên");
+			m.addContent(content);
+			Util.containerContent.add(m, BorderLayout.CENTER);
+			Util.containerContent.revalidate();
+			Util.containerContent.repaint();
+		});
+
 		sl_panel.putConstraint(SpringLayout.EAST, panel_1, -30, SpringLayout.WEST, btnToInsert);
 		sl_panel.putConstraint(SpringLayout.WEST, btnToInsert, -200, SpringLayout.EAST, panel);
 		sl_panel.putConstraint(SpringLayout.NORTH, btnToInsert, 0, SpringLayout.NORTH, panel_1);

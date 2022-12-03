@@ -3,6 +3,7 @@ package ui;
 import component.table.product.ListProductTable;
 import component.Button;
 import utils.ImageUtil;
+import utils.Util;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -72,6 +73,22 @@ public class ListProductContent extends JPanel {
 		btnToInsertProduct.setBorderPainted(false);
 		btnToInsertProduct.setBorderColor(btnToInsertProduct.getBackground());
 		btnToInsertProduct.setRadius(20);
+		btnToInsertProduct.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnToInsertProduct.addActionListener(i -> {
+			if (Util.containerContent != null) {
+				Util.containerContent.removeAll();
+				Util.containerContent.revalidate();
+				Util.containerContent.repaint();
+			}
+
+			FormProduct content = new FormProduct();
+			MainContent m = new MainContent("Sản phẩm");
+			m.addContent(content);
+			Util.containerContent.add(m, BorderLayout.CENTER);
+			Util.containerContent.revalidate();
+			Util.containerContent.repaint();
+		});
+
 		sl_panel.putConstraint(SpringLayout.EAST, panel_1, -30, SpringLayout.WEST, btnToInsertProduct);
 		sl_panel.putConstraint(SpringLayout.WEST, btnToInsertProduct, -200, SpringLayout.EAST, panel);
 		sl_panel.putConstraint(SpringLayout.NORTH, btnToInsertProduct, 0, SpringLayout.NORTH, panel_1);
