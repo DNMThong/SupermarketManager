@@ -528,7 +528,7 @@ public class POS extends JPanel {
 				}
 				fillHD();
 				sumCurrency();
-				dislayTotal();
+				displayTotal();
 			};
 			return action;
 	};
@@ -613,7 +613,7 @@ public class POS extends JPanel {
 		return kh;
 	}
 
-	public void dislayTotal() {
+	public void displayTotal() {
 		total = sum*(100-discount)/100;
 		lblThanhTien.setText(CurrencyUtil.format(total));
 	}
@@ -627,7 +627,7 @@ public class POS extends JPanel {
 		listHD.clear();
 		fillHD();
 		sumCurrency();
-		dislayTotal();
+		displayTotal();
 	}
 
 	public void addHD(String maHD) {
@@ -748,7 +748,7 @@ public class POS extends JPanel {
 				listHD.remove(product);
 				fillHD();
 				sumCurrency();
-				dislayTotal();
+				displayTotal();
 			}
 		}
 	}
@@ -776,7 +776,7 @@ public class POS extends JPanel {
 				}
 				fillHD();
 				sumCurrency();
-				dislayTotal();
+				displayTotal();
 			}
 		}
 	}
@@ -823,7 +823,7 @@ public class POS extends JPanel {
 					lblGiam.setText(discount(khachHang.getDoThanMat())+"%");
 					discount = discount(khachHang.getDoThanMat());
 				}
-				dislayTotal();
+				displayTotal();
 			},500);
 		}
 	}
