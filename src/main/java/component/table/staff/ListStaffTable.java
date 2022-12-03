@@ -24,7 +24,14 @@ public class ListStaffTable extends JTable {
     private NhanVienDAO nvd = new NhanVienDAO();
     private EventAction eventAction;
 
-    public ListStaffTable() {
+    private ListStaffTableRes listStaffTableRes;
+
+    public interface ListStaffTableRes {
+        void setAmountStaff(int amount);
+    }
+
+    public ListStaffTable(ListStaffTableRes listStaffTableRes) {
+        this.listStaffTableRes = listStaffTableRes;
         setOpaque(false);
         getTableHeader().setBackground(new Color(255, 255, 255));
         setBackground(Color.white);
@@ -96,7 +103,12 @@ public class ListStaffTable extends JTable {
         sp.getViewport().setBackground(Color.white);
         c.add(sp, BorderLayout.CENTER);
 
-        ListStaffTable tb = new ListStaffTable();
+        ListStaffTable tb = new ListStaffTable(new ListStaffTableRes() {
+            @Override
+            public void setAmountStaff(int amount) {
+
+            }
+        });
         sp.setViewportView(tb);
         frame.setVisible(true);
 
@@ -187,6 +199,7 @@ public class ListStaffTable extends JTable {
         staffs.forEach(product -> {
             addRow(product.toRowTable(eventAction));
         });
+        listStaffTableRes.setAmountStaff(staffs.size());
     }
 
     @Override

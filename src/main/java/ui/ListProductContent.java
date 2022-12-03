@@ -95,7 +95,12 @@ public class ListProductContent extends JPanel {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		panel_2.add(scrollPane);
-		tb = new ListProductTable();
+		tb = new ListProductTable(new ListProductTable.ListProductTableRes() {
+			@Override
+			public void setAmountProduct(int amount) {
+				lbProductCount.setText("Sản phẩm: "+amount);
+			}
+		});
 		scrollPane.setViewportView(tb);
 		// TODO Auto-generated constructor stub
 	}

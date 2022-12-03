@@ -25,8 +25,13 @@ public class ListProductTable extends JTable {
 
     private SanPhamDAO spd = new SanPhamDAO();
     private EventAction eventAction;
+    private ListProductTableRes listProductTableRes;
+    public interface ListProductTableRes {
+        void setAmountProduct(int amount);
+    }
 
-    public ListProductTable() {
+    public ListProductTable(ListProductTableRes listProductTableRes) {
+        this.listProductTableRes = listProductTableRes;
         setOpaque(false);
         getTableHeader().setBackground(new Color(255, 255, 255));
         setBackground(Color.white);
@@ -137,6 +142,7 @@ public class ListProductTable extends JTable {
         products.forEach(product -> {
             addRow(product.toRowTable(eventAction));
         });
+        listProductTableRes.setAmountProduct(products.size());
     }
 
     public static void main(String[] args) throws MalformedURLException {
@@ -151,7 +157,12 @@ public class ListProductTable extends JTable {
         sp.getViewport().setBackground(Color.white);
         c.add(sp, BorderLayout.CENTER);
 
-        ListProductTable tb = new ListProductTable();
+        ListProductTable tb = new ListProductTable(new ListProductTableRes() {
+            @Override
+            public void setAmountProduct(int amount) {
+
+            }
+        });
         sp.setViewportView(tb);
 
 //        this.MaSP = MaSP;

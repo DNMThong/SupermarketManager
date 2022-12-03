@@ -95,7 +95,12 @@ public class ListStaffContent extends JPanel {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		panel_2.add(scrollPane);
-		tb = new ListStaffTable();
+		tb = new ListStaffTable(new ListStaffTable.ListStaffTableRes() {
+			@Override
+			public void setAmountStaff(int amount) {
+				lbStaffCount.setText("Nhân viên: " + amount);
+			}
+		});
 		scrollPane.setViewportView(tb);
 		// TODO Auto-generated constructor stub
 	}
