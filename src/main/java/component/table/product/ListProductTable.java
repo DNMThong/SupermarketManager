@@ -118,6 +118,7 @@ public class ListProductTable extends JTable {
 
             @Override
             public void update(SanPham product) {
+                Util.siderbarMenu.clearExistSelected();
                 if (Util.containerContent != null) {
                     Util.containerContent.removeAll();
                     Util.containerContent.revalidate();
@@ -165,14 +166,6 @@ public class ListProductTable extends JTable {
         });
         sp.setViewportView(tb);
 
-//        this.MaSP = MaSP;
-//        this.TenSP = TenSP;
-//        this.DVT = DVT;
-//        this.GiaSP = GiaSP;
-//        this.TenLoai = TenLoai;
-//        this.TenNCC = TenNCC;
-//        this.Hinh = Hinh;
-        System.out.println(ListProductTable.class.getResource("../../../icon/sidebar/Account.png"));
 
         frame.setVisible(true);
 

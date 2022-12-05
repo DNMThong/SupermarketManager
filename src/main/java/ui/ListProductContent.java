@@ -75,6 +75,7 @@ public class ListProductContent extends JPanel {
 		btnToInsertProduct.setRadius(20);
 		btnToInsertProduct.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnToInsertProduct.addActionListener(i -> {
+			Util.siderbarMenu.setSelectedSubMenu(Util.siderbarMenu.subProduct_1);
 			if (Util.containerContent != null) {
 				Util.containerContent.removeAll();
 				Util.containerContent.revalidate();

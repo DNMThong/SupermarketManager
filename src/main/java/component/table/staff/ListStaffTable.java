@@ -143,6 +143,7 @@ public class ListStaffTable extends JTable {
 
             @Override
             public void update(NhanVien nv) {
+                Util.siderbarMenu.clearExistSelected();
                 if (Util.containerContent != null) {
                     Util.containerContent.removeAll();
                     Util.containerContent.revalidate();

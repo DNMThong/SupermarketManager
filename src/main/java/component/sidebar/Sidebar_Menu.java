@@ -14,26 +14,26 @@ import java.util.ArrayList;
 public class Sidebar_Menu extends JPanel {
 
 		private Dimension size;
-		private MenuItem subProduct_1;
-		private MenuItem subProduct_2;
-		private MenuItem subStaff_1;
-		private MenuItem subStaff_3;
-		private MenuItem subStaff_2;
-		private MenuItem subStaff_4;
-		private MenuItem subBill_1;
-		private MenuItem subStat_1;
-		private MenuItem subStat_2;
-		private MenuItem subStat_3;
-		private MenuItem subStorage_1;
-		private MenuItem subStorage_2;
-		private MenuItem subStorage_3;
-		private MenuItem menuHome;
-		private MenuItem menuProduct;
-		private MenuItem menuStaff;
-		private MenuItem menuBill;
-		private MenuItem menuStatistic;
-		private MenuItem menuStorage;
-		private MenuItem menuAccount;
+		public MenuItem subProduct_1;
+		public MenuItem subProduct_2;
+		public MenuItem subStaff_1;
+		public MenuItem subStaff_3;
+		public MenuItem subStaff_2;
+		public MenuItem subStaff_4;
+		public MenuItem subBill_1;
+		public MenuItem subStat_1;
+		public MenuItem subStat_2;
+		public MenuItem subStat_3;
+		public MenuItem subStorage_1;
+		public MenuItem subStorage_2;
+		public MenuItem subStorage_3;
+		public MenuItem menuHome;
+		public MenuItem menuProduct;
+		public MenuItem menuStaff;
+		public MenuItem menuBill;
+		public MenuItem menuStatistic;
+		public MenuItem menuStorage;
+		public MenuItem menuAccount;
 
 		private MainContent contentPanel;
 
@@ -42,7 +42,7 @@ public class Sidebar_Menu extends JPanel {
 			initComponents();
 			execute();
 			Util.containerContent = (JPanel) c;
-
+			Util.siderbarMenu = this;
 		}
 
 		private void initComponents() {
@@ -146,7 +146,7 @@ public class Sidebar_Menu extends JPanel {
 			getParent().repaint();
 		}
 
-		private void clearExistSelected() {
+		public void clearExistSelected() {
 			menuHome.setSelected(false);
 			menuProduct.setSelected(false);
 			menuStaff.setSelected(false);
@@ -165,7 +165,7 @@ public class Sidebar_Menu extends JPanel {
 			getParent().getParent().repaint();
 		}
 
-		private void setSelectedSubMenu(MenuItem item) {
+		public void setSelectedSubMenu(MenuItem item) {
 			clearExistSelected();
 			item.setSelected(true);
 			item.setEffectColor(Color.BLUE, new Color(234, 240, 252));
@@ -176,7 +176,7 @@ public class Sidebar_Menu extends JPanel {
 			getParent().getParent().repaint();
 		}
 
-		private void setSelectedMenu(MenuItem item) {
+		public void setSelectedMenu(MenuItem item) {
 			clearExistSelected();
 			item.setSelected(true);
 			item.setEffectColor(new Color(188, 203, 209), new Color(188, 203, 209));
@@ -186,6 +186,8 @@ public class Sidebar_Menu extends JPanel {
 			getParent().getParent().revalidate();
 			getParent().getParent().repaint();
 		}
+
+
 
 		/**
 		 * CONTROLLER

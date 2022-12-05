@@ -75,6 +75,7 @@ public class ListStaffContent extends JPanel {
 		btnToInsert.setRadius(20);
 		btnToInsert.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnToInsert.addActionListener(i -> {
+			Util.siderbarMenu.setSelectedSubMenu(Util.siderbarMenu.subStaff_1);
 			if (Util.containerContent != null) {
 				Util.containerContent.removeAll();
 				Util.containerContent.revalidate();

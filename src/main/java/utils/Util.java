@@ -1,10 +1,13 @@
 package utils;
 
+import component.sidebar.MenuItem;
+import component.sidebar.Sidebar_Menu;
 import ui.MainContent;
 
 import javax.swing.*;
 
 public class Util {
+
     public static void setTimeout(Runnable runnable, int delay){
         new Thread(() -> {
             try {
@@ -20,4 +23,6 @@ public class Util {
     public static JFrame mainFrame = null;
 
     public static JPanel containerContent = null;
+
+    public static Sidebar_Menu siderbarMenu = null;
 }
