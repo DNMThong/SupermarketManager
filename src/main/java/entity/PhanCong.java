@@ -11,6 +11,7 @@ public class PhanCong {
     private String GhiChu;
     private String MaNhanVien;
 
+
     public PhanCong() {
     }
 
@@ -46,6 +47,7 @@ public class PhanCong {
         this.TongThoiGian = TongThoiGian;
     }
 
+
     public String getGhiChu() {
         return GhiChu;
     }
@@ -72,5 +74,6 @@ public class PhanCong {
     }
 
    
+
 
 }

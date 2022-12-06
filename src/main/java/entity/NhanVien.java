@@ -108,12 +108,16 @@ public class NhanVien {
 
     /**
      *
+<<<<<<< HEAD
      * Header: "Thông tin nhân viên", "Mã nhân viên", "Số điện thoại", "Email", "Mật khẩu", "Action"
+=======
+     * Header: "Thông tin nhân viên", "Mã nhân viên", "Email", "Số điện thoại", "Mật khẩu", "Action"
+>>>>>>> Hung2
      */
     public Object[] toRowTable(EventAction event) {
         return new Object[]{
                 new ModelStaffInfo(HoTen, GioiTinh, ImageUtil.read(getClass().getResource("/image/"+getHinh()),60,80)),
-                MaNhanVien,             
+                MaNhanVien,
                 SDT,
                 Email,
                 MatKhau,

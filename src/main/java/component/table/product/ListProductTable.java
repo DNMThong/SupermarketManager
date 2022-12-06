@@ -21,6 +21,7 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class ListProductTable extends JTable {
 
     private SanPhamDAO spd = new SanPhamDAO();
@@ -99,6 +100,18 @@ public class ListProductTable extends JTable {
 
         /**
          * delete: Viết xử lí cho nút xóa update: Viết xử lí cho nút sửa
+=======
+                "Thông tin sản phẩm", "Mã sản phẩm", "Loại", "Đơn vị tính", "Giá", "Action"
+        };
+
+        Object[][] data = {
+
+        };
+
+        /**
+         * delete: Viết xử lí cho nút xóa
+         * update: Viết xử lí cho nút sửa
+>>>>>>> Hung2
          *
          */
         eventAction = new EventAction() {
@@ -110,6 +123,7 @@ public class ListProductTable extends JTable {
                         loadProduct();
                         Alert.success("Xóa thành công");
                     } catch (Exception e) {
+
                         Alert.error("Xóa thất bại");
                     }
 
@@ -119,6 +133,7 @@ public class ListProductTable extends JTable {
             @Override
             public void update(SanPham product) {
                 Util.siderbarMenu.clearExistSelected();
+
                 if (Util.containerContent != null) {
                     Util.containerContent.removeAll();
                     Util.containerContent.revalidate();
@@ -161,12 +176,9 @@ public class ListProductTable extends JTable {
         ListProductTable tb = new ListProductTable(new ListProductTableRes() {
             @Override
             public void setAmountProduct(int amount) {
-
             }
         });
         sp.setViewportView(tb);
-
-
         frame.setVisible(true);
 
     }
@@ -186,9 +198,9 @@ public class ListProductTable extends JTable {
         }
     }
 
+
     @Override
     public boolean isCellEditable(int row, int column) {
         return column == 5;
     }
-
 }

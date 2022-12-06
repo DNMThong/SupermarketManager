@@ -25,6 +25,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Cursor;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -230,6 +231,7 @@ public class FormProduct extends JPanel {
     }
 
     private void fillCBXLoaiSanPham() {
+
         LoaiSanPhamDAO lSP = new LoaiSanPhamDAO();
         modelLoaiSanPham = (DefaultComboBoxModel) cboLoaiSP.getModel();
         modelLoaiSanPham.removeAllElements();
@@ -315,6 +317,7 @@ public class FormProduct extends JPanel {
     private SanPham getForm() {
         SanPham sp = new SanPham();
         String DVT = (String) cboDonViTinh.getSelectedItem();
+
         NhaCungCap cBXNCC = (NhaCungCap) cboNhaCungCap.getSelectedItem();
         LoaiSanPham cBXLSP = (LoaiSanPham) cboLoaiSP.getSelectedItem();
         sp.setMaSP((String) txtMaSP.getText());
@@ -346,6 +349,7 @@ public class FormProduct extends JPanel {
         }
     }
 
+
     private void clearForm() {
         txtMaSP.setText("");
         txtTenSP.setText("");
@@ -356,57 +360,58 @@ public class FormProduct extends JPanel {
         displayChooseFile();
     }
 
-    private void addSuKien() {
-        image.addMouseListener(new getHinh());
-        btnClear.addActionListener(new handleClearButton());
-        btnOk.addActionListener(new handleOkButton());
-    }
-
-    public void fillForm() {
-        if (product != null) {
-            NhaCungCapDAO nccd = new NhaCungCapDAO();
-            LoaiSanPhamDAO lspd = new LoaiSanPhamDAO();
-            txtMaSP.setText(product.getMaSP());
-            txtTenSP.setText(product.getTenSP());
-            txtGhiChu.setText(product.getGhiChu());
-            modelDVT.setSelectedItem(product.getDVT());
-            modelNCC.setSelectedItem(nccd.selectById(product.getMaNhaCungCap()));
-            modelLoaiSanPham.setSelectedItem(lspd.selectById(product.getMaLoai()));
-            fileImage = new File(getClass().getResource("/image/" + product.getHinh()).getFile());
-            image.setIcon(ImageUtil.read(fileImage.getAbsolutePath()));
-            displayChooseFile();
+         private void addSuKien() {
+            image.addMouseListener(new getHinh());
+            btnClear.addActionListener(new handleClearButton());
+            btnOk.addActionListener(new handleOkButton());
         }
 
-    }
-
-    class handleClearButton implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            clearForm();
-
-        }
-    }
-
-    class handleOkButton implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if (product == null) {
-                insertSanPham();
-            } else {
-                updateSanPham();
+        public void fillForm () {
+            if (product != null) {
+                NhaCungCapDAO nccd = new NhaCungCapDAO();
+                LoaiSanPhamDAO lspd = new LoaiSanPhamDAO();
+                txtMaSP.setText(product.getMaSP());
+                txtTenSP.setText(product.getTenSP());
+                txtGhiChu.setText(product.getGhiChu());
+                modelDVT.setSelectedItem(product.getDVT());
+                modelNCC.setSelectedItem(nccd.selectById(product.getMaNhaCungCap()));
+                modelLoaiSanPham.setSelectedItem(lspd.selectById(product.getMaLoai()));
+                fileImage = new File(getClass().getResource("/image/" + product.getHinh()).getFile());
+                image.setIcon(ImageUtil.read(fileImage.getAbsolutePath()));
+                displayChooseFile();
             }
 
         }
 
-    }
 
-    class getHinh extends MouseAdapter implements MouseListener {
+        class handleClearButton implements ActionListener {
 
-        @Override
-        public void mousePressed(MouseEvent e) {
-            addImage();
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                clearForm();
+
+            }
         }
-    }
+
+        class handleOkButton implements ActionListener {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (product == null) {
+                    insertSanPham();
+                } else {
+                    updateSanPham();
+                }
+
+            }
+
+        }
+
+        class getHinh extends MouseAdapter implements MouseListener {
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                addImage();
+            }
+        }
 }

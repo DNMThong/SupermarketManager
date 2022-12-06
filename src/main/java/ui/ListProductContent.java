@@ -19,6 +19,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class ListProductContent extends JPanel {
 	
 	private ListProductTable tb;
@@ -152,7 +153,7 @@ public class ListProductContent extends JPanel {
 		sl_panel.putConstraint(SpringLayout.SOUTH, wapperButton, -10, SpringLayout.SOUTH, panel);
 		sl_panel.putConstraint(SpringLayout.EAST, wapperButton, -22, SpringLayout.EAST, panel);
 		panel.add(wapperButton);
-		
+
 		JLabel lbProductCount = new JLabel("Sản phẩm: 34");
 		lbProductCount.setBorder(new EmptyBorder(0, 10, 0, 10));
 		sl_panel.putConstraint(SpringLayout.NORTH, lbProductCount, 6, SpringLayout.SOUTH, lbSubTitle);
@@ -175,6 +176,7 @@ public class ListProductContent extends JPanel {
 				lbProductCount.setText("Sản phẩm: "+amount);
 			}
 		});
+
 		scrollPane.setViewportView(tb);
 		// TODO Auto-generated constructor stub
 	}

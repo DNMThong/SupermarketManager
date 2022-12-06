@@ -2,6 +2,7 @@ package utils;
 
 import dao.NhanVienDAO;
 import dao.SanPhamDAO;
+
 import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -123,4 +124,6 @@ public class Validation {
         }
         return isSuccess;
     }
+
+	
 }

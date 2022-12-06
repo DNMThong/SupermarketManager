@@ -90,4 +90,5 @@
       <url>https://download2.dynamsoft.com/maven/dbr/jar</url>
     </repository>
   </repositories>
+
 </project>

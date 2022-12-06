@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="300" pageHeight="850" columnWidth="260" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="01483687-b772-4248-ad2f-00b8fb583a8c">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="rstMaHD" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT [MaHD],[NgayXuat],[HoTen],[TenSP],[SoLuong],[GiaXuat],[ThanhTien]
+  FROM [QLDA_SieuThi].[dbo].[ChiTietHoaDon] where MaHD = $P{rstMaHD}]]>
+	</queryString>
+	<field name="MaHD" class="java.lang.String"/>
+	<field name="NgayXuat" class="java.sql.Date"/>
+	<field name="HoTen" class="java.lang.String"/>
+	<field name="TenSP" class="java.lang.String"/>
+	<field name="SoLuong" class="java.lang.Integer"/>
+	<field name="GiaXuat" class="java.lang.Integer"/>
+	<field name="ThanhTien" class="java.lang.Integer"/>
+	<variable name="SUM_THANHTIEN" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{SoLuong}*$F{GiaXuat}]]></variableExpression>
+	</variable>
+	<title>
+		<band height="69" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="260" height="20" uuid="9538b2c1-f4a5-4971-b22a-24eb0d19cb25"/>
+				<textElement textAlignment="Center">
+					<font fontName="Open Sans" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[HỆ THỐNG QUẢN LÝ SIÊU THỊ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="260" height="20" uuid="f35a682f-64df-42a8-9e6f-4dc4719dffba"/>
+				<textElement textAlignment="Center">
+					<font fontName="Open Sans" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[www.hethongquanlysieuthi.com]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="260" height="20" uuid="e0a29b84-aa03-43ed-82db-2b0de4c60424"/>
+				<textElement textAlignment="Center">
+					<font fontName="Open Sans" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Quận 12, TP. Hồ Chí Minh]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="98" splitType="Stretch">
+			<staticText>
+				<reportElement x="6" y="33" width="100" height="20" uuid="1b5192e4-9505-4603-ae25-1bdda09eb059"/>
+				<textElement>
+					<font fontName="Open Sans" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Mã hóa đơn:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="10" width="260" height="20" uuid="567b7283-316f-4a5d-9410-fb8496685387"/>
+				<textElement textAlignment="Center">
+					<font fontName="Open Sans" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PHIẾU THANH TOÁN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="53" width="100" height="20" uuid="8c38bf53-b52e-4c67-b626-d89dbef368f7"/>
+				<textElement>
+					<font fontName="Open Sans" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Ngày lập hóa đơn:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="73" width="100" height="20" uuid="8b238932-afb4-4751-8096-7e453dbb3814"/>
+				<textElement>
+					<font fontName="Open Sans" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Nhân viên:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="260" height="1" uuid="f8b70e49-f7cc-46dd-9300-a9363f09d0c8"/>
+			</line>
+			<textField>
+				<reportElement x="106" y="33" width="100" height="20" uuid="56a0e210-b91c-4adb-a219-0d33e348a80b"/>
+				<textElement>
+					<font fontName="Open Sans" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MaHD}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="106" y="53" width="100" height="20" uuid="ec8f2b0f-f673-40af-9d4d-a2560741f685"/>
+				<textElement>
+					<font fontName="Open Sans" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NgayXuat}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="106" y="73" width="100" height="20" uuid="8b6bc3ed-b773-41e1-a1c3-d904891bdf12"/>
+				<textElement>
+					<font fontName="Open Sans" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{HoTen}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement x="34" y="6" width="18" height="20" uuid="d3c28735-158b-4e65-b537-b35e0a2fddc7"/>
+				<textElement textAlignment="Center">
+					<font fontName="Open Sans" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="102" y="6" width="55" height="20" uuid="56990d1b-d241-45b1-a0ea-08a804d8abda"/>
+				<textElement textAlignment="Right">
+					<font fontName="Open Sans" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Giá bán]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="6" width="78" height="20" uuid="e6f179f7-63fe-4795-b1d5-cb03909a5f1c"/>
+				<textElement textAlignment="Right">
+					<font fontName="Open Sans" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Thành tiền]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="260" height="1" uuid="8a40b62a-21a1-4ee4-a264-88d37dd61794"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="42" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="260" height="20" uuid="e038dfbc-5918-4dad-930e-5429a5c74aa2"/>
+				<textElement>
+					<font fontName="Open Sans" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TenSP}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="9" y="20" width="64" height="20" uuid="8d4cf671-f8fd-44b3-b3ab-6a34a5ccf6fe"/>
+				<textElement textAlignment="Center">
+					<font fontName="Open Sans" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SoLuong}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="82" y="20" width="75" height="20" uuid="513fc1cc-a403-4dbb-b4b4-e7c0fdb0867e"/>
+				<textElement textAlignment="Right">
+					<font fontName="Open Sans" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{GiaXuat}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="183" y="20" width="75" height="20" uuid="ec7b4fba-e141-4ed0-a92c-a64a39e79d28"/>
+				<textElement textAlignment="Right">
+					<font fontName="Open Sans" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SoLuong}*$F{GiaXuat}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="234" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="77" width="260" height="1" uuid="1b8ac1da-1cfe-44ba-8162-af42df1f1b39"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="87" width="260" height="20" uuid="2ba92c11-6350-4608-8240-efeaa92da985"/>
+				<textElement textAlignment="Center">
+					<font fontName="Open Sans" size="11"/>
+				</textElement>
+				<text><![CDATA[Tổng đài góp ý/khiếu nại: 1800 17309]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="107" width="260" height="81" uuid="a7f6c5f3-8edd-4759-b30e-1e80d5603f3f"/>
+				<textElement textAlignment="Center">
+					<font fontName="Open Sans" size="11"/>
+				</textElement>
+				<text><![CDATA[Lưu ý: Hệ thống quản lý siêu thị chỉ xuất hóa đơn trong ngày, Quý khách vui lòng liên hệ thu ngân để được hỗ trợ. Quý khách có thể in bản sao hóa đơn VAT tại trang web
+https://hddt.hethongquanlysieuthi.com]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="188" width="260" height="46" uuid="93971043-363b-4fd9-bf1a-f9bcf9c1fd1e"/>
+				<textElement textAlignment="Center">
+					<font fontName="Open Sans" size="11"/>
+				</textElement>
+				<text><![CDATA[Quý khách vui lòng xem chi tiết Chính sách đổi - trả hàng được niêm yết tại cửa hàng BHX. Xin cảm ơn quý khách. Hẹn gặp lại!]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="68" y="9" width="80" height="20" uuid="305007e3-c4af-423b-acab-16edc0cdefdc"/>
+				<textElement>
+					<font fontName="Open Sans" size="11"/>
+				</textElement>
+				<text><![CDATA[Tổng tiền hàng:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="25" y="29" width="123" height="20" uuid="f1f09e44-424b-4230-a415-0503ad15bce5"/>
+				<textElement textAlignment="Right">
+					<font fontName="Open Sans" size="11" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[(Đã bao gồm giảm giá)]]></text>
+			</staticText>
+			<textField pattern="#,##0">
+				<reportElement x="182" y="9" width="78" height="20" uuid="61df40c2-afb7-4668-908e-cedf2783d1b0"/>
+				<textElement textAlignment="Right">
+					<font fontName="Open Sans" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SUM_THANHTIEN}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="51" width="260" height="20" uuid="9be5aa5b-f125-421e-a5af-9fab907d8822"/>
+				<textElement textAlignment="Center">
+					<font fontName="Open Sans" size="11" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[(Giá trên đã bao gồm thuế GTGT)]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="260" height="1" uuid="f393fc3e-8371-48b3-b055-be784736d17c"/>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>

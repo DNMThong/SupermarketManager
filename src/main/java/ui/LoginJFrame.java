@@ -31,6 +31,7 @@ import javax.swing.JButton;
 public class LoginJFrame extends JFrame {
 
 	private Button btnDangNhapQR;
+
 	private JPanel contentPane;
 	private TextField txTaiKhoan;
 	private PasswordField txMatKhau;
@@ -98,11 +99,7 @@ public class LoginJFrame extends JFrame {
 		btnDangNhap.setForeground(Color.white);
 		btnDangNhap.setText("Đăng nhập");
 		btnDangNhap.setRadius(40);
-		btnDangNhap.setColor(new Color(31,174,255));
-		btnDangNhap.setColorOver(new Color(90,193,251));
-		btnDangNhap.setColorClick(new Color(31,174,255));
-		btnDangNhap.setBorderColor(Color.white);
-		btnDangNhap.addActionListener(new handleActionDangNhap());
+
 
 		btnDangNhapQR = new Button();
 		btnDangNhapQR.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -123,15 +120,14 @@ public class LoginJFrame extends JFrame {
 		wapperButton.add(btnDangNhap);
 		wapperButton.add(btnDangNhapQR);
 
-		
+
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(524)
 					.addComponent(wapperButton, GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
-					.addGap(511))
-				.addGroup(gl_contentPane.createSequentialGroup()
+					.addComponent(btnDangNhap, GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
 					.addGap(344)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addComponent(txMatKhau, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
@@ -198,6 +194,7 @@ public class LoginJFrame extends JFrame {
 		}
 	}
 
+
 	class handleActionDangNhap implements ActionListener {
 
 		@Override
@@ -218,6 +215,7 @@ public class LoginJFrame extends JFrame {
 					login(infoLogin[0],infoLogin[1]);
 				}
 			});
+
 		}
 	}
 }

@@ -33,6 +33,7 @@ public class ListStaffTable extends JTable {
     public ListStaffTable(ListStaffTableRes listStaffTableRes) {
         this.listStaffTableRes = listStaffTableRes;
         setOpaque(false);
+
         getTableHeader().setBackground(new Color(255, 255, 255));
         setBackground(Color.white);
         setShowHorizontalLines(true);
@@ -62,6 +63,7 @@ public class ListStaffTable extends JTable {
                     return cell;
                 } else if (o instanceof ModelAction) {
                     ModelAction<NhanVien, EventAction> data = (ModelAction) o;
+
                     StaffAction cell = new StaffAction(data);
                     if (selected) {
                         cell.setSelectedBackground(new Color(239, 244, 255));
@@ -130,6 +132,7 @@ public class ListStaffTable extends JTable {
             @Override
             public void delete(NhanVien nv) {
                 if (Alert.confirm("Xóa nhân viên", "Bạn có chắc muốn xóa nhân viên này", Util.mainFrame)) {
+
                     try {
                         nvd.delete(nv.getMaNhanVien());
                         loadProduct();
@@ -161,6 +164,7 @@ public class ListStaffTable extends JTable {
         };
         setModel(new DefaultTableModel(data, header));
 
+
 //        this.MaNV = MaNV;
 //        this.HoTen = HoTen;
 //        this.SDT = SDT;
@@ -170,6 +174,7 @@ public class ListStaffTable extends JTable {
 //        this.MatKhau = MatKhau;
 //        this.VaiTro = VaiTro;
 //        this.Hinh = Hinh;
+
 //        this.MaNhanVien = MaNhanVien;
 //        this.HoTen = HoTen;
 //        this.GioiTinh = GioiTinh;
@@ -185,6 +190,7 @@ public class ListStaffTable extends JTable {
         DefaultTableModel mod = (DefaultTableModel) getModel();
         mod.addRow(row);
     }
+
 
 //	public void fillTable(List<>) {
 //		// SQL select 
@@ -212,5 +218,4 @@ public class ListStaffTable extends JTable {
             return super.getCellEditor(row, col);
         }
     }
-
 }

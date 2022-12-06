@@ -102,6 +102,7 @@ public class Sidebar_Menu extends JPanel {
 
 		private void setDefaultColor() {
 
+
 //		setColor(subProduct_1,
 //				subProduct_2,
 //				subStaff_1,
@@ -543,6 +544,18 @@ public class Sidebar_Menu extends JPanel {
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 				setSelectedSubMenu(subBill_1);
+				if (Util.containerContent != null) {
+					Util.containerContent.removeAll();
+					Util.containerContent.revalidate();
+					Util.containerContent.repaint();
+				}
+
+				DanhSachHoaDonJPanel content = new DanhSachHoaDonJPanel();
+				MainContent m = new MainContent("Nhân viên");
+				m.addContent(content);
+				Util.containerContent.add(m, BorderLayout.CENTER);
+				Util.containerContent.revalidate();
+				Util.containerContent.repaint();
 			}
 
 			@Override

@@ -154,7 +154,7 @@ public class ListStaffContent extends JPanel {
 		sl_panel.putConstraint(SpringLayout.SOUTH, wapperButton, -10, SpringLayout.SOUTH, panel);
 		sl_panel.putConstraint(SpringLayout.EAST, wapperButton, -22, SpringLayout.EAST, panel);
 		panel.add(wapperButton);
-		
+
 		JLabel lbStaffCount = new JLabel("Nhân viên: 34");
 		lbStaffCount.setBorder(new EmptyBorder(0, 10, 0, 10));
 		sl_panel.putConstraint(SpringLayout.NORTH, lbStaffCount, 6, SpringLayout.SOUTH, lbSubTitle);
@@ -177,6 +177,7 @@ public class ListStaffContent extends JPanel {
 				lbStaffCount.setText("Nhân viên: " + amount);
 			}
 		});
+
 		scrollPane.setViewportView(tb);
 		// TODO Auto-generated constructor stub
 	}
