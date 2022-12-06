@@ -1,5 +1,11 @@
 package ui;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import component.table.product.ListProductTable;
 import component.Button;
 import utils.ImageUtil;
@@ -7,7 +13,11 @@ import utils.Util;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ListProductContent extends JPanel {
 	
@@ -72,7 +82,7 @@ public class ListProductContent extends JPanel {
 		btnToInsertProduct.setFocusPainted(false);
 		btnToInsertProduct.setBorderPainted(false);
 		btnToInsertProduct.setBorderColor(btnToInsertProduct.getBackground());
-		btnToInsertProduct.setRadius(20);
+		btnToInsertProduct.setRadius(40);
 		btnToInsertProduct.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnToInsertProduct.addActionListener(i -> {
 			Util.siderbarMenu.setSelectedSubMenu(Util.siderbarMenu.subProduct_1);
@@ -90,12 +100,58 @@ public class ListProductContent extends JPanel {
 			Util.containerContent.repaint();
 		});
 
+		Button btnRenderQR = new Button();
+		btnRenderQR.setIcon(ImageUtil.read(this.getClass().getResource("/icon/QR.png"), 24, 24));
+		btnRenderQR.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnRenderQR.setForeground(Color.WHITE);
+		btnRenderQR.setColor(new Color(255,255,255));
+		btnRenderQR.setColorOver(new Color(243, 237, 237));
+		btnRenderQR.setColorClick(new Color(255,255,255));
+		btnRenderQR.setFocusPainted(false);
+		btnRenderQR.setBorderPainted(false);
+		btnRenderQR.setBorderColor(btnToInsertProduct.getBackground());
+		btnRenderQR.setRadius(40);
+		btnRenderQR.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnRenderQR.addActionListener(i -> {
+			try {
+				DefaultTableModel model = (DefaultTableModel) tb.getModel();
+				int row = tb.getSelectedRow();
+				if(row>-1) {
+					String QrCodeData= model.getValueAt(row,1)+"";
+					String filePath= getClass().getResource("../image/qr_product").getPath()+"/"+QrCodeData+".png";
+
+					String charset= "UTF-8";
+					Map<EncodeHintType, ErrorCorrectionLevel> hintMap= new HashMap<EncodeHintType, ErrorCorrectionLevel>();
+					hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
+					BitMatrix matrix= new MultiFormatWriter().encode(
+							new String (QrCodeData.getBytes(charset),charset),
+							BarcodeFormat.QR_CODE,200,200,hintMap);
+
+					MatrixToImageWriter.writeToFile(matrix, filePath.substring(filePath.lastIndexOf('.')+1),new File(filePath));
+
+					JDialog dialog = new JDialog();
+					ImageIcon icon = new ImageIcon(filePath);
+					JLabel label = new JLabel(icon);
+					dialog.add(label);
+					dialog.setSize(200,200);
+					dialog.setVisible(true);
+				}
+
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
+
+		JPanel wapperButton = new JPanel(new FlowLayout(100));
+		wapperButton.add(btnToInsertProduct);
+		wapperButton.add(btnRenderQR);
+
 		sl_panel.putConstraint(SpringLayout.EAST, panel_1, -30, SpringLayout.WEST, btnToInsertProduct);
-		sl_panel.putConstraint(SpringLayout.WEST, btnToInsertProduct, -200, SpringLayout.EAST, panel);
-		sl_panel.putConstraint(SpringLayout.NORTH, btnToInsertProduct, 0, SpringLayout.NORTH, panel_1);
-		sl_panel.putConstraint(SpringLayout.SOUTH, btnToInsertProduct, -10, SpringLayout.SOUTH, panel);
-		sl_panel.putConstraint(SpringLayout.EAST, btnToInsertProduct, -22, SpringLayout.EAST, panel);
-		panel.add(btnToInsertProduct);
+		sl_panel.putConstraint(SpringLayout.WEST, wapperButton, -250, SpringLayout.EAST, panel);
+		sl_panel.putConstraint(SpringLayout.NORTH, wapperButton, 0, SpringLayout.NORTH, panel_1);
+		sl_panel.putConstraint(SpringLayout.SOUTH, wapperButton, -10, SpringLayout.SOUTH, panel);
+		sl_panel.putConstraint(SpringLayout.EAST, wapperButton, -22, SpringLayout.EAST, panel);
+		panel.add(wapperButton);
 		
 		JLabel lbProductCount = new JLabel("Sản phẩm: 34");
 		lbProductCount.setBorder(new EmptyBorder(0, 10, 0, 10));

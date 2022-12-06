@@ -30,6 +30,7 @@ import javax.swing.JButton;
 
 public class LoginJFrame extends JFrame {
 
+	private Button btnDangNhapQR;
 	private JPanel contentPane;
 	private TextField txTaiKhoan;
 	private PasswordField txMatKhau;
@@ -96,12 +97,31 @@ public class LoginJFrame extends JFrame {
 		btnDangNhap.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnDangNhap.setForeground(Color.white);
 		btnDangNhap.setText("Đăng nhập");
-		btnDangNhap.setRadius(30);
+		btnDangNhap.setRadius(40);
 		btnDangNhap.setColor(new Color(31,174,255));
 		btnDangNhap.setColorOver(new Color(90,193,251));
 		btnDangNhap.setColorClick(new Color(31,174,255));
 		btnDangNhap.setBorderColor(Color.white);
 		btnDangNhap.addActionListener(new handleActionDangNhap());
+
+		btnDangNhapQR = new Button();
+		btnDangNhapQR.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnDangNhapQR.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnDangNhapQR.setForeground(Color.white);
+		btnDangNhapQR.setText("Quét mã");
+		btnDangNhapQR.setRadius(40);
+		btnDangNhapQR.setColor(new Color(31,174,255));
+		btnDangNhapQR.setColorOver(new Color(90,193,251));
+		btnDangNhapQR.setColorClick(new Color(31,174,255));
+		btnDangNhapQR.setBorderColor(Color.white);
+		btnDangNhapQR.addActionListener(new handleActionDangNhapQR());
+
+		GridLayout layout = new GridLayout(1,2,30,30);
+		JPanel wapperButton = new JPanel(layout);
+		wapperButton.setOpaque(false);
+
+		wapperButton.add(btnDangNhap);
+		wapperButton.add(btnDangNhapQR);
 
 		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
@@ -109,7 +129,7 @@ public class LoginJFrame extends JFrame {
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(524)
-					.addComponent(btnDangNhap, GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+					.addComponent(wapperButton, GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
 					.addGap(511))
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(344)
@@ -138,7 +158,7 @@ public class LoginJFrame extends JFrame {
 					.addGap(68)
 					.addComponent(txMatKhau, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
 					.addGap(64)
-					.addComponent(btnDangNhap, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+					.addComponent(wapperButton, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(107, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
@@ -158,30 +178,46 @@ public class LoginJFrame extends JFrame {
 		return true;
 	}
 
+	public void login(String username,String password) {
+		NhanVienDAO nvd = new NhanVienDAO();
+		NhanVien nv = nvd.selectById(username);
+		if(nv==null) {
+			Alert.error(LoginJFrame.getFrames()[0], "Sai tài khoản");
+		}else {
+			if(nv.getMatKhau().equals(password)) {
+				Auth.user = nv;
+				Alert.success("Đăng nhập thành công");
+				dispose();
+				Util.mainFrame = new MainFrame();
+				System.out.println(nv.getMatKhau());
+				repaint();
+				revalidate();
+			}else {
+				Alert.error(LoginJFrame.getFrames()[0], "Sai mật khẩu");
+			}
+		}
+	}
+
 	class handleActionDangNhap implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			NhanVienDAO nvd = new NhanVienDAO();
-			NhanVien nv = nvd.selectById(txTaiKhoan.getText());
+			login(txTaiKhoan.getText(),String.valueOf(txMatKhau.getPassword()));
+		}
+	}
 
-			if(validation()) {
-				if(nv==null) {
-					Alert.error(LoginJFrame.getFrames()[0], "Sai tài khoản");
-				}else {
-					if(nv.getMatKhau().equals(String.valueOf(txMatKhau.getPassword()))) {
-						Auth.user = nv;
-						Alert.success(LoginJFrame.getFrames()[0], "Đăng nhập thành công");
-						dispose();
-						Util.mainFrame = new MainFrame();
-						System.out.println(nv.getMatKhau());
-						repaint();
-						revalidate();
-					}else {
-						Alert.error(LoginJFrame.getFrames()[0], "Sai mật khẩu");
-					}
+	class handleActionDangNhapQR implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			ScanBarCode sbc = new ScanBarCode(new ScanBarCode.ScanBarcodeReponse() {
+				@Override
+				public void getScanBarcodeReponse(String rs) {
+
+					String[] infoLogin = rs.split(" - ");
+					login(infoLogin[0],infoLogin[1]);
 				}
-			}
+			});
 		}
 	}
 }
