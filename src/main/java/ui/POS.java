@@ -491,7 +491,6 @@ public class POS extends JPanel {
 			row.setLayout(new GridLayout(1, 3, 10, 10));
 			row.setBorder(new EmptyBorder(5,10,5,10));
 
-
 			if(i<len)
 				row.add(new CardProduct(list.get(i)[2] + "", Integer.parseInt(list.get(i)[7] + ""), list.get(i)[4] + "", ImageUtil.read(getClass().getResource("../image/" + list.get(i)[3]), 200, 150), actionButtonAdd(list.get(i))));
 
