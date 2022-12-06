@@ -17,7 +17,11 @@ import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
+import utils.JDBCUtil;
 
 public class DanhSachHoaDonJPanel extends javax.swing.JPanel {
 
@@ -255,7 +259,6 @@ public class DanhSachHoaDonJPanel extends javax.swing.JPanel {
     void initDialogOrther() {
         ChiTietHoaDonJDialog.pack();
         ChiTietHoaDonJDialog.setLocationRelativeTo(null);
-        ChiTietHoaDonJDialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
         ChiTietHoaDonJDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
     }
 
@@ -273,29 +276,23 @@ public class DanhSachHoaDonJPanel extends javax.swing.JPanel {
         model2.getColumn(3).setCellRenderer(render);
     }
 
-    String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-    String url = "jdbc:sqlserver://localhost:1433;database=QLDA_SieuThi;encrypt=true;trustServerCertificate=true";
-    String user = "sa";
-    String pass = "songlong";
-
     private int rowHoaDon = 0;
 
     void fillDanhSachHoaDon() {
+
         DefaultTableModel modal = (DefaultTableModel) tblDanhSachHoaDon.getModel();
         modal.setRowCount(0);
         try {
             String sql = "select * from DanhSachHoaDon order by NgayXuat desc";
-            Class.forName(driver);
-            Connection con = DriverManager.getConnection(url, user, pass);
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery(sql);
+
+            ResultSet rs = JDBCUtil.query(sql);
+            System.out.println(rs.next());
             while (rs.next()) {
                 Object[] row = new Object[]{rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)};
                 modal.addRow(row);
             }
             rs.close();
-            st.close();
-            con.close();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -307,11 +304,9 @@ public class DanhSachHoaDonJPanel extends javax.swing.JPanel {
         modal.setRowCount(0);
         String mahd = tblDanhSachHoaDon.getValueAt(rowHoaDon, 0).toString();
         try {
-            String sql = "select * from ChiTietHoaDon where MaHD = '" + mahd + "'";
-            Class.forName(driver);
-            Connection con = DriverManager.getConnection(url, user, pass);
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery(sql);
+            String sql = "select * from ChiTietHoaDon where MaHD = ?";
+
+            ResultSet rs = JDBCUtil.query(sql,mahd);
             lblMaHoaDon.setText(mahd);
             lblNgayLapHoaDon.setText(tblDanhSachHoaDon.getValueAt(rowHoaDon, 1).toString());
             lblTenNhanVien.setText(tblDanhSachHoaDon.getValueAt(rowHoaDon, 2).toString());
@@ -320,9 +315,6 @@ public class DanhSachHoaDonJPanel extends javax.swing.JPanel {
                 modal.addRow(row);
                 lblTongHoaDon.setText(String.valueOf(totalPriceInvoice()));
             }
-            rs.close();
-            st.close();
-            con.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -339,14 +331,29 @@ public class DanhSachHoaDonJPanel extends javax.swing.JPanel {
 
     void inHoaDon() {
         try {
-            rowHoaDon = tblDanhSachHoaDon.getSelectedRow();
+//            rowHoaDon = tblDanhSachHoaDon.getSelectedRow();
+//            String mahd = tblDanhSachHoaDon.getValueAt(rowHoaDon, 0).toString();
+//            String reportSource = getClass().getResource("/reports/InHoaDon.jrxml").getPath();
+//            JasperReport jasperReport = JasperCompileManager.compileReport(reportSource);
+//            Map<String, Object> map = new HashMap<String, Object>();
+//            map.put("rstMaHD", mahd);
+//            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, map, new JREmptyDataSource());
+//            JasperViewer.viewReport(jasperPrint, false);
             String mahd = tblDanhSachHoaDon.getValueAt(rowHoaDon, 0).toString();
-            String reportSource = "C:\\Users\\ShariacHung\\Documents\\SupermarketManager-Hung1\\src\\main\\resources\\reports\\InHoaDon.jrxml";
-            JasperReport jasperReport = JasperCompileManager.compileReport(reportSource);
-            Map<String, Object> map = new HashMap<String, Object>();
-            map.put("rstMaHD", mahd);
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, map, new JREmptyDataSource());
-            JasperViewer.viewReport(jasperPrint, false);
+            String reportSource = getClass().getResource("/reports/InHoaDon.jrxml").getPath();
+            JasperDesign jdesign = JRXmlLoader.load(reportSource);
+            String query = "SELECT [MaHD],[NgayXuat],[HoTen],[TenSP],[SoLuong],[GiaXuat],[ThanhTien]" +
+                    "  FROM [QLDA_SieuThi].[dbo].[ChiTietHoaDon] where MaHD like '"+mahd+"'";
+
+            JRDesignQuery updateQuery = new JRDesignQuery();
+            updateQuery.setText(query);
+
+            jdesign.setQuery(updateQuery);
+
+            JasperReport jreport = JasperCompileManager.compileReport(jdesign);
+            JasperPrint jprint = JasperFillManager.fillReport(jreport, null,JDBCUtil.getConnect());
+
+            JasperViewer.viewReport(jprint);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -476,7 +476,7 @@ public class Sidebar_Menu extends JPanel {
             }
 
             MainContent m = new MainContent("Ca làm việc");
-            m.addContent(new CaLamViecJPanel());
+//            m.addContent(new CaLamViecJPanel());
             Util.containerContent.add(m, BorderLayout.CENTER);
             Util.containerContent.revalidate();
             Util.containerContent.repaint();
@@ -634,7 +634,7 @@ public class Sidebar_Menu extends JPanel {
             }
 
             MainContent m = new MainContent("Thống kê doanh thu");
-            m.addContent(new DoanhThuNhapXuatJPanel());
+//            m.addContent(new DoanhThuNhapXuatJPanel());
             Util.containerContent.add(m, BorderLayout.CENTER);
             Util.containerContent.revalidate();
             Util.containerContent.repaint();
