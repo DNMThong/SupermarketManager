@@ -4,49 +4,65 @@ import java.util.Date;
 
 public class PhanCong {
 
-    private String MaPhanCong;
-    private Date GioVao;
-    private Date GioTan;
-    private double TongThoiGian;
+    private String NgayKhoiTao;
+    private Date NgayLam;
+    private String NhanVien;
+    private String GioLam;
+    private String GioTan;
     private String GhiChu;
-    private String MaNhanVien;
-
 
     public PhanCong() {
     }
 
-    public String getMaPhanCong() {
-        return MaPhanCong;
+
+    public PhanCong(String NgayKhoiTao, Date NgayLam, String NhanVien, String GioLam, String GioTan, String GhiChu) {
+        this.NgayKhoiTao = NgayKhoiTao;
+        this.NgayLam = NgayLam;
+        this.NhanVien = NhanVien;
+        this.GioLam = GioLam;
+        this.GioTan = GioTan;
+        this.GhiChu = GhiChu;
     }
 
-    public void setMaPhanCong(String MaPhanCong) {
-        this.MaPhanCong = MaPhanCong;
+    public String getNgayKhoiTao() {
+        return NgayKhoiTao;
     }
 
-    public Date getGioVao() {
-        return GioVao;
+    public void setNgayKhoiTao(String NgayKhoiTao) {
+        this.NgayKhoiTao = NgayKhoiTao;
     }
 
-    public void setGioVao(Date GioVao) {
-        this.GioVao = GioVao;
+    public Date getNgayLam() {
+        return NgayLam;
     }
 
-    public Date getGioTan() {
+    public void setNgayLam(Date NgayLam) {
+        this.NgayLam = NgayLam;
+    }
+
+    public String getNhanVien() {
+        return NhanVien;
+    }
+
+    public void setNhanVien(String NhanVien) {
+        this.NhanVien = NhanVien;
+    }
+
+    public String getGioLam() {
+        return GioLam;
+    }
+
+    public void setGioLam(String GioLam) {
+        this.GioLam = GioLam;
+    }
+
+    public String getGioTan() {
         return GioTan;
     }
 
-    public void setGioTan(Date GioTan) {
+    public void setGioTan(String GioTan) {
         this.GioTan = GioTan;
     }
-
-    public double getTongThoiGian() {
-        return TongThoiGian;
-    }
-
-    public void setTongThoiGian(double TongThoiGian) {
-        this.TongThoiGian = TongThoiGian;
-    }
-
 
     public String getGhiChu() {
         return GhiChu;
@@ -55,25 +71,6 @@ public class PhanCong {
     public void setGhiChu(String GhiChu) {
         this.GhiChu = GhiChu;
     }
-
-    public String getMaNhanVien() {
-        return MaNhanVien;
-    }
-
-    public void setMaNhanVien(String MaNhanVien) {
-        this.MaNhanVien = MaNhanVien;
-    }
-
-    public PhanCong(String MaPhanCong, Date GioVao, Date GioTan, double TongThoiGian, String GhiChu, String MaNhanVien) {
-        this.MaPhanCong = MaPhanCong;
-        this.GioVao = GioVao;
-        this.GioTan = GioTan;
-        this.TongThoiGian = TongThoiGian;
-        this.GhiChu = GhiChu;
-        this.MaNhanVien = MaNhanVien;
-    }
-
-   
 
 
 }

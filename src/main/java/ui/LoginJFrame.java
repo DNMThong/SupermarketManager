@@ -221,6 +221,7 @@ public class LoginJFrame extends JFrame {
 						Alert.error(LoginJFrame.getFrames()[0],"Mã QR không hợp lệ");
 					}
 
+
 				}
 			});
 		}

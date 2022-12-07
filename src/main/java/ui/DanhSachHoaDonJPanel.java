@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -307,6 +308,7 @@ public class DanhSachHoaDonJPanel extends javax.swing.JPanel {
             String sql = "select * from ChiTietHoaDon where MaHD = ?";
 
             ResultSet rs = JDBCUtil.query(sql,mahd);
+
             lblMaHoaDon.setText(mahd);
             lblNgayLapHoaDon.setText(tblDanhSachHoaDon.getValueAt(rowHoaDon, 1).toString());
             lblTenNhanVien.setText(tblDanhSachHoaDon.getValueAt(rowHoaDon, 2).toString());
@@ -344,6 +346,7 @@ public class DanhSachHoaDonJPanel extends javax.swing.JPanel {
             JasperDesign jdesign = JRXmlLoader.load(reportSource);
             String query = "SELECT * FROM [QLDA_SieuThi].[dbo].[ChiTietHoaDon] where MaHD like '"+mahd+"'";
 
+
             JRDesignQuery updateQuery = new JRDesignQuery();
             updateQuery.setText(query);
 
@@ -353,6 +356,7 @@ public class DanhSachHoaDonJPanel extends javax.swing.JPanel {
             JasperPrint jprint = JasperFillManager.fillReport(jreport, null,JDBCUtil.getConnect());
 
             JasperViewer.viewReport(jprint,false);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
