@@ -124,4 +124,9 @@ public class NhanVien {
                 VaiTro?"Trưởng phòng":"Nhân viên",
                 new ModelAction<NhanVien, EventAction>(this, event)};
     }
+
+    @Override
+    public String toString() {
+        return getHoTen();
+    }
 }

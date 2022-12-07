@@ -7,6 +7,8 @@ import component.SwingCalendar.WeekCalendar;
 import component.datechooser.EventDateChooser;
 import component.datechooser.SelectedAction;
 import component.datechooser.SelectedDate;
+import dao.NhanVienDAO;
+import entity.NhanVien;
 import entity.PhanCong;
 import java.awt.Color;
 import java.awt.Dialog;
@@ -22,16 +24,18 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import javax.swing.JComponent;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+import java.util.List;
+import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+
+import utils.Alert;
 import utils.JDBCUtil;
 
 public class CaLamViecJPanel extends javax.swing.JPanel {
+
+    private DefaultComboBoxModel modelNV;
 
     public CaLamViecJPanel() {
         initComponents();
@@ -440,7 +444,7 @@ public class CaLamViecJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel calendarPanel;
     private javax.swing.JComboBox<String> cboGioBatDau;
     private javax.swing.JComboBox<String> cboGioKetThuc;
-    private javax.swing.JComboBox<String> cboNhanVien;
+    private javax.swing.JComboBox<NhanVien> cboNhanVien;
     private component.datechooser.DateChooser dateChooser;
     private component.datechooser.DateChooser datePicker;
     private javax.swing.JLabel jLabel1;
@@ -546,14 +550,7 @@ public class CaLamViecJPanel extends javax.swing.JPanel {
                 calendar.setTime(dateTimeIn);
                 calendar.setTime(dateTimeOut);
 
-//                PhanCong pc = new PhanCong();
-//                pc.setNgayKhoiTao(rs.getString(1));
-//                pc.setNhanVien(rs.getString(2));
-//                pc.setNgayLam(rs.getDate(3));
-//                pc.setGioLam(dateTimeIn.getHours() + ":" + dateTimeIn.getMinutes());
-//                pc.setGioTan(dateTimeOut.getHours() + ":" + dateTimeOut.getMinutes());
-//                pc.setGhiChu(rs.getString(6));
-//                listPC.add(pc);
+
                 events.add(new CalendarEvent(LocalDate.of(year, month, day), LocalTime.of(dateTimeIn.getHours(), dateTimeIn.getMinutes()), LocalTime.of(dateTimeOut.getHours(), dateTimeOut.getMinutes()), rs.getString(5) + "\n" + rs.getString(6)));
             }
             rs.close();
@@ -573,7 +570,7 @@ public class CaLamViecJPanel extends javax.swing.JPanel {
 
     void insert() {
         try {
-            String QueryInsert = "insert into PhanCong(ngaykhoitao, GioVao, GioTan, ghichu, HoTen) values (?,?,?,?,?)";
+            String QueryInsert = "insert into PhanCong(ngaykhoitao, GioVao, GioTan, ghichu, MaNV) values (?,?,?,?,?)";
             PreparedStatement ps = JDBCUtil.getConnect().prepareStatement(QueryInsert);
 
             String date = txtDate.getText();
@@ -588,15 +585,16 @@ public class CaLamViecJPanel extends javax.swing.JPanel {
             Timestamp timeIn = new Timestamp(millisecondsIn);
             long millisecondsOut = formatDateTime.parse(dateTimeOutStr).getTime();
             Timestamp timeOut = new Timestamp(millisecondsOut);
+            NhanVien nv = (NhanVien) cboNhanVien.getSelectedItem();
 
             ps.setTimestamp(1, sq);
             ps.setTimestamp(2, timeIn);
             ps.setTimestamp(3, timeOut);
             ps.setString(4, txtGhiChu.getText());
-            ps.setString(5, (String) cboNhanVien.getSelectedItem());
+            ps.setString(5, nv.getMaNhanVien());
             ps.executeUpdate();
             ps.close();
-            JOptionPane.showMessageDialog(this, "Tạo ca làm mới thành công");
+            Alert.success("Tạo ca làm mới thành công");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -622,12 +620,12 @@ public class CaLamViecJPanel extends javax.swing.JPanel {
 
     void addNhanVienInComboBox() {
         try {
-            String sql = "select distinct HoTen from NhanVien";
-            ResultSet rs = JDBCUtil.query(sql);
-            while (rs.next()) {
-                cboNhanVien.addItem(rs.getString(1));
-            }
-            rs.close();
+            NhanVienDAO nvd = new NhanVienDAO();
+            List<NhanVien> listNV = nvd.selectAll();
+            modelNV = (DefaultComboBoxModel) cboNhanVien.getModel();
+            listNV.forEach(i -> {
+                modelNV.addElement(i);
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
