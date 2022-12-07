@@ -670,7 +670,7 @@ GO
   join SanPham sp on sp.MaSP = CTHD.MaSP
   join HoaDon hd on hd.MaHD = CTHD.MaHD
   join NhanVien nv on nv.MaNV = hd.MaNV
-  join KhachHang kh on kh.MaKH = hd.MaKH
+  full join KhachHang kh on kh.MaKH = hd.MaKH
   where CTPX.MaSP = CTHD.MaSP
   group by CTHD.MaHD, hd.NgayXuat, nv.HoTen, sp.TenSP, CTHD.SoLuong, CTPX.GiaXuat, CTHD.MaPhieuXuat, 
   CASE
@@ -680,6 +680,10 @@ GO
 		ELSE 0
 	END
 GO
+
+
+  
+
 /** Object:  View [dbo].[DanhSachHoaDon]    Script Date: 12/6/2022 8:46:49 PM **/
 SET ANSI_NULLS ON
 GO

@@ -1,7 +1,7 @@
 package utils;
 
 import component.notification.Notification;
-import confirm.ConfirmJDialog;
+import component.confirm.ConfirmJDialog;
 import ui.MainFrame;
 
 import javax.swing.*;

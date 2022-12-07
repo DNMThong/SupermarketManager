@@ -1,4 +1,4 @@
-package confirm;
+package component.confirm;
 
 import java.awt.Color;
 import java.awt.Graphics;

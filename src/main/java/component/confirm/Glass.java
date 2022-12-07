@@ -1,4 +1,4 @@
-package confirm;
+package component.confirm;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;

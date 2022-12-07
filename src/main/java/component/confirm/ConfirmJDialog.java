@@ -1,4 +1,4 @@
-package confirm;
+package component.confirm;
 
 import component.Button;
 import java.awt.*;
