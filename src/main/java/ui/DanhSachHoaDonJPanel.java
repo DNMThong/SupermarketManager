@@ -1,5 +1,6 @@
 package ui;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -14,6 +15,7 @@ import net.sf.jasperreports.engine.design.JRDesignQuery;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
+import utils.Alert;
 import utils.JDBCUtil;
 
 public class DanhSachHoaDonJPanel extends javax.swing.JPanel {
@@ -35,9 +37,9 @@ public class DanhSachHoaDonJPanel extends javax.swing.JPanel {
         ChiTietHoaDonJDialog = new javax.swing.JDialog();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblChiTietHoaDon = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        btnXoaHoaDon = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnInHoaDon = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         lblMaHoaDon = new javax.swing.JLabel();
@@ -77,14 +79,22 @@ public class DanhSachHoaDonJPanel extends javax.swing.JPanel {
             tblChiTietHoaDon.getColumnModel().getColumn(3).setMaxWidth(120);
         }
 
-        jButton1.setText("Xóa hóa đơn");
+        btnXoaHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Delete-file-icon.png"))); // NOI18N
+        btnXoaHoaDon.setText("Xóa hóa đơn");
+        btnXoaHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaHoaDonActionPerformed(evt);
+            }
+        });
 
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/document-edit-icon.png"))); // NOI18N
         jButton2.setText("Sửa hóa đơn");
 
-        jButton3.setText("In hóa đơn");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnInHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Action-file-print-icon.png"))); // NOI18N
+        btnInHoaDon.setText("In hóa đơn");
+        btnInHoaDon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnInHoaDonActionPerformed(evt);
             }
         });
 
@@ -113,39 +123,37 @@ public class DanhSachHoaDonJPanel extends javax.swing.JPanel {
         ChiTietHoaDonJDialogLayout.setHorizontalGroup(
             ChiTietHoaDonJDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ChiTietHoaDonJDialogLayout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(ChiTietHoaDonJDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ChiTietHoaDonJDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ChiTietHoaDonJDialogLayout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                        .addGroup(ChiTietHoaDonJDialogLayout.createSequentialGroup()
+                            .addComponent(jLabel5)
+                            .addGap(40, 40, 40)))
+                    .addGroup(ChiTietHoaDonJDialogLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(52, 52, 52)))
                 .addGroup(ChiTietHoaDonJDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ChiTietHoaDonJDialogLayout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(ChiTietHoaDonJDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
-                            .addGroup(ChiTietHoaDonJDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(ChiTietHoaDonJDialogLayout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addGroup(ChiTietHoaDonJDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ChiTietHoaDonJDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ChiTietHoaDonJDialogLayout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                                .addGroup(ChiTietHoaDonJDialogLayout.createSequentialGroup()
-                                    .addComponent(jLabel5)
-                                    .addGap(40, 40, 40)))
-                            .addGroup(ChiTietHoaDonJDialogLayout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(52, 52, 52)))
-                        .addGroup(ChiTietHoaDonJDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblMaHoaDon)
-                            .addGroup(ChiTietHoaDonJDialogLayout.createSequentialGroup()
-                                .addComponent(lblTenNhanVien)
-                                .addGap(102, 102, 102)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblTongHoaDon))
-                            .addComponent(lblNgayLapHoaDon))))
-                .addGap(0, 9, Short.MAX_VALUE))
+                        .addComponent(lblTenNhanVien)
+                        .addGap(102, 102, 102)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblTongHoaDon))
+                    .addComponent(lblMaHoaDon)
+                    .addComponent(lblNgayLapHoaDon))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(ChiTietHoaDonJDialogLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(ChiTietHoaDonJDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnInHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnXoaHoaDon))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         ChiTietHoaDonJDialogLayout.setVerticalGroup(
             ChiTietHoaDonJDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,7 +166,7 @@ public class DanhSachHoaDonJPanel extends javax.swing.JPanel {
                 .addGroup(ChiTietHoaDonJDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNgayLapHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(9, 9, 9)
                 .addGroup(ChiTietHoaDonJDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTenNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -166,13 +174,13 @@ public class DanhSachHoaDonJPanel extends javax.swing.JPanel {
                     .addComponent(lblTongHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(ChiTietHoaDonJDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(ChiTietHoaDonJDialogLayout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnInHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnXoaHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(16, 16, 16))
         );
 
@@ -219,16 +227,22 @@ public class DanhSachHoaDonJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_tblDanhSachHoaDonMouseClicked
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnInHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInHoaDonActionPerformed
         inHoaDon();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnInHoaDonActionPerformed
+
+    private void btnXoaHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaHoaDonActionPerformed
+        xoaHoaDon();
+        fillDanhSachHoaDon();
+        ChiTietHoaDonJDialog.setVisible(false);
+    }//GEN-LAST:event_btnXoaHoaDonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog ChiTietHoaDonJDialog;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnInHoaDon;
+    private javax.swing.JButton btnXoaHoaDon;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -277,15 +291,12 @@ public class DanhSachHoaDonJPanel extends javax.swing.JPanel {
         modal.setRowCount(0);
         try {
             String sql = "select * from DanhSachHoaDon order by NgayXuat desc";
-
             ResultSet rs = JDBCUtil.query(sql);
-
             while (rs.next()) {
                 Object[] row = new Object[]{rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)};
                 modal.addRow(row);
             }
             rs.close();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -346,6 +357,18 @@ public class DanhSachHoaDonJPanel extends javax.swing.JPanel {
             JasperPrint jprint = JasperFillManager.fillReport(jreport, null, JDBCUtil.getConnect());
 
             JasperViewer.viewReport(jprint, false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    void xoaHoaDon() {
+        try {
+            String mahd = tblDanhSachHoaDon.getValueAt(rowHoaDon, 0).toString();
+            String sqlDelete = "DELETE HoaDon where MaHD like '" + mahd + "'";
+            PreparedStatement ps = JDBCUtil.getStmt(sqlDelete);
+            ps.executeUpdate();
+            Alert.success("Xoá hóa đơn thành công!");
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -10,11 +10,8 @@ import component.datechooser.SelectedDate;
 import entity.PhanCong;
 import java.awt.Color;
 import java.awt.Dialog;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -25,10 +22,10 @@ import java.util.GregorianCalendar;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import utils.Alert;
 import utils.JDBCUtil;
 
 public class CaLamViecJPanel extends javax.swing.JPanel {
@@ -60,7 +57,7 @@ public class CaLamViecJPanel extends javax.swing.JPanel {
         dateChooser = new component.datechooser.DateChooser();
         DanhSachEventJDialog = new javax.swing.JDialog();
         jScrollPane2 = new javax.swing.JScrollPane();
-        table = new javax.swing.JTable();
+        tblDanhSach = new javax.swing.JTable();
         btnTao = new javax.swing.JButton();
         btnList = new javax.swing.JButton();
         calendarPanel = new javax.swing.JPanel();
@@ -221,23 +218,37 @@ public class CaLamViecJPanel extends javax.swing.JPanel {
 
         DanhSachEventJDialog.setTitle("Chỉnh sửa");
 
-        table.setModel(new javax.swing.table.DefaultTableModel(
+        tblDanhSach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Ngày tạo", "Nhân viên", "Ngày làm", "Giờ vào", "Giờ tan", "Ghi Chú"
+                "Ngày tạo", "Nhân viên", "Ngày làm", "Giờ vào", "Giờ tan", "Thời gian làm (Giờ)", "Ghi Chú"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(table);
+        jScrollPane2.setViewportView(tblDanhSach);
+        if (tblDanhSach.getColumnModel().getColumnCount() > 0) {
+            tblDanhSach.getColumnModel().getColumn(0).setMinWidth(140);
+            tblDanhSach.getColumnModel().getColumn(0).setMaxWidth(140);
+            tblDanhSach.getColumnModel().getColumn(1).setMinWidth(230);
+            tblDanhSach.getColumnModel().getColumn(1).setMaxWidth(230);
+            tblDanhSach.getColumnModel().getColumn(2).setMinWidth(100);
+            tblDanhSach.getColumnModel().getColumn(2).setMaxWidth(100);
+            tblDanhSach.getColumnModel().getColumn(3).setMinWidth(70);
+            tblDanhSach.getColumnModel().getColumn(3).setMaxWidth(70);
+            tblDanhSach.getColumnModel().getColumn(4).setMinWidth(70);
+            tblDanhSach.getColumnModel().getColumn(4).setMaxWidth(70);
+            tblDanhSach.getColumnModel().getColumn(5).setMinWidth(130);
+            tblDanhSach.getColumnModel().getColumn(5).setMaxWidth(130);
+        }
 
         javax.swing.GroupLayout DanhSachEventJDialogLayout = new javax.swing.GroupLayout(DanhSachEventJDialog.getContentPane());
         DanhSachEventJDialog.getContentPane().setLayout(DanhSachEventJDialogLayout);
@@ -350,11 +361,11 @@ public class CaLamViecJPanel extends javax.swing.JPanel {
 
     private void btnListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListActionPerformed
         initCenterColumnTable();
+        showDanhSach();
         DanhSachEventJDialog.setVisible(true);
     }//GEN-LAST:event_btnListActionPerformed
 
     private void txtTieuDeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTieuDeFocusGained
-        // TODO add your handling code here:
         if (txtTieuDe.getText().equals("Thêm tiêu đề")) {
             txtTieuDe.setForeground(Color.BLACK);
             txtTieuDe.setText("");
@@ -362,7 +373,6 @@ public class CaLamViecJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTieuDeFocusGained
 
     private void txtTieuDeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTieuDeFocusLost
-        // TODO add your handling code here:
         if (txtTieuDe.getText().isEmpty()) {
             txtTieuDe.setForeground(Color.GRAY);
             txtTieuDe.setText("Thêm tiêu đề");
@@ -370,7 +380,6 @@ public class CaLamViecJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTieuDeFocusLost
 
     private void txtGhiChuFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtGhiChuFocusGained
-        // TODO add your handling code here:
         if (txtGhiChu.getText().equals("Thêm ghi chú")) {
             txtGhiChu.setForeground(Color.BLACK);
             txtGhiChu.setText("");
@@ -378,7 +387,6 @@ public class CaLamViecJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txtGhiChuFocusGained
 
     private void txtGhiChuFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtGhiChuFocusLost
-        // TODO add your handling code here:
         if (txtGhiChu.getText().isEmpty()) {
             txtGhiChu.setForeground(Color.GRAY);
             txtGhiChu.setText("Thêm ghi chú");
@@ -387,23 +395,25 @@ public class CaLamViecJPanel extends javax.swing.JPanel {
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
         if (btnLuu.getText().equals("Lưu")) {
+            TaoLichJDialog.dispose();
             insert();
             fillToCalendar();
-            TaoLichJDialog.setVisible(false);
             calendarPanel.revalidate();
             calendarPanel.repaint();
         } else {
-
+            TaoLichJDialog.dispose();
+            update();
+            fillToCalendar();
+            calendarPanel.revalidate();
+            calendarPanel.repaint();
         }
     }//GEN-LAST:event_btnLuuActionPerformed
 
     private void btnDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDateActionPerformed
-        // TODO add your handling code here:
         dateChooser.showPopup();
     }//GEN-LAST:event_btnDateActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        // TODO add your handling code here:
         TaoLichJDialog.dispose();
         remove();
         fillToCalendar();
@@ -412,17 +422,14 @@ public class CaLamViecJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnLastWeekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastWeekActionPerformed
-        // TODO add your handling code here:
         cal.prevWeek();
     }//GEN-LAST:event_btnLastWeekActionPerformed
 
     private void btnTodayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTodayActionPerformed
-        // TODO add your handling code here:
         cal.goToToday();
     }//GEN-LAST:event_btnTodayActionPerformed
 
     private void btnNextWeekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextWeekActionPerformed
-        // TODO add your handling code here:
         cal.nextWeek();
     }//GEN-LAST:event_btnNextWeekActionPerformed
 
@@ -449,7 +456,7 @@ public class CaLamViecJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable table;
+    private javax.swing.JTable tblDanhSach;
     private javax.swing.JTextField txtDate;
     private javax.swing.JTextArea txtGhiChu;
     private javax.swing.JTextField txtTieuDe;
@@ -461,6 +468,9 @@ public class CaLamViecJPanel extends javax.swing.JPanel {
         initActionOrther();
         fillToCalendar();
     }
+
+    String getTimeInToUpdate = "";
+    String getTimeOutToUpdate = "";
 
     void initJDialogOrther() {
         TaoLichJDialog.pack();
@@ -497,6 +507,8 @@ public class CaLamViecJPanel extends javax.swing.JPanel {
         cal.addCalendarEventClickListener(new CalendarEventClickListener() {
             @Override
             public void calendarEventClick(CalendarEventClickEvent e) {
+                getTimeInToUpdate = txtDate.getText() + " " + cboGioBatDau.getSelectedItem().toString() + ":00";
+                getTimeOutToUpdate = txtDate.getText() + " " + cboGioKetThuc.getSelectedItem().toString() + ":00";
                 btnXoa.setText("Xóa");
                 btnLuu.setText("Sửa");
                 txtDate.setText(e.getCalendarEvent().getDate().toString());
@@ -512,10 +524,12 @@ public class CaLamViecJPanel extends javax.swing.JPanel {
     void initCenterColumnTable() {
         DefaultTableCellRenderer render = new DefaultTableCellRenderer();
         render.setHorizontalAlignment(JLabel.CENTER);
-        TableColumnModel model = table.getColumnModel();
+        TableColumnModel model = tblDanhSach.getColumnModel();
         model.getColumn(0).setCellRenderer(render);
         model.getColumn(2).setCellRenderer(render);
         model.getColumn(3).setCellRenderer(render);
+        model.getColumn(4).setCellRenderer(render);
+        model.getColumn(5).setCellRenderer(render);
     }
 
     ArrayList<CalendarEvent> events = new ArrayList<>();
@@ -570,7 +584,6 @@ public class CaLamViecJPanel extends javax.swing.JPanel {
 //            modal.addRow(row);
 //        }
 //    }
-
     void insert() {
         try {
             String QueryInsert = "insert into PhanCong(ngaykhoitao, GioVao, GioTan, ghichu, HoTen) values (?,?,?,?,?)";
@@ -596,7 +609,8 @@ public class CaLamViecJPanel extends javax.swing.JPanel {
             ps.setString(5, (String) cboNhanVien.getSelectedItem());
             ps.executeUpdate();
             ps.close();
-            JOptionPane.showMessageDialog(this, "Tạo ca làm mới thành công");
+            Alert.success("Tạo ca làm mới thành công!");
+            resetFormThemCaLam();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -606,12 +620,13 @@ public class CaLamViecJPanel extends javax.swing.JPanel {
         if (btnXoa.getText().equals("Xóa")) {
             String dateTimeIn = txtDate.getText() + " " + cboGioBatDau.getSelectedItem().toString() + ":00";
             String dateTimeOut = txtDate.getText() + " " + cboGioKetThuc.getSelectedItem().toString() + ":00";
-            String sql = "DELETE FROM Calam WHERE giovaolam = '" + dateTimeIn + "' and gioketthuc = '" + dateTimeOut + "'";
+            String sql = "DELETE FROM PhanCong WHERE GioVao = '" + dateTimeIn + "' and GioTan = '" + dateTimeOut + "'";
             try {
                 PreparedStatement ps = JDBCUtil.getConnect().prepareStatement(sql);
                 ps.executeUpdate();
                 ps.close();
-                JOptionPane.showMessageDialog(this, "Xóa ca làm thành công");
+                Alert.success("Xóa ca làm thành công");
+                resetFormThemCaLam();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -620,14 +635,85 @@ public class CaLamViecJPanel extends javax.swing.JPanel {
         }
     }
 
+    void update() {
+        try {
+            String QueryUpdate = "UPDATE PhanCong set NgayKhoiTao = ?, GioVao = ?, GioTan = ?, GhiChu = ? where HoTen = ? and GioVao = '" + getTimeInToUpdate + "' and GioTan = '" + getTimeOutToUpdate + "'";
+            PreparedStatement ps = JDBCUtil.getStmt(QueryUpdate);
+
+            String date = txtDate.getText();
+            java.util.Date utilDate = new java.util.Date();
+            java.sql.Timestamp sq = new java.sql.Timestamp(utilDate.getTime());
+
+            String patternDateTime = "yyyy-MM-dd hh:mm:ss";
+            SimpleDateFormat formatDateTime = new SimpleDateFormat(patternDateTime);
+            String dateTimeInStr = date + " " + cboGioBatDau.getSelectedItem().toString() + ":00";
+            String dateTimeOutStr = date + " " + cboGioKetThuc.getSelectedItem().toString() + ":00";
+            long millisecondsIn = formatDateTime.parse(dateTimeInStr).getTime();
+            Timestamp timeIn = new Timestamp(millisecondsIn);
+            long millisecondsOut = formatDateTime.parse(dateTimeOutStr).getTime();
+            Timestamp timeOut = new Timestamp(millisecondsOut);
+
+            ps.setTimestamp(1, sq);
+            ps.setTimestamp(2, timeIn);
+            ps.setTimestamp(3, timeOut);
+            ps.setString(4, txtGhiChu.getText());
+            ps.setString(5, (String) cboNhanVien.getSelectedItem());
+            ps.executeUpdate();
+            ps.close();
+            Alert.success("Sửa ca làm thành công");
+            resetFormThemCaLam();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    void resetFormThemCaLam() {
+        txtTieuDe.setText(null);
+        txtDate.setText(null);
+        txtGhiChu.setText(null);
+        cboNhanVien.setSelectedIndex(0);
+        cboGioBatDau.setSelectedIndex(0);
+        cboGioKetThuc.setSelectedIndex(4);
+    }
+
     void addNhanVienInComboBox() {
         try {
-            String sql = "select distinct HoTen from NhanVien";
+            String sql = "select distinct HoTen from NhanVien order by HoTen asc";
             ResultSet rs = JDBCUtil.query(sql);
             while (rs.next()) {
                 cboNhanVien.addItem(rs.getString(1));
             }
             rs.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    void showDanhSach() {
+        try {
+            DefaultTableModel modal = (DefaultTableModel) tblDanhSach.getModel();
+            modal.setRowCount(0);
+            String sql = "SELECT * FROM DanhSachPhanCong order by NgayKhoiTao desc";
+            ResultSet rs = JDBCUtil.query(sql);
+            while (rs.next()) {
+                String GioVaoString = rs.getString(2);
+                String GioTanString = rs.getString(3);
+
+                SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+                Date dateTimeIn = format.parse(GioVaoString);
+                Date dateTimeOut = format.parse(GioTanString);
+                java.util.Calendar calendar = new GregorianCalendar();
+                calendar.setTime(dateTimeIn);
+                calendar.setTime(dateTimeOut);
+
+                String In = String.valueOf(dateTimeIn.getHours()) + ":" + String.valueOf(dateTimeIn.getMinutes());
+                String Out = String.valueOf(dateTimeOut.getHours()) + ":" + String.valueOf(dateTimeOut.getMinutes());
+
+                double ThoiGianLam = rs.getDouble(4) / 60;
+
+                Object[] row = new Object[]{rs.getString(1), rs.getString(5), rs.getDate(2), In, Out, ThoiGianLam, rs.getString(6)};
+                modal.addRow(row);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -24,6 +24,7 @@ public class MainFrame extends JFrame {
 	
 	public MainFrame() {
 		initComponents();
+                this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 	}
 
 	
