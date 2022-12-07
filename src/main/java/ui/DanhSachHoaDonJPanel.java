@@ -286,7 +286,7 @@ public class DanhSachHoaDonJPanel extends javax.swing.JPanel {
             String sql = "select * from DanhSachHoaDon order by NgayXuat desc";
 
             ResultSet rs = JDBCUtil.query(sql);
-            System.out.println(rs.next());
+
             while (rs.next()) {
                 Object[] row = new Object[]{rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)};
                 modal.addRow(row);
@@ -342,8 +342,7 @@ public class DanhSachHoaDonJPanel extends javax.swing.JPanel {
             String mahd = tblDanhSachHoaDon.getValueAt(rowHoaDon, 0).toString();
             String reportSource = getClass().getResource("/reports/InHoaDon.jrxml").getPath();
             JasperDesign jdesign = JRXmlLoader.load(reportSource);
-            String query = "SELECT [MaHD],[NgayXuat],[HoTen],[TenSP],[SoLuong],[GiaXuat],[ThanhTien]" +
-                    "  FROM [QLDA_SieuThi].[dbo].[ChiTietHoaDon] where MaHD like '"+mahd+"'";
+            String query = "SELECT * FROM [QLDA_SieuThi].[dbo].[ChiTietHoaDon] where MaHD like '"+mahd+"'";
 
             JRDesignQuery updateQuery = new JRDesignQuery();
             updateQuery.setText(query);
@@ -353,7 +352,7 @@ public class DanhSachHoaDonJPanel extends javax.swing.JPanel {
             JasperReport jreport = JasperCompileManager.compileReport(jdesign);
             JasperPrint jprint = JasperFillManager.fillReport(jreport, null,JDBCUtil.getConnect());
 
-            JasperViewer.viewReport(jprint);
+            JasperViewer.viewReport(jprint,false);
         } catch (Exception e) {
             e.printStackTrace();
         }

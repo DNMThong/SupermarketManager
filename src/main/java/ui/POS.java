@@ -11,6 +11,11 @@ import dao.KhachHangDAO;
 import entity.ChiTietHoaDon;
 import entity.HoaDon;
 import entity.KhachHang;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -87,6 +92,8 @@ public class POS extends JPanel {
 
 	private int total = 0;
 	private Button btnThanhToan;
+
+	private String maHD;
 
 	/**
 	 * Create the panel.
@@ -330,6 +337,7 @@ public class POS extends JPanel {
 		btnInHoaDon.setColorClick(new Color(31, 174, 255));
 		btnInHoaDon.setColor(new Color(31, 174, 255));
 		btnInHoaDon.setBorderColor(Color.WHITE);
+		btnInHoaDon.addActionListener(new handlePrintBill());
 
 		btnLamMoi = new Button();
 		btnLamMoi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -552,20 +560,6 @@ public class POS extends JPanel {
 		sum = rs.get();
 		lblTong.setText(CurrencyUtil.format(rs.get()));
 	}
-	
-//	public void testData() {
-//		List<SanPham> list = new ArrayList<SanPham>();
-//
-//		for(int i=0;i<20;i++) {
-//			SanPham sp = new SanPham();
-//			sp.setTenSP("Sua Milo");
-//			sp.setGiaSP(100000);
-//			sp.setTenNCC("ABC");
-//			sp.setHinh("SuaMiLo.png");
-//			list.add(sp);
-//		}
-//		fillProduct(list);
-//	}
 
 	public void loadProduct() {
 		products.clear();
@@ -623,7 +617,10 @@ public class POS extends JPanel {
 	}
 
 	public void clearHD() {
+		maHD = null;
 		listHD.clear();
+		txtTienKhachDua.setText("");
+		txtMaKH.setText("");
 		fillHD();
 		sumCurrency();
 		displayTotal();
@@ -635,7 +632,6 @@ public class POS extends JPanel {
 		ChiTietHoaDonDAO cthdd = new ChiTietHoaDonDAO();
 		String maNV = Auth.user.getMaNhanVien();
 		String maKH = txtMaKH.getText().trim();
-		System.out.println(maHD);
 		try {
 			hdd.insert(new HoaDon(maHD, maNV, maKH,new Date()));
 			listHD.forEach((product,amount) -> {
@@ -714,13 +710,46 @@ public class POS extends JPanel {
 		Desktop.getDesktop().browse(new URI(url));
 	}
 
+	public void printBill(String maHoaDon) throws JRException {
+		String reportSource = getClass().getResource("/reports/InHoaDon.jrxml").getPath();
+		JasperDesign jdesign = JRXmlLoader.load(reportSource);
+		String query = "SELECT * FROM [QLDA_SieuThi].[dbo].[ChiTietHoaDon] where MaHD like '"+maHoaDon+"'";
+
+		JRDesignQuery updateQuery = new JRDesignQuery();
+		updateQuery.setText(query);
+
+		jdesign.setQuery(updateQuery);
+
+		JasperReport jreport = JasperCompileManager.compileReport(jdesign);
+		JasperPrint jprint = JasperFillManager.fillReport(jreport, null,JDBCUtil.getConnect());
+
+		JasperViewer.viewReport(jprint,false);
+	}
+
+	class handlePrintBill implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if(maHD == null) {
+				Alert.error("Vui lòng thanh toán trước khi in hóa đơn");
+			}else {
+				try {
+					printBill(maHD);
+				} catch (JRException ex) {
+					throw new RuntimeException(ex);
+				}
+			}
+		}
+	}
+
 	class handleBtnThanhToan implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			UUID uuid = UUID.randomUUID();
 			if(rdoTienMat.isSelected()) {
-				addHD(uuid.toString());
+				maHD = uuid.toString();
+				addHD(maHD);
 			}else {
 				try {
 					zalopay(uuid.toString());

@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="300" pageHeight="850" columnWidth="260" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="01483687-b772-4248-ad2f-00b8fb583a8c">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="300" pageHeight="700" columnWidth="260" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="01483687-b772-4248-ad2f-00b8fb583a8c">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
-	<parameter name="rstMaHD" class="java.lang.String">
-		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
-	</parameter>
+	<property name="ireport.y" value="329"/>
 	<queryString>
-		<![CDATA[SELECT [MaHD],[NgayXuat],[HoTen],[TenSP],[SoLuong],[GiaXuat],[ThanhTien]
-  FROM [QLDA_SieuThi].[dbo].[ChiTietHoaDon] where MaHD = $P{rstMaHD}]]>
+		<![CDATA[SELECT [MaHD]
+      ,[NgayXuat]
+      ,[HoTen]
+      ,[TenSP]
+      ,[SoLuong]
+      ,[GiaXuat]
+      ,[ThanhTien]
+      ,[GiamGia]
+  FROM [QLDA_SieuThi].[dbo].[ChiTietHoaDon] where mahd = 'hd01']]>
 	</queryString>
 	<field name="MaHD" class="java.lang.String"/>
 	<field name="NgayXuat" class="java.sql.Date"/>
@@ -17,6 +21,7 @@
 	<field name="SoLuong" class="java.lang.Integer"/>
 	<field name="GiaXuat" class="java.lang.Integer"/>
 	<field name="ThanhTien" class="java.lang.Integer"/>
+	<field name="GiamGia" class="java.math.BigDecimal"/>
 	<variable name="SUM_THANHTIEN" class="java.lang.Integer" calculation="Sum">
 		<variableExpression><![CDATA[$F{SoLuong}*$F{GiaXuat}]]></variableExpression>
 	</variable>
@@ -153,7 +158,7 @@
 				<textFieldExpression><![CDATA[$F{GiaXuat}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="183" y="20" width="75" height="20" uuid="ec7b4fba-e141-4ed0-a92c-a64a39e79d28"/>
+				<reportElement x="169" y="20" width="89" height="20" uuid="ec7b4fba-e141-4ed0-a92c-a64a39e79d28"/>
 				<textElement textAlignment="Right">
 					<font fontName="Open Sans" size="11"/>
 				</textElement>
@@ -162,19 +167,19 @@
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="234" splitType="Stretch">
+		<band height="287" splitType="Stretch">
 			<line>
-				<reportElement x="0" y="77" width="260" height="1" uuid="1b8ac1da-1cfe-44ba-8162-af42df1f1b39"/>
+				<reportElement x="0" y="130" width="260" height="1" uuid="1b8ac1da-1cfe-44ba-8162-af42df1f1b39"/>
 			</line>
 			<staticText>
-				<reportElement x="0" y="87" width="260" height="20" uuid="2ba92c11-6350-4608-8240-efeaa92da985"/>
+				<reportElement x="0" y="140" width="260" height="20" uuid="2ba92c11-6350-4608-8240-efeaa92da985"/>
 				<textElement textAlignment="Center">
 					<font fontName="Open Sans" size="11"/>
 				</textElement>
 				<text><![CDATA[Tổng đài góp ý/khiếu nại: 1800 17309]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="107" width="260" height="81" uuid="a7f6c5f3-8edd-4759-b30e-1e80d5603f3f"/>
+				<reportElement x="0" y="160" width="260" height="81" uuid="a7f6c5f3-8edd-4759-b30e-1e80d5603f3f"/>
 				<textElement textAlignment="Center">
 					<font fontName="Open Sans" size="11"/>
 				</textElement>
@@ -182,7 +187,7 @@
 https://hddt.hethongquanlysieuthi.com]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="188" width="260" height="46" uuid="93971043-363b-4fd9-bf1a-f9bcf9c1fd1e"/>
+				<reportElement x="0" y="241" width="260" height="46" uuid="93971043-363b-4fd9-bf1a-f9bcf9c1fd1e"/>
 				<textElement textAlignment="Center">
 					<font fontName="Open Sans" size="11"/>
 				</textElement>
@@ -196,21 +201,21 @@ https://hddt.hethongquanlysieuthi.com]]></text>
 				<text><![CDATA[Tổng tiền hàng:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="25" y="29" width="123" height="20" uuid="f1f09e44-424b-4230-a415-0503ad15bce5"/>
+				<reportElement x="25" y="82" width="123" height="20" uuid="f1f09e44-424b-4230-a415-0503ad15bce5"/>
 				<textElement textAlignment="Right">
 					<font fontName="Open Sans" size="11" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[(Đã bao gồm giảm giá)]]></text>
 			</staticText>
 			<textField pattern="#,##0">
-				<reportElement x="182" y="9" width="78" height="20" uuid="61df40c2-afb7-4668-908e-cedf2783d1b0"/>
+				<reportElement x="169" y="9" width="91" height="20" uuid="61df40c2-afb7-4668-908e-cedf2783d1b0"/>
 				<textElement textAlignment="Right">
 					<font fontName="Open Sans" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{SUM_THANHTIEN}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="51" width="260" height="20" uuid="9be5aa5b-f125-421e-a5af-9fab907d8822"/>
+				<reportElement x="0" y="104" width="260" height="20" uuid="9be5aa5b-f125-421e-a5af-9fab907d8822"/>
 				<textElement textAlignment="Center">
 					<font fontName="Open Sans" size="11" isBold="true" isItalic="true"/>
 				</textElement>
@@ -219,6 +224,37 @@ https://hddt.hethongquanlysieuthi.com]]></text>
 			<line>
 				<reportElement x="0" y="0" width="260" height="1" uuid="f393fc3e-8371-48b3-b055-be784736d17c"/>
 			</line>
+			<staticText>
+				<reportElement x="68" y="62" width="80" height="20" uuid="3c9ef7d2-44c6-4584-8477-d90620f45f82"/>
+				<textElement textAlignment="Right">
+					<font fontName="Open Sans" size="11"/>
+				</textElement>
+				<text><![CDATA[Tổng hoá đơn:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="68" y="29" width="80" height="20" uuid="a8790922-8109-4968-b29a-5e1047300653"/>
+				<textElement textAlignment="Right">
+					<font fontName="Open Sans" size="11"/>
+				</textElement>
+				<text><![CDATA[Giảm giá:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="55" width="260" height="1" uuid="376df5c1-8dc9-4da7-933d-477e4cb5c0dc"/>
+			</line>
+			<textField pattern="#,##0 %">
+				<reportElement x="169" y="29" width="91" height="20" uuid="8a725e10-c12c-48d8-a442-00a04fdbf05e"/>
+				<textElement textAlignment="Right">
+					<font fontName="Open Sans" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{GiamGia}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="169" y="62" width="91" height="20" uuid="7c941281-16b9-403e-8cd1-f8b7a7b411e5"/>
+				<textElement textAlignment="Right">
+					<font fontName="Open Sans" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SUM_THANHTIEN}-($V{SUM_THANHTIEN}.floatValue()*$F{GiamGia}.floatValue())]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageFooter>
 </jasperReport>
