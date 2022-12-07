@@ -215,7 +215,12 @@ public class LoginJFrame extends JFrame {
 				public void getScanBarcodeReponse(String rs) {
 
 					String[] infoLogin = rs.split(" - ");
-					login(infoLogin[0],infoLogin[1]);
+					if(infoLogin.length == 2) {
+						login(infoLogin[0],infoLogin[1]);
+					}else {
+						Alert.error(LoginJFrame.getFrames()[0],"Mã QR không hợp lệ");
+					}
+
 				}
 			});
 		}
