@@ -408,11 +408,11 @@ public class CaLamViecJPanel extends javax.swing.JPanel {
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
-        TaoLichJDialog.dispose();
-        remove();
-        fillToCalendar();
-        calendarPanel.revalidate();
-        calendarPanel.repaint();
+//        TaoLichJDialog.dispose();
+//        remove();
+//        fillToCalendar();
+//        calendarPanel.revalidate();
+//        calendarPanel.repaint();
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnLastWeekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastWeekActionPerformed
@@ -600,23 +600,23 @@ public class CaLamViecJPanel extends javax.swing.JPanel {
         }
     }
 
-    void remove() {
-        if (btnXoa.getText().equals("Xóa")) {
-            String dateTimeIn = txtDate.getText() + " " + cboGioBatDau.getSelectedItem().toString() + ":00";
-            String dateTimeOut = txtDate.getText() + " " + cboGioKetThuc.getSelectedItem().toString() + ":00";
-            String sql = "DELETE FROM Calam WHERE giovaolam = '" + dateTimeIn + "' and gioketthuc = '" + dateTimeOut + "'";
-            try {
-                PreparedStatement ps = JDBCUtil.getConnect().prepareStatement(sql);
-                ps.executeUpdate();
-                ps.close();
-                JOptionPane.showMessageDialog(this, "Xóa ca làm thành công");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-            TaoLichJDialog.dispose();
-        }
-    }
+//    void remove() {
+//        if (btnXoa.getText().equals("Xóa")) {
+//            String dateTimeIn = txtDate.getText() + " " + cboGioBatDau.getSelectedItem().toString() + ":00";
+//            String dateTimeOut = txtDate.getText() + " " + cboGioKetThuc.getSelectedItem().toString() + ":00";
+//            String sql = "DELETE FROM Calam WHERE giovaolam = '" + dateTimeIn + "' and gioketthuc = '" + dateTimeOut + "'";
+//            try {
+//                PreparedStatement ps = JDBCUtil.getConnect().prepareStatement(sql);
+//                ps.executeUpdate();
+//                ps.close();
+//                JOptionPane.showMessageDialog(this, "Xóa ca làm thành công");
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        } else {
+//            TaoLichJDialog.dispose();
+//        }
+//    }
 
     void addNhanVienInComboBox() {
         try {

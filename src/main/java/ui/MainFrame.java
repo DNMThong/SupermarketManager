@@ -3,6 +3,7 @@ package ui;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import component.sidebar.Sidebar;
 import component.textfield.PasswordField;
+import utils.ImageUtil;
 import utils.Util;
 
 import javax.swing.*;
@@ -30,6 +31,8 @@ public class MainFrame extends JFrame {
 	
 	private void initComponents() {
 		FlatIntelliJLaf.setup();
+		this.setIconImage(ImageUtil.read(getClass().getResource("/image/logo/logo-black.png")).getImage());
+
 		JPanel panel = new JPanel();
 		Sidebar sidebarPane = new Sidebar(panel);
 		this.setContentPane(contentPane);
