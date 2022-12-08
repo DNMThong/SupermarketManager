@@ -1,6 +1,7 @@
 package ui;
 
 import java.io.IOException;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -9,6 +10,15 @@ import javax.swing.JLabel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
+import utils.Alert;
 import utils.JDBCUtil;
 import utils.XExcel;
 
@@ -268,13 +278,13 @@ public class DanhSachPhieuNhapJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnExcelActionPerformed
 
     private void btnInPhieuNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInPhieuNhapActionPerformed
-//        inHoaDon();
+        inPhieuNhap();
     }//GEN-LAST:event_btnInPhieuNhapActionPerformed
 
     private void btnXoaPhieuNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaPhieuNhapActionPerformed
-//        xoaHoaDon();
-//        fillDanhSachHoaDon();
-//        ChiTietPhieuNhap.setVisible(false);
+        xoaPhieuNhap();
+        fillDanhSachPhieuNhap();
+        ChiTietPhieuNhapDialog.setVisible(false);
     }//GEN-LAST:event_btnXoaPhieuNhapActionPerformed
 
     private void tblDanhSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhSachMouseClicked
@@ -357,11 +367,11 @@ public class DanhSachPhieuNhapJPanel extends javax.swing.JPanel {
         rowPhieuNhap = tblDanhSach.getSelectedRow();
         DefaultTableModel modal = (DefaultTableModel) tblChiTietPhieuNhap.getModel();
         modal.setRowCount(0);
-        String mahd = tblDanhSach.getValueAt(rowPhieuNhap, 0).toString();
+        String maphieunhap = tblDanhSach.getValueAt(rowPhieuNhap, 0).toString();
         try {
             String sql = "select * from ChiTietPhieuNhap where MaPhieuNhap = ?";
-            ResultSet rs = JDBCUtil.query(sql, mahd);
-            lblMaPhieuNhap.setText(mahd);
+            ResultSet rs = JDBCUtil.query(sql, maphieunhap);
+            lblMaPhieuNhap.setText(maphieunhap);
             lblNgayLapPhieuNhap.setText(tblDanhSach.getValueAt(rowPhieuNhap, 1).toString());
             lblTenNhanVien.setText(tblDanhSach.getValueAt(rowPhieuNhap, 2).toString());
             while (rs.next()) {
@@ -381,5 +391,38 @@ public class DanhSachPhieuNhapJPanel extends javax.swing.JPanel {
             total = total + Integer.parseInt(thanhtien);
         }
         return total;
+    }
+
+    void inPhieuNhap() {
+        try {
+            String maphieunhap = tblDanhSach.getValueAt(rowPhieuNhap, 0).toString();
+            String reportSource = getClass().getResource("/reports/InPhieuNhapXuat.jrxml").getPath();
+            JasperDesign jdesign = JRXmlLoader.load(reportSource);
+            String query = "SELECT * FROM ChiTietPhieuNhap where MaPhieuNhap like '" + maphieunhap + "'";
+
+            JRDesignQuery updateQuery = new JRDesignQuery();
+            updateQuery.setText(query);
+
+            jdesign.setQuery(updateQuery);
+
+            JasperReport jreport = JasperCompileManager.compileReport(jdesign);
+            JasperPrint jprint = JasperFillManager.fillReport(jreport, null, JDBCUtil.getConnect());
+
+            JasperViewer.viewReport(jprint, false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    void xoaPhieuNhap() {
+        try {
+            String mahd = tblDanhSach.getValueAt(rowPhieuNhap, 0).toString();
+            String sqlDelete = "DELETE PhieuNhap where MaPhieuNhap like '" + mahd + "'";
+            PreparedStatement ps = JDBCUtil.getStmt(sqlDelete);
+            ps.executeUpdate();
+            Alert.success("Xoá hóa đơn thành công!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
