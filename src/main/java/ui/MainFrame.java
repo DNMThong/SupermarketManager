@@ -32,7 +32,7 @@ public class MainFrame extends JFrame {
 	
 	private void initComponents() {
 		FlatIntelliJLaf.setup();
-		this.setIconImage(ImageUtil.read(getClass().getResource("/image/logo/logo-black.png")).getImage());
+		this.setIconImage(ImageUtil.read(getClass().getResource("/image/logo/logo-black.jpg")).getImage());
 
 		JPanel panel = new JPanel();
 		Sidebar sidebarPane = new Sidebar(panel);

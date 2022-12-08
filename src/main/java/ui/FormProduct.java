@@ -372,7 +372,7 @@ public class FormProduct extends JPanel {
                 LoaiSanPhamDAO lspd = new LoaiSanPhamDAO();
                 txtMaSP.setText(product.getMaSP());
                 txtTenSP.setText(product.getTenSP());
-                txtGhiChu.setText(product.getGhiChu());
+                txtGhiChu.setText(product.getGhiChu()==null?"":product.getGhiChu());
                 modelDVT.setSelectedItem(product.getDVT());
                 modelNCC.setSelectedItem(nccd.selectById(product.getMaNhaCungCap()));
                 modelLoaiSanPham.setSelectedItem(lspd.selectById(product.getMaLoai()));

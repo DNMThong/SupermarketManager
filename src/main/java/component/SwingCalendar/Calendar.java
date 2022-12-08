@@ -361,7 +361,17 @@ public abstract class Calendar extends JComponent {
             g2.setFont(origFont.deriveFont(fontSize));
 
             // Draw the event's text
-            g2.drawString(event.getText(), (int) x + 5, (int) y0 + 23);
+            String str = event.getText();
+//            g2.drawString(event.getText(), (int) x + 5, (int) y0 + 23);
+            int index = str.indexOf("\n");
+            if(index > -1) {
+                g2.drawString(str.substring(0,index), (int) x + 5, (int) y0 + 23);
+                g2.drawString(str.substring(index), (int) x + 5, (int) y0 + 39);
+            }else {
+                g2.drawString(str, (int) x + 5, (int) y0 + 23);
+            }
+
+
 
             // Reset font
             g2.setFont(origFont);

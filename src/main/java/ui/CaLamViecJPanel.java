@@ -492,7 +492,7 @@ public class CaLamViecJPanel extends javax.swing.JPanel {
             public void dateSelected(SelectedAction action, SelectedDate date) {
                 btnXoa.setText("Hủy");
                 btnLuu.setText("Lưu");
-                txtDate.setText(date.getDay() + "-" + date.getMonth() + "-" + date.getYear());
+                txtDate.setText(date.getYear()+ "-" + date.getMonth() + "-" + date.getDay());
                 txtGhiChu.setText(null);
                 TaoLichJDialog.setVisible(true);
             }
@@ -551,7 +551,7 @@ public class CaLamViecJPanel extends javax.swing.JPanel {
                 calendar.setTime(dateTimeOut);
 
 
-                events.add(new CalendarEvent(LocalDate.of(year, month, day), LocalTime.of(dateTimeIn.getHours(), dateTimeIn.getMinutes()), LocalTime.of(dateTimeOut.getHours(), dateTimeOut.getMinutes()), rs.getString(5) + "\n" + rs.getString(6)));
+                events.add(new CalendarEvent(LocalDate.of(year, month, day), LocalTime.of(dateTimeIn.getHours(), dateTimeIn.getMinutes()), LocalTime.of(dateTimeOut.getHours(), dateTimeOut.getMinutes()), rs.getString(5) + " \n" + rs.getString(6)));
             }
             rs.close();
             calendarPanel.add((JComponent) cal);
