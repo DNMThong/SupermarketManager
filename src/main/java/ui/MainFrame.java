@@ -25,6 +25,7 @@ public class MainFrame extends JFrame {
 	
 	public MainFrame() {
 		initComponents();
+		Util.siderbarMenu.selectMenuHome();
 	}
 
 	

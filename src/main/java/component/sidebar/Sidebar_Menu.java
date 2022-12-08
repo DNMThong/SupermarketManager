@@ -2,6 +2,7 @@ package component.sidebar;
 
 
 import ui.*;
+import utils.ImageUtil;
 import utils.Util;
 
 import javax.swing.*;
@@ -140,8 +141,8 @@ public class Sidebar_Menu extends JPanel {
                 sub.forEach(e -> e.setSelected(false));
             }
         }
-        getParent().revalidate();
-        getParent().repaint();
+        revalidate();
+        repaint();
     }
 
     public void clearExistSelected() {
@@ -159,8 +160,8 @@ public class Sidebar_Menu extends JPanel {
         clearSubMenuSelected(menuStatistic);
         clearSubMenuSelected(menuStorage);
         clearSubMenuSelected(menuAccount);
-        getParent().getParent().revalidate();
-        getParent().getParent().repaint();
+        revalidate();
+        repaint();
     }
 
     public void setSelectedSubMenu(MenuItem item) {
@@ -170,8 +171,8 @@ public class Sidebar_Menu extends JPanel {
         item.setBackground(item.getContainerColor());
         item.getItem().setBackground(item.getItemColor());
 
-        getParent().getParent().revalidate();
-        getParent().getParent().repaint();
+        revalidate();
+        repaint();
     }
 
     public void setSelectedMenu(MenuItem item) {
@@ -181,8 +182,29 @@ public class Sidebar_Menu extends JPanel {
         item.setBackground(item.getContainerColor());
         item.getItem().setBackground(item.getItemColor());
 
-        getParent().getParent().revalidate();
-        getParent().getParent().repaint();
+        revalidate();
+        repaint();
+    }
+
+    public void selectMenuHome() {
+        setSelectedMenu(menuHome);
+        if (Util.containerContent != null) {
+            Util.containerContent.removeAll();
+            Util.containerContent.revalidate();
+            Util.containerContent.repaint();
+        }
+        MainContent m = new MainContent("");
+        JPanel j = new JPanel(new BorderLayout());
+        j.setBackground(Color.white);
+        JLabel lb = new JLabel();
+        lb.setIcon(ImageUtil.read(getClass().getResource("../../image/logo/logo-white.png")));
+        lb.setHorizontalAlignment(SwingConstants.CENTER);
+        lb.setVerticalAlignment(SwingConstants.CENTER);
+        j.add(lb,BorderLayout.CENTER);
+        m.addContent(j);
+        Util.containerContent.add(m, BorderLayout.CENTER);
+        Util.containerContent.revalidate();
+        Util.containerContent.repaint();
     }
 
     /**
@@ -195,22 +217,7 @@ public class Sidebar_Menu extends JPanel {
         @Override
         public void mousePressed(MouseEvent e) {
             // TODO Auto-generated method stub
-            setSelectedMenu(menuHome);
-            if (contentPanel != null) {
-                contentPanel.removeAll();
-                contentPanel.revalidate();
-                contentPanel.repaint();
-            }
-            contentPanel = new MainContent("Trang chu");
-            contentPanel.addContent(new POS());
-            if (Util.containerContent != null) {
-                Util.containerContent.removeAll();
-                Util.containerContent.revalidate();
-                Util.containerContent.repaint();
-                Util.containerContent.add(contentPanel, BorderLayout.CENTER);
-                Util.containerContent.revalidate();
-                Util.containerContent.repaint();
-            }
+            selectMenuHome();
         }
 
         @Override
@@ -245,20 +252,23 @@ public class Sidebar_Menu extends JPanel {
         public void mousePressed(MouseEvent e) {
             // TODO Auto-generated method stub
             setSelectedMenu(menuAccount);
-            if (contentPanel != null) {
-                contentPanel.removeAll();
-                contentPanel.revalidate();
-                contentPanel.repaint();
-            }
-            contentPanel = new MainContent("Tai khoan");
             if (Util.containerContent != null) {
                 Util.containerContent.removeAll();
                 Util.containerContent.revalidate();
                 Util.containerContent.repaint();
-                Util.containerContent.add(contentPanel, BorderLayout.CENTER);
-                Util.containerContent.revalidate();
-                Util.containerContent.repaint();
             }
+            MainContent m = new MainContent("");
+            JPanel j = new JPanel(new BorderLayout());
+            JLabel lb = new JLabel("Chức năng đang được hoàn thiện");
+            lb.setFont(new Font("Tahoma",Font.PLAIN,20));
+            lb.setForeground(new Color(31,174,255));
+            lb.setHorizontalAlignment(SwingConstants.CENTER);
+            lb.setVerticalAlignment(SwingConstants.CENTER);
+            j.add(lb,BorderLayout.CENTER);
+            m.addContent(j);
+            Util.containerContent.add(m, BorderLayout.CENTER);
+            Util.containerContent.revalidate();
+            Util.containerContent.repaint();
         }
 
         @Override
@@ -514,6 +524,23 @@ public class Sidebar_Menu extends JPanel {
         public void mousePressed(MouseEvent e) {
             // TODO Auto-generated method stub
             setSelectedSubMenu(subStaff_4);
+            if (Util.containerContent != null) {
+                Util.containerContent.removeAll();
+                Util.containerContent.revalidate();
+                Util.containerContent.repaint();
+            }
+            MainContent m = new MainContent("");
+            JPanel j = new JPanel(new BorderLayout());
+            JLabel lb = new JLabel("Chức năng đang được hoàn thiện");
+            lb.setFont(new Font("Tahoma",Font.PLAIN,20));
+            lb.setForeground(new Color(31,174,255));
+            lb.setHorizontalAlignment(SwingConstants.CENTER);
+            lb.setVerticalAlignment(SwingConstants.CENTER);
+            j.add(lb,BorderLayout.CENTER);
+            m.addContent(j);
+            Util.containerContent.add(m, BorderLayout.CENTER);
+            Util.containerContent.revalidate();
+            Util.containerContent.repaint();
         }
 
         @Override
@@ -592,6 +619,23 @@ public class Sidebar_Menu extends JPanel {
         public void mousePressed(MouseEvent e) {
             // TODO Auto-generated method stub
             setSelectedSubMenu(subStat_1);
+            if (Util.containerContent != null) {
+                Util.containerContent.removeAll();
+                Util.containerContent.revalidate();
+                Util.containerContent.repaint();
+            }
+            MainContent m = new MainContent("");
+            JPanel j = new JPanel(new BorderLayout());
+            JLabel lb = new JLabel("Chức năng đang được hoàn thiện");
+            lb.setFont(new Font("Tahoma",Font.PLAIN,20));
+            lb.setForeground(new Color(31,174,255));
+            lb.setHorizontalAlignment(SwingConstants.CENTER);
+            lb.setVerticalAlignment(SwingConstants.CENTER);
+            j.add(lb,BorderLayout.CENTER);
+            m.addContent(j);
+            Util.containerContent.add(m, BorderLayout.CENTER);
+            Util.containerContent.revalidate();
+            Util.containerContent.repaint();
         }
 
         @Override
@@ -631,7 +675,7 @@ public class Sidebar_Menu extends JPanel {
             }
             MainContent m = new MainContent("Thống kê doanh thu");
             m.addContent(new DoanhThuNhapXuatJPanel());
-            Util.containerContent.add(m, BorderLayout.NORTH);
+            Util.containerContent.add(m, BorderLayout.CENTER);
             Util.containerContent.revalidate();
             Util.containerContent.repaint();
         }
@@ -667,6 +711,23 @@ public class Sidebar_Menu extends JPanel {
         public void mousePressed(MouseEvent e) {
             // TODO Auto-generated method stub
             setSelectedSubMenu(subStat_3);
+            if (Util.containerContent != null) {
+                Util.containerContent.removeAll();
+                Util.containerContent.revalidate();
+                Util.containerContent.repaint();
+            }
+            MainContent m = new MainContent("");
+            JPanel j = new JPanel(new BorderLayout());
+            JLabel lb = new JLabel("Chức năng đang được hoàn thiện");
+            lb.setFont(new Font("Tahoma",Font.PLAIN,20));
+            lb.setForeground(new Color(31,174,255));
+            lb.setHorizontalAlignment(SwingConstants.CENTER);
+            lb.setVerticalAlignment(SwingConstants.CENTER);
+            j.add(lb,BorderLayout.CENTER);
+            m.addContent(j);
+            Util.containerContent.add(m, BorderLayout.CENTER);
+            Util.containerContent.revalidate();
+            Util.containerContent.repaint();
         }
 
         @Override
@@ -700,6 +761,23 @@ public class Sidebar_Menu extends JPanel {
         public void mousePressed(MouseEvent e) {
             // TODO Auto-generated method stub
             setSelectedSubMenu(subStorage_1);
+            if (Util.containerContent != null) {
+                Util.containerContent.removeAll();
+                Util.containerContent.revalidate();
+                Util.containerContent.repaint();
+            }
+            MainContent m = new MainContent("");
+            JPanel j = new JPanel(new BorderLayout());
+            JLabel lb = new JLabel("Chức năng đang được hoàn thiện");
+            lb.setFont(new Font("Tahoma",Font.PLAIN,20));
+            lb.setForeground(new Color(31,174,255));
+            lb.setHorizontalAlignment(SwingConstants.CENTER);
+            lb.setVerticalAlignment(SwingConstants.CENTER);
+            j.add(lb,BorderLayout.CENTER);
+            m.addContent(j);
+            Util.containerContent.add(m, BorderLayout.CENTER);
+            Util.containerContent.revalidate();
+            Util.containerContent.repaint();
         }
 
         @Override
@@ -778,6 +856,23 @@ public class Sidebar_Menu extends JPanel {
         public void mousePressed(MouseEvent e) {
             // TODO Auto-generated method stub
             setSelectedSubMenu(subStorage_3);
+            if (Util.containerContent != null) {
+                Util.containerContent.removeAll();
+                Util.containerContent.revalidate();
+                Util.containerContent.repaint();
+            }
+            MainContent m = new MainContent("");
+            JPanel j = new JPanel(new BorderLayout());
+            JLabel lb = new JLabel("Chức năng đang được hoàn thiện");
+            lb.setFont(new Font("Tahoma",Font.PLAIN,20));
+            lb.setForeground(new Color(31,174,255));
+            lb.setHorizontalAlignment(SwingConstants.CENTER);
+            lb.setVerticalAlignment(SwingConstants.CENTER);
+            j.add(lb,BorderLayout.CENTER);
+            m.addContent(j);
+            Util.containerContent.add(m, BorderLayout.CENTER);
+            Util.containerContent.revalidate();
+            Util.containerContent.repaint();
         }
 
         @Override

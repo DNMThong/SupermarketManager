@@ -45,7 +45,7 @@ public class Sidebar extends JPanel {
 		scrollPane.setPreferredSize(new Dimension(2, 600));
 		scrollPane.setBorder(null);
 
-		JLabel lbMadeBy = new JLabel("---Quy Da---");
+		JLabel lbMadeBy = new JLabel("--- Nhóm 1 ---");
 		lbMadeBy.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
 		lbMadeBy.setHorizontalAlignment(SwingConstants.CENTER);
 		this.setBackground(Color.BLUE);
