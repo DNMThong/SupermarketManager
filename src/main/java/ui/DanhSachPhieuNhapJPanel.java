@@ -399,7 +399,7 @@ public class DanhSachPhieuNhapJPanel extends javax.swing.JPanel {
             String maphieunhap = tblDanhSach.getValueAt(rowPhieuNhap, 0).toString();
             String reportSource = getClass().getResource("/reports/InPhieuNhapXuat.jrxml").getPath();
             JasperDesign jdesign = JRXmlLoader.load(reportSource);
-            String query = "SELECT * FROM ChiTietPhieuNhap where MaPhieuNhap = '" + maphieunhap + "'";
+            String query = "SELECT * FROM ChiTietPhieuNhap where MaPhieuNhap like '" + maphieunhap + "'";
 
             System.out.println(query);
 

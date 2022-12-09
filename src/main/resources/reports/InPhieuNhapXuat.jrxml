@@ -97,7 +97,7 @@
       ,[GiaNhap]
       ,[SoLuong]
       ,[THANHTIEN]
-  FROM [QLDA_SieuThi].[dbo].[ChiTietPhieuNhap] where MaPhieuNhap = 'PN01']]>
+  FROM [QLDA_SieuThi].[dbo].[ChiTietPhieuNhap] where MaPhieuNhap =  '$P{MaPhieuNhap}']]>
 	</queryString>
 	<field name="MaPhieuNhap" class="java.lang.String"/>
 	<field name="NgayNhap" class="java.sql.Date"/>
