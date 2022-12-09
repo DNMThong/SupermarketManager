@@ -817,8 +817,8 @@ public class Sidebar_Menu extends JPanel {
                 Util.containerContent.repaint();
             }
 
-            DSPNContent content = new DSPNContent();
-            MainContent m = new MainContent("Sản Phẩm");
+            DanhSachPhieuNhapJPanel content = new DanhSachPhieuNhapJPanel();
+            MainContent m = new MainContent("Hóa đơn");
             m.addContent(content);
             Util.containerContent.add(m, BorderLayout.CENTER);
             Util.containerContent.revalidate();
