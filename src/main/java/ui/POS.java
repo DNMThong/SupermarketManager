@@ -618,9 +618,13 @@ public class POS extends JPanel {
 
 	public void clearHD() {
 		maHD = null;
+		discount = 0;
+		total = 0;
+		sum = 0;
 		listHD.clear();
 		txtTienKhachDua.setText("");
 		txtMaKH.setText("");
+		lblGiam.setText("");
 		fillHD();
 		sumCurrency();
 		displayTotal();
@@ -714,6 +718,7 @@ public class POS extends JPanel {
 		String reportSource = getClass().getResource("/reports/InHoaDon.jrxml").getPath();
 		JasperDesign jdesign = JRXmlLoader.load(reportSource);
 		String query = "SELECT * FROM [QLDA_SieuThi].[dbo].[ChiTietHoaDon] where MaHD like '"+maHoaDon+"'";
+		System.out.println(query);
 
 		JRDesignQuery updateQuery = new JRDesignQuery();
 		updateQuery.setText(query);
