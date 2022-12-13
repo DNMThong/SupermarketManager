@@ -560,14 +560,6 @@ public class CaLamViecJPanel extends javax.swing.JPanel {
                 calendar.setTime(dateTimeIn);
                 calendar.setTime(dateTimeOut);
 
-//                PhanCong pc = new PhanCong();
-//                pc.setNgayKhoiTao(rs.getString(1));
-//                pc.setNhanVien(rs.getString(2));
-//                pc.setNgayLam(rs.getDate(3));
-//                pc.setGioLam(dateTimeIn.getHours() + ":" + dateTimeIn.getMinutes());
-//                pc.setGioTan(dateTimeOut.getHours() + ":" + dateTimeOut.getMinutes());
-//                pc.setGhiChu(rs.getString(6));
-//                listPC.add(pc);
                 events.add(new CalendarEvent(LocalDate.of(year, month, day), LocalTime.of(dateTimeIn.getHours(), dateTimeIn.getMinutes()), LocalTime.of(dateTimeOut.getHours(), dateTimeOut.getMinutes()), rs.getString(5) + "\n" + rs.getString(6)));
             }
             rs.close();
@@ -577,13 +569,6 @@ public class CaLamViecJPanel extends javax.swing.JPanel {
         }
     }
 
-//    void filltoTable() {
-//        DefaultTableModel modal = (DefaultTableModel) table.getModel();
-//        for (PhanCong pc1 : listPC) {
-//            Object[] row = new Object[]{pc1.getNgayKhoiTao(), pc1.getNhanVien(), pc1.getNgayLam(), pc1.getGioLam(), pc1.getGioTan(), pc1.getGhiChu()};
-//            modal.addRow(row);
-//        }
-//    }
     void insert() {
         try {
             String QueryInsert = "insert into PhanCong(ngaykhoitao, GioVao, GioTan, ghichu, HoTen) values (?,?,?,?,?)";
@@ -601,12 +586,13 @@ public class CaLamViecJPanel extends javax.swing.JPanel {
             Timestamp timeIn = new Timestamp(millisecondsIn);
             long millisecondsOut = formatDateTime.parse(dateTimeOutStr).getTime();
             Timestamp timeOut = new Timestamp(millisecondsOut);
+            NhanVien nv = (NhanVien) cboNhanVien.getSelectedItem();
 
             ps.setTimestamp(1, sq);
             ps.setTimestamp(2, timeIn);
             ps.setTimestamp(3, timeOut);
             ps.setString(4, txtGhiChu.getText());
-            ps.setString(5, (String) cboNhanVien.getSelectedItem());
+            ps.setString(5, nv.getMaNhanVien());
             ps.executeUpdate();
             ps.close();
             Alert.success("Tạo ca làm mới thành công!");
