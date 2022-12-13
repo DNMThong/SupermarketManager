@@ -233,7 +233,7 @@ public class DoanhThuNhapXuatJPanel extends javax.swing.JPanel {
             String sql = "select * from TruyVanDoanhThuTrongKhoang where NgayXuat >= '" + txtFrom.getText() + "' and NgayXuat <= '" + txtTo.getText() + "'";
             ResultSet rs = JDBCUtil.query(sql);
             while (rs.next()) {
-                chart.addData(new ModelChart(rs.getString(1), new double[]{rs.getInt(2), rs.getInt(3)}));
+                chart.addData(new ModelChart(rs.getString(1), new double[]{rs.getLong(2), rs.getLong(3)}));
             }
             rs.close();
             chart.start();
@@ -318,7 +318,7 @@ public class DoanhThuNhapXuatJPanel extends javax.swing.JPanel {
             String sql = "SELECT [Year], [Tiền nhập hàng], [Tiền bán hàng] FROM [QLDA_SieuThi].[dbo].[TongTienDoanhThu] order by Year asc";
             ResultSet rs = JDBCUtil.query(sql);
             while (rs.next()) {
-                chart.addData(new ModelChart("Năm " + rs.getString(1), new double[]{rs.getInt(2), rs.getInt(3)}));
+                chart.addData(new ModelChart("Năm " + rs.getString(1), new double[]{rs.getLong(2), rs.getLong(3)}));
             }
             rs.close();
         } catch (Exception e) {
@@ -332,7 +332,7 @@ public class DoanhThuNhapXuatJPanel extends javax.swing.JPanel {
         try {
             ResultSet rs = JDBCUtil.query(sql);
             while (rs.next()) {
-                chart.addData(new ModelChart(rs.getString(1) + "-" + rs.getString(2), new double[]{rs.getInt(3), rs.getInt(4)}));
+                chart.addData(new ModelChart(rs.getString(1) + "-" + rs.getString(2), new double[]{rs.getLong(3), rs.getLong(4)}));
             }
             rs.close();
         } catch (Exception e) {

@@ -84,7 +84,7 @@ public class Sidebar_Menu extends JPanel {
         subStat_3 = new MenuItem(null, "Thống kê chi tiêu của khách hàng", new HandleSubStat_3());
 
         // create submenu storage
-        subStorage_1 = new MenuItem(null, "Thêm phiếu nhập", new HandleSubStorage_1());
+        subStorage_1 = new MenuItem(null, "Danh sách phiếu xuất", new HandleSubStorage_1());
         subStorage_2 = new MenuItem(null, "Danh sách phiếu nhập", new HandleSubStorage_2());
         subStorage_3 = new MenuItem(null, "Sản phẩm tồn kho", new HandleSubStorage_3());
 
@@ -818,7 +818,7 @@ public class Sidebar_Menu extends JPanel {
             }
 
             DanhSachPhieuNhapJPanel content = new DanhSachPhieuNhapJPanel();
-            MainContent m = new MainContent("Hóa đơn");
+            MainContent m = new MainContent("Phiếu nhập");
             m.addContent(content);
             Util.containerContent.add(m, BorderLayout.CENTER);
             Util.containerContent.revalidate();
