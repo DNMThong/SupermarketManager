@@ -16,6 +16,7 @@ import net.sf.jasperreports.engine.design.JRDesignQuery;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
+import org.apache.commons.math3.stat.descriptive.summary.Product;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -79,9 +80,9 @@ public class POS extends JPanel {
 	private Button btnXoa;
 	private Button btnLamMoi;
 
-	private List<Object[]> products = new ArrayList<Object[]>();
+	public List<Object[]> products = new ArrayList<Object[]>();
 
-	private HashMap<Object[],Integer> listHD = new HashMap<Object[],Integer>();
+	public HashMap<Object[],Integer> listHD = new HashMap<Object[],Integer>();
 
 	String placeholder = "Mã sản phẩm hoặc tên sản phẩm";
 	private JLabel lblBarcode;
@@ -586,6 +587,33 @@ public class POS extends JPanel {
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	public List<Object[]> searchProduct(String searchValue) {
+		List<Object[]> listProduct = new ArrayList<Object[]>();
+		String query = "select * from view_BanSanPham where MaSP like ? or TenSP like ?";
+		if(searchValue.equals(placeholder)) {
+			searchValue = "";
+		}
+		try {
+			ResultSet rs = JDBCUtil.query(query,"%"+searchValue+"%","%"+searchValue+"%");
+			while (rs.next()) {
+				Object[] product = new Object[]{
+						rs.getString(1),   // MaSP
+						rs.getString(2),   // MaPhieuXuat
+						rs.getString(3),   // TenSP
+						rs.getString(4),	  // Hinh
+						rs.getString(5),   // TenNCC
+						rs.getString(6),   // DonViTinh
+						rs.getString(7),   // TenLoai
+						rs.getInt(8),      // Gia
+				};
+				listProduct.add(product);
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return listProduct;
 	}
 
 	public int discount(int doThanMat) {
