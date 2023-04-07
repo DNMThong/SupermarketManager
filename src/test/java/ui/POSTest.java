@@ -50,6 +50,7 @@ public class POSTest {
     public void findProudctByIdExist() {
         List<Object[]> listProduct;
         listProduct = pos.searchProduct("4902430429399");
+        assertEquals(1,listProduct.size());
         assertEquals("4902430429399",listProduct.get(0)[0]);
     }
 
@@ -66,6 +67,7 @@ public class POSTest {
         listProduct = pos.searchProduct("Mì");
         listProduct.forEach(i -> {
             assertTrue(String.valueOf(i[2]).contains("Mì"));
+            assertFalse(!String.valueOf(i[2]).contains("Mì"));
         });
     }
 
